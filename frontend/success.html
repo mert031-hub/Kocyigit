@@ -8,9 +8,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link 
-        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="success.css">
     <link rel="icon" type="image/jpeg" href="">
 
@@ -29,11 +28,17 @@
 <body>
     <div id="preloader">
         <div class="preloader-content">
-            <div class="preloader-logo">KOÇYİĞİT<span>Betrieb&Handel</span></div>
+            <div class="preloader-logo">KOÇYİĞİT<span>Betrieb&amp;Handel</span></div>
             <div class="preloader-bar"></div>
             <p class="preloader-text">KOÇYİĞİT wird geladen...</p>
         </div>
     </div>
+
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container justify-content-center">
+            <a class="navbar-brand" href="index.html">KOÇYİĞİT<span>Betrieb&amp;Handel</span></a>
+        </div>
+    </nav>
 
     <div class="container py-5">
         <div class="row justify-content-center">
@@ -46,7 +51,7 @@
                                 <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
                             </svg>
                         </div>
-                        <h1 style="font-family:'Playfair Display';" data-aos="fade-down" data-aos-offset="0">Vielen
+                        <h1 style="font-family:'Cormorant Garamond', serif;" data-aos="fade-down" data-aos-offset="0">Vielen
                             Dank!</h1>
                         <p class="opacity-75" data-aos="fade-in" data-aos-delay="400" data-aos-offset="0">Ihre
                             Bestellung wurde erfolgreich entgegengenommen.</p>
@@ -80,7 +85,7 @@
                             </div>
                         </div>
 
-                        <div class="mb-5 bg-light p-3 rounded-4" data-aos="fade-up" data-aos-delay="700"
+                        <div class="mb-5 p-3" style="background:var(--cream,#f9f7f4);" data-aos="fade-up" data-aos-delay="700"
                             data-aos-offset="0">
                             <h6 class="text-uppercase small fw-bold text-muted mb-2">Lieferadresse</h6>
                             <p class="mb-0 fw-semibold" id="addressText">--</p>
@@ -101,6 +106,43 @@
             </div>
         </div>
     </div>
+
+    <footer class="luxe-footer">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-5">
+                    <a href="index.html" class="footer-brand">KOÇYİĞİT<span>Betrieb&amp;Handel</span></a>
+                    <p class="footer-tagline">Premium Mode &amp; Lifestyle</p>
+                    <p style="color:rgba(255,255,255,0.30); font-size:0.78rem; line-height:1.75; max-width:260px; font-weight:300;">
+                        Sinkenbreite 1<br>89180 Berghülen, Deutschland<br>
+                        <a href="tel:+4915125387018" style="color:rgba(255,255,255,0.35); text-decoration:none; font-size:0.75rem;">+49 151 25387018</a>
+                    </p>
+                </div>
+                <div class="col-lg-3 offset-lg-1">
+                    <h6 style="color:rgba(255,255,255,0.25); font-size:0.6rem; letter-spacing:0.32em; text-transform:uppercase; margin-bottom:20px; font-weight:500;">Navigation</h6>
+                    <div class="d-flex flex-column" style="gap:4px;">
+                        <a href="index.html#produkte" class="footer-link">Kollektion</a>
+                        <a href="track.html" class="footer-link">Bestellverfolgung</a>
+                        <a href="contact.html" class="footer-link">Kontakt</a>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <h6 style="color:rgba(255,255,255,0.25); font-size:0.6rem; letter-spacing:0.32em; text-transform:uppercase; margin-bottom:20px; font-weight:500;">Rechtliches</h6>
+                    <div class="d-flex flex-column" style="gap:4px;">
+                        <a href="Impressum.html" class="footer-link">Impressum</a>
+                        <a href="Datenschutz.html" class="footer-link">Datenschutz</a>
+                        <a href="Widerruf.html" class="footer-link">Widerrufsbelehrung</a>
+                        <a href="agb.html" class="footer-link">AGB</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-divider"></div>
+            <div class="d-flex justify-content-between align-items-center flex-wrap" style="gap:12px;">
+                <p class="footer-copy mb-0">© 2026 Koçyiğit Betrieb&amp;Handel. Alle Rechte vorbehalten.</p>
+                <a href="contact.html" class="footer-contact-link">Fragen? Kontaktieren Sie uns</a>
+            </div>
+        </div>
+    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>

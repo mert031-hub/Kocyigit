@@ -1242,6 +1242,53 @@ body.dark-mode .payment-brand-grid { opacity: 0.45; }
 body.dark-mode .payment-brand-grid:hover { opacity: 0.85; }
 
 /* ============================================================
+   LEGAL PAGES
+   ============================================================ */
+
+.legal-doc {
+  max-width: 860px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  padding: clamp(28px, 5vw, 56px);
+  margin-top: 40px;
+  margin-bottom: 64px;
+}
+
+.legal-doc h1, .legal-doc .playfair {
+  font-family: var(--font-display);
+  font-weight: 300;
+  color: var(--text-main);
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  letter-spacing: 0.02em;
+  margin-bottom: 1.5rem;
+}
+
+.legal-doc h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  color: var(--text-main);
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 8px;
+}
+
+.legal-doc p, .legal-doc li {
+  font-size: 0.92rem;
+  line-height: 1.78;
+  color: var(--text-main);
+  font-weight: 300;
+}
+
+.legal-doc a { color: var(--gold); }
+.legal-doc a:hover { color: var(--gold-hover); }
+
+body:has(.legal-doc) {
+  background: var(--bg-secondary) !important;
+}
+
+/* ============================================================
    FOOTER
    ============================================================ */
 

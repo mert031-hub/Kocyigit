@@ -81,10 +81,46 @@ h2, h3, .modal-title {
 .checkout-aside {
   flex: 0.7;
   background: linear-gradient(170deg, #111111 0%, #0a0a0a 100%) !important;
-  color: white !important;
+  color: #ffffff !important;
   padding: 52px 44px !important;
   display: flex;
   flex-direction: column;
+}
+
+.checkout-aside * { color: inherit; }
+
+.checkout-heading {
+  font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+  font-weight: 300;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  letter-spacing: 0.04em;
+  color: #111111;
+}
+
+.aside-heading {
+  font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+  font-weight: 300;
+  font-size: clamp(1.3rem, 2.5vw, 1.7rem);
+  letter-spacing: 0.04em;
+  color: #ffffff;
+}
+
+.btn-clear-cart {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.25);
+  color: rgba(255,255,255,0.60) !important;
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border-radius: 0;
+  transition: all 0.3s ease;
+  padding: 6px 14px;
+}
+
+.btn-clear-cart:hover {
+  border-color: rgba(255,255,255,0.55);
+  color: rgba(255,255,255,0.90) !important;
 }
 
 #checkout-items {

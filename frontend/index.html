@@ -275,7 +275,37 @@
         </div>
     </main>
 
-    <section id="testimonials" class="py-5 dark-section">
+    <!-- Brands Marquee Strip -->
+    <div class="brands-strip" aria-hidden="true">
+        <div class="brands-track">
+            <span class="brand-text">MAGUREX CARE</span>
+            <span class="brand-diamond">◆</span>
+            <span class="brand-text">YAŞAM GARDEN</span>
+            <span class="brand-diamond">◆</span>
+            <span class="brand-text">PREMIUM KOLLEKTION</span>
+            <span class="brand-diamond">◆</span>
+            <span class="brand-text">BERGHÜLEN · DEUTSCHLAND</span>
+            <span class="brand-diamond">◆</span>
+            <span class="brand-text">GEPRÜFTE QUALITÄT</span>
+            <span class="brand-diamond">◆</span>
+            <span class="brand-text">SEIT 2023</span>
+            <span class="brand-diamond">◆</span>
+            <span class="brand-text">MAGUREX CARE</span>
+            <span class="brand-diamond">◆</span>
+            <span class="brand-text">YAŞAM GARDEN</span>
+            <span class="brand-diamond">◆</span>
+            <span class="brand-text">PREMIUM KOLLEKTION</span>
+            <span class="brand-diamond">◆</span>
+            <span class="brand-text">BERGHÜLEN · DEUTSCHLAND</span>
+            <span class="brand-diamond">◆</span>
+            <span class="brand-text">GEPRÜFTE QUALITÄT</span>
+            <span class="brand-diamond">◆</span>
+            <span class="brand-text">SEIT 2023</span>
+            <span class="brand-diamond">◆</span>
+        </div>
+    </div>
+
+        <section id="testimonials" class="py-5 dark-section">
         <div class="container">
             <div class="text-center mb-5" data-aos="fade-down">
                 <span class="section-eyebrow">Was unsere Kunden sagen</span>
@@ -325,12 +355,20 @@
         </div>
     </section>
 
-    <section class="social-area py-5" id="social">
-        <div class="container text-center">
-            <span class="section-eyebrow" data-aos="fade-up">Instagram</span>
-            <h2 class="mb-5 social-section-title" data-aos="fade-in">@KOCYIGIT_BETRIEB_HANDEL</h2>
-            <div class="row g-3 justify-content-center" id="luxe-social-gallery">
+    <section class="social-area" id="social">
+        <div class="social-hero-header">
+            <div class="container text-center">
+                <span class="section-eyebrow" data-aos="fade-up">Folgen Sie uns · Instagram</span>
+                <h2 class="social-handle" data-aos="fade-up" data-aos-delay="100">@KOCYIGIT_BETRIEB_HANDEL</h2>
+                <a href="https://www.instagram.com/kocyigit_betrieb_handel/" target="_blank" rel="noopener"
+                    class="social-follow-btn" data-aos="fade-up" data-aos-delay="200">
+                    <i class="fab fa-instagram"></i>
+                    <span>AUF INSTAGRAM FOLGEN</span>
+                </a>
             </div>
+        </div>
+        <div class="social-gallery-wrap">
+            <div class="row g-0 justify-content-center" id="luxe-social-gallery"></div>
         </div>
     </section>
 
@@ -559,7 +597,75 @@
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script src="main.js"></script>
     <script src="cartSync.js"></script>
-    <script>AOS.init();</script>
+    <script>AOS.init({ once: true, duration: 700, easing: 'ease-out-cubic' });</script>
+    <script>
+    (function () {
+      /* ── Card scroll-reveal via IntersectionObserver ── */
+      var cardIdx = 0;
+      var cardIO = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) {
+            var idx = parseInt(e.target.dataset.cardIdx || '0', 10);
+            var delay = (idx % 4) * 90;
+            (function (el, d) {
+              setTimeout(function () {
+                el.classList.add('card-visible');
+              }, d);
+            })(e.target, delay);
+            cardIO.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.06, rootMargin: '0px 0px 80px 0px' });
+
+      function observeCards(root) {
+        root.querySelectorAll('.product-card, .testimonial-card').forEach(function (c) {
+          if (!c.dataset.cardIdx) {
+            c.dataset.cardIdx = cardIdx++;
+          }
+          cardIO.observe(c);
+        });
+      }
+
+      /* Watch for dynamically rendered cards */
+      var mo = new MutationObserver(function (mutations) {
+        mutations.forEach(function (m) {
+          m.addedNodes.forEach(function (node) {
+            if (node.nodeType !== 1) return;
+            if (node.classList && (node.classList.contains('product-card') || node.classList.contains('testimonial-card'))) {
+              if (!node.dataset.cardIdx) node.dataset.cardIdx = cardIdx++;
+              cardIO.observe(node);
+            }
+            if (node.querySelectorAll) {
+              node.querySelectorAll('.product-card, .testimonial-card').forEach(function (c) {
+                if (!c.dataset.cardIdx) c.dataset.cardIdx = cardIdx++;
+                cardIO.observe(c);
+              });
+            }
+          });
+        });
+      });
+
+      ['product-grid-container', 'testimonial-container'].forEach(function (id) {
+        var el = document.getElementById(id);
+        if (el) mo.observe(el, { childList: true, subtree: true });
+      });
+
+      /* ── Hero stat counter ── */
+      document.querySelectorAll('.hero-stat-num[data-target]').forEach(function (el) {
+        var target = parseInt(el.getAttribute('data-target'), 10);
+        var duration = 2000;
+        var start = null;
+        function step(ts) {
+          if (!start) start = ts;
+          var pct = Math.min((ts - start) / duration, 1);
+          var ease = 1 - Math.pow(1 - pct, 3);
+          el.textContent = Math.round(ease * target);
+          if (pct < 1) requestAnimationFrame(step);
+        }
+        setTimeout(function () { requestAnimationFrame(step); }, 1200);
+      });
+    })();
+    </script>
 </body>
 
 </html>

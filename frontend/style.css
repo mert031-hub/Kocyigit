@@ -1799,3 +1799,314 @@ body .luxe-footer {
     padding: 48px 0 80px 0 !important;
   }
 }
+
+/* ============================================================
+   PRODUCT CARDS — SCROLL REVEAL
+   ============================================================ */
+
+@keyframes cardReveal {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.product-card,
+.testimonial-card {
+  opacity: 0;
+  /* hover transitions — kept separate from reveal animation */
+  transition: box-shadow 0.35s ease, border-color 0.35s ease, transform 0.35s ease;
+}
+
+.product-card.card-visible,
+.testimonial-card.card-visible {
+  animation: cardReveal 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* ============================================================
+   PRODUCTS HEADER — EDITORIAL BACKDROP
+   ============================================================ */
+
+.products-header {
+  text-align: center;
+  margin-bottom: 56px;
+  position: relative;
+  padding: 48px 0 24px;
+  overflow: hidden;
+}
+
+.products-header::before {
+  content: 'KOLLEKTION';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-display);
+  font-size: clamp(3.5rem, 13vw, 9rem);
+  font-weight: 700;
+  letter-spacing: 0.10em;
+  color: var(--text-main);
+  opacity: 0.030;
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+  line-height: 1;
+}
+
+.products-header > * { position: relative; z-index: 1; }
+
+/* ============================================================
+   BRANDS MARQUEE STRIP
+   ============================================================ */
+
+.brands-strip {
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  overflow: hidden;
+  padding: 22px 0;
+  position: relative;
+}
+
+.brands-strip::before,
+.brands-strip::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 100px;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.brands-strip::before {
+  left: 0;
+  background: linear-gradient(to right, var(--bg-secondary), transparent);
+}
+
+.brands-strip::after {
+  right: 0;
+  background: linear-gradient(to left, var(--bg-secondary), transparent);
+}
+
+.brands-track {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  animation: brandsScroll 24s linear infinite;
+  will-change: transform;
+}
+
+.brands-track:hover { animation-play-state: paused; }
+
+@keyframes brandsScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.brand-text {
+  font-family: var(--font-display);
+  font-size: clamp(0.85rem, 2vw, 1.05rem);
+  font-weight: 400;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--text-main);
+  padding: 0 36px;
+  opacity: 0.32;
+  transition: opacity 0.3s ease;
+}
+
+.brands-track:hover .brand-text { opacity: 0.68; }
+
+.brand-diamond {
+  color: var(--gold);
+  font-size: 0.42rem;
+  opacity: 0.55;
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   SOCIAL SECTION — DARK EDITORIAL
+   ============================================================ */
+
+.social-area { overflow: hidden; }
+
+.social-hero-header {
+  background: #0a0a0a;
+  padding: 72px 0 64px;
+  position: relative;
+  overflow: hidden;
+}
+
+.social-hero-header::before {
+  content: 'INSTAGRAM';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-display);
+  font-size: clamp(4rem, 16vw, 14rem);
+  font-weight: 700;
+  letter-spacing: 0.10em;
+  color: #ffffff;
+  opacity: 0.024;
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+}
+
+.social-handle {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 4vw, 2.8rem);
+  font-weight: 300;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+  margin-bottom: 32px;
+  line-height: 1.15;
+}
+
+.social-follow-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid var(--gold-border);
+  color: rgba(255,255,255,0.65);
+  text-decoration: none;
+  padding: 13px 28px;
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  font-family: var(--font-sans);
+}
+
+.social-follow-btn i {
+  font-size: 1rem;
+  color: var(--gold);
+  transition: color 0.3s ease;
+}
+
+.social-follow-btn:hover {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: #ffffff;
+}
+
+.social-follow-btn:hover i { color: #ffffff; }
+
+.social-gallery-wrap {
+  background: #0d0d0d;
+}
+
+#luxe-social-gallery {
+  margin: 0 !important;
+}
+
+#luxe-social-gallery .insta-img {
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+#luxe-social-gallery > div {
+  position: relative;
+  overflow: hidden;
+  padding: 0 !important;
+}
+
+#luxe-social-gallery > div::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(10,10,10,0.52);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  z-index: 1;
+}
+
+#luxe-social-gallery > div:hover::after { opacity: 1; }
+#luxe-social-gallery > div:hover .insta-img { transform: scale(1.07); }
+
+/* ============================================================
+   PAYMENT ICONS — FLOAT ANIMATION
+   ============================================================ */
+
+@keyframes iconFloat {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-5px); }
+}
+
+.payment-brand-grid .brand-item:nth-child(1) i { animation: iconFloat 3.4s ease-in-out 0.00s infinite; }
+.payment-brand-grid .brand-item:nth-child(2) i { animation: iconFloat 3.4s ease-in-out 0.38s infinite; }
+.payment-brand-grid .brand-item:nth-child(3) i { animation: iconFloat 3.4s ease-in-out 0.76s infinite; }
+.payment-brand-grid .brand-item:nth-child(4) i { animation: iconFloat 3.4s ease-in-out 1.14s infinite; }
+.payment-brand-grid .brand-item:nth-child(5) i { animation: iconFloat 3.4s ease-in-out 1.52s infinite; }
+.payment-brand-grid .brand-item:nth-child(6) i { animation: iconFloat 3.4s ease-in-out 1.90s infinite; }
+
+/* ============================================================
+   VISIT SECTION — ENHANCED
+   ============================================================ */
+
+.map-wrapper {
+  transition: box-shadow 0.4s ease;
+}
+
+.map-wrapper:hover {
+  box-shadow: 0 16px 56px rgba(0,0,0,0.14) !important;
+}
+
+.icon-circle {
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.contact-card:hover .icon-circle {
+  background: var(--gold) !important;
+}
+
+/* ============================================================
+   SHOW MORE BUTTONS — PREMIUM UNDERLINE
+   ============================================================ */
+
+#showMoreProductsBtn,
+#showMoreReviewsBtn {
+  position: relative;
+  overflow: hidden;
+  border: none !important;
+  background: transparent !important;
+  color: var(--text-main) !important;
+  padding: 14px 0 !important;
+  font-size: 0.65rem !important;
+  letter-spacing: 0.26em !important;
+  font-weight: 500 !important;
+  text-transform: uppercase !important;
+  font-family: var(--font-sans) !important;
+}
+
+#showMoreProductsBtn::after,
+#showMoreReviewsBtn::after {
+  content: '';
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  width: 0;
+  height: 1px;
+  background: var(--gold);
+  transform: translateX(-50%);
+  transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#showMoreProductsBtn:hover::after,
+#showMoreReviewsBtn:hover::after {
+  width: 100%;
+}
+
+.dark-section #showMoreReviewsBtn {
+  color: rgba(255,255,255,0.65) !important;
+}
+
+.dark-section #showMoreReviewsBtn::after {
+  background: var(--gold) !important;
+}

@@ -149,22 +149,34 @@
 
     <header class="hero-section">
         <div class="hero-left-panel">
-            <span class="hero-eyebrow" data-aos="fade-up">Berghülen, Deutschland</span>
-            <h1 class="hero-title" data-aos="fade-up" data-aos-delay="100">EXKLUSIVITÄT<br>IN JEDEM DETAIL</h1>
-            <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="200">
+            <span class="hero-eyebrow hero-anim-1">Berghülen, Deutschland</span>
+            <h1 class="hero-title hero-anim-2">EXKLUSIVITÄT<br><em>IN JEDEM DETAIL</em></h1>
+            <p class="hero-subtitle hero-anim-3">
                 Premium Mode &amp; Lifestyle — Koçyiğit Betrieb&amp;Handel.<br>
-                Willkommen bei Ihrem offiziellen Store in Berghülen.
+                Ihr offizieller Store in Berghülen, Deutschland.
             </p>
-            <div data-aos="fade-up" data-aos-delay="300" class="hero-cta-group">
-                <a href="#produkte" class="hero-cta hero-cta-gold">Kollektion entdecken <i class="fas fa-arrow-right" style="font-size:0.7rem;"></i></a>
+            <div class="hero-cta-group hero-anim-4">
+                <a href="#produkte" class="hero-cta hero-cta-gold">
+                    <span>Kollektion entdecken</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
                 <a href="contact.html" class="hero-cta">Kontakt</a>
             </div>
-            <div class="hero-stats" data-aos="fade-up" data-aos-delay="400">
-                <div class="hero-stat"><span>500+</span><small>Produkte</small></div>
+            <div class="hero-stats hero-anim-5">
+                <div class="hero-stat">
+                    <span class="hero-stat-num" data-target="500">0</span><span class="hero-stat-plus">+</span>
+                    <small>Produkte</small>
+                </div>
                 <div class="hero-stat-divider"></div>
-                <div class="hero-stat"><span>5★</span><small>Bewertungen</small></div>
+                <div class="hero-stat">
+                    <span class="hero-stat-num">5</span><span class="hero-stat-plus">★</span>
+                    <small>Bewertungen</small>
+                </div>
                 <div class="hero-stat-divider"></div>
-                <div class="hero-stat"><span>DE</span><small>Versand</small></div>
+                <div class="hero-stat">
+                    <span class="hero-stat-num">DE</span>
+                    <small>Versand</small>
+                </div>
             </div>
             <p class="visually-hidden">
                 Willkommen bei Koçyiğit Betrieb&amp;Handel in Berghülen. Wir sind Ihr offizieller Store für exklusive
@@ -172,13 +184,41 @@
             </p>
         </div>
         <div class="hero-right-panel" aria-hidden="true">
-            <div class="hero-image-caption">
+            <div class="hero-image-caption hero-anim-5">
+                <i class="fas fa-award" style="color:var(--gold);font-size:0.9rem;"></i>
                 <span>MAGUREX CARE</span>
                 <span class="hero-caption-dot">·</span>
                 <span>YAŞAM GARDEN</span>
             </div>
         </div>
     </header>
+
+    <div class="announcement-bar">
+        <div class="ticker-wrap">
+            <div class="ticker-content">
+                <span class="ticker-item"><i class="fas fa-truck-fast"></i> KOSTENLOSER VERSAND AB <strong id="search-shipping-threshold">69,99 €</strong></span>
+                <span class="ticker-sep">◆</span>
+                <span class="ticker-item">PREMIUM QUALITÄT · GEPRÜFTE PRODUKTE</span>
+                <span class="ticker-sep">◆</span>
+                <span class="ticker-item"><i class="fas fa-shield-halved"></i> SICHERE ZAHLUNG MIT STRIPE</span>
+                <span class="ticker-sep">◆</span>
+                <span class="ticker-item">SCHNELLE LIEFERUNG IN GANZ DEUTSCHLAND</span>
+                <span class="ticker-sep">◆</span>
+                <span class="ticker-item"><i class="fas fa-headset"></i> SUPPORT: MO–FR 09–18 UHR</span>
+                <span class="ticker-sep">◆</span>
+                <span class="ticker-item"><i class="fas fa-truck-fast"></i> KOSTENLOSER VERSAND AB 69,99 €</span>
+                <span class="ticker-sep">◆</span>
+                <span class="ticker-item">PREMIUM QUALITÄT · GEPRÜFTE PRODUKTE</span>
+                <span class="ticker-sep">◆</span>
+                <span class="ticker-item"><i class="fas fa-shield-halved"></i> SICHERE ZAHLUNG MIT STRIPE</span>
+                <span class="ticker-sep">◆</span>
+                <span class="ticker-item">SCHNELLE LIEFERUNG IN GANZ DEUTSCHLAND</span>
+                <span class="ticker-sep">◆</span>
+                <span class="ticker-item"><i class="fas fa-headset"></i> SUPPORT: MO–FR 09–18 UHR</span>
+                <span class="ticker-sep">◆</span>
+            </div>
+        </div>
+    </div>
 
     <div class="values-strip">
         <div class="row g-0 m-0">
@@ -213,28 +253,18 @@
         </div>
     </div>
 
-    <section class="container mt-5 pt-4" data-aos="fade-up" data-aos-delay="200">
-        <div class="search-container text-center">
+    <section class="search-section">
+        <div class="container">
             <div class="search-input-wrapper">
                 <span class="search-icon-fixed"><i class="fas fa-search"></i></span>
                 <input type="text" id="mainSearchInput" class="luxe-search-input"
                     placeholder="Suchen Sie in unserer Kollektion..." onkeyup="filterProducts()">
             </div>
-
-            <div class="mt-4 mx-auto" style="max-width: 500px;" data-aos="zoom-in" data-aos-delay="300">
-                <div class="p-2 px-4 rounded-pill shadow-sm search-shipping-pill">
-                    <div class="fw-bold mb-0" style="font-size: 0.85rem; letter-spacing: 0.5px;">
-                        <i class="fas fa-truck me-2 shipping-icon"></i>
-                        <span class="shipping-text">KOSTENLOSER VERSAND AB <span id="search-shipping-threshold">50,00
-                                €</span>!</span>
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
 
     <main class="container my-5 py-4" id="produkte" data-aos="fade-up">
-        <div class="text-center mb-5">
+        <div class="products-header" data-aos="fade-up">
             <span class="section-eyebrow">Entdecken Sie unsere Produkte</span>
             <h2 class="section-title">Unsere Kollektion</h2>
             <div class="gold-divider mx-auto"></div>

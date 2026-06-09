@@ -148,23 +148,70 @@
     </nav>
 
     <header class="hero-section">
-        <div class="hero-overlay"></div>
-        <div class="container" style="position: relative; z-index: 2; padding-left: clamp(1.5rem, 5vw, 4rem);">
+        <div class="hero-left-panel">
             <span class="hero-eyebrow" data-aos="fade-up">Berghülen, Deutschland</span>
             <h1 class="hero-title" data-aos="fade-up" data-aos-delay="100">EXKLUSIVITÄT<br>IN JEDEM DETAIL</h1>
             <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="200">
                 Premium Mode &amp; Lifestyle — Koçyiğit Betrieb&amp;Handel.<br>
                 Willkommen bei Ihrem offiziellen Store in Berghülen.
             </p>
-            <div data-aos="fade-up" data-aos-delay="300">
-                <a href="#produkte" class="hero-cta">Kollektion entdecken <i class="fas fa-arrow-right" style="font-size:0.7rem;"></i></a>
+            <div data-aos="fade-up" data-aos-delay="300" class="hero-cta-group">
+                <a href="#produkte" class="hero-cta hero-cta-gold">Kollektion entdecken <i class="fas fa-arrow-right" style="font-size:0.7rem;"></i></a>
+                <a href="contact.html" class="hero-cta">Kontakt</a>
+            </div>
+            <div class="hero-stats" data-aos="fade-up" data-aos-delay="400">
+                <div class="hero-stat"><span>500+</span><small>Produkte</small></div>
+                <div class="hero-stat-divider"></div>
+                <div class="hero-stat"><span>5★</span><small>Bewertungen</small></div>
+                <div class="hero-stat-divider"></div>
+                <div class="hero-stat"><span>DE</span><small>Versand</small></div>
             </div>
             <p class="visually-hidden">
                 Willkommen bei Koçyiğit Betrieb&amp;Handel in Berghülen. Wir sind Ihr offizieller Store für exklusive
                 Magurex Care Autopflegeprodukte, Yaşam Garden Gartenartikel und Premium Lifestyle Mode in Deutschland.
             </p>
         </div>
+        <div class="hero-right-panel" aria-hidden="true">
+            <div class="hero-image-caption">
+                <span>MAGUREX CARE</span>
+                <span class="hero-caption-dot">·</span>
+                <span>YAŞAM GARDEN</span>
+            </div>
+        </div>
     </header>
+
+    <div class="values-strip">
+        <div class="row g-0 m-0">
+            <div class="col-6 col-md-3 values-item">
+                <i class="fas fa-truck-fast"></i>
+                <div>
+                    <strong>Kostenloser Versand</strong>
+                    <span>ab 50 €</span>
+                </div>
+            </div>
+            <div class="col-6 col-md-3 values-item">
+                <i class="fas fa-shield-halved"></i>
+                <div>
+                    <strong>Sicheres Einkaufen</strong>
+                    <span>SSL verschlüsselt</span>
+                </div>
+            </div>
+            <div class="col-6 col-md-3 values-item">
+                <i class="fas fa-award"></i>
+                <div>
+                    <strong>Premium Qualität</strong>
+                    <span>Geprüfte Produkte</span>
+                </div>
+            </div>
+            <div class="col-6 col-md-3 values-item">
+                <i class="fas fa-headset"></i>
+                <div>
+                    <strong>Persönlicher Service</strong>
+                    <span>Mo–Fr 09:00–18:00</span>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <section class="container mt-5 pt-4" data-aos="fade-up" data-aos-delay="200">
         <div class="search-container text-center">
@@ -194,12 +241,11 @@
         </div>
         <div id="product-grid-container" class="row g-4"></div>
         <div class="text-center mt-5" id="show-more-products-wrapper" style="display: none;">
-            <button id="showMoreProductsBtn" class="btn btn-outline-dark rounded-pill px-5 fw-bold">MEHR PRODUKTE
-                ANZEIGEN</button>
+            <button id="showMoreProductsBtn" class="btn btn-outline-dark px-5">MEHR PRODUKTE ANZEIGEN</button>
         </div>
     </main>
 
-    <section id="testimonials" class="py-5 bg-light border-top border-bottom">
+    <section id="testimonials" class="py-5 dark-section">
         <div class="container">
             <div class="text-center mb-5" data-aos="fade-down">
                 <span class="section-eyebrow">Was unsere Kunden sagen</span>
@@ -210,11 +256,10 @@
             <div id="testimonial-container" class="row g-4 mb-2" data-aos="fade-up"></div>
 
             <div class="text-center mt-4 mb-5" id="show-more-reviews-wrapper" style="display: none;">
-                <button id="showMoreReviewsBtn" class="btn btn-outline-dark rounded-pill px-5 fw-bold">MEHR
-                    ANZEIGEN</button>
+                <button id="showMoreReviewsBtn" class="btn btn-outline-dark px-5">MEHR ANZEIGEN</button>
             </div>
 
-            <div id="verified-review-box" class="col-lg-8 mx-auto p-4 rounded-4 shadow-sm bg-white"
+            <div id="verified-review-box" class="col-lg-8 mx-auto p-4 review-form-box"
                 style="display: none;" data-aos="zoom-in">
                 <h4 class="fw-bold mb-2 text-center">Teilen Sie Ihre Erfahrung</h4>
                 <p class="text-center small text-muted mb-4">Verbleibende Bewertungen: <span
@@ -252,18 +297,18 @@
 
     <section class="social-area py-5" id="social">
         <div class="container text-center">
-            <h2 class="mb-5" style="font-family:'Playfair Display'; color: var(--midnight);" data-aos="fade-in">
-                @KOCYIGIT_BETRIEB_HANDEL</h2>
+            <span class="section-eyebrow" data-aos="fade-up">Instagram</span>
+            <h2 class="mb-5 social-section-title" data-aos="fade-in">@KOCYIGIT_BETRIEB_HANDEL</h2>
             <div class="row g-3 justify-content-center" id="luxe-social-gallery">
             </div>
         </div>
     </section>
 
-    <section id="besuch" class="visit-us-area py-5 bg-white border-top">
+    <section id="besuch" class="visit-us-area py-5">
         <div class="container">
             <div class="row align-items-center g-5">
                 <div class="col-lg-6" data-aos="fade-right">
-                    <div class="map-wrapper shadow-lg rounded-4 overflow-hidden" style="border: 1px solid var(--gold);">
+                    <div class="map-wrapper overflow-hidden">
                         <iframe
                             src="https://maps.google.com/maps?q=Sinkenbreite%201,%2089180%20Bergh%C3%BClen&t=&z=15&ie=UTF8&iwloc=&output=embed"
                             width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
@@ -273,8 +318,8 @@
                 </div>
                 <div class="col-lg-6" data-aos="fade-left">
                     <div class="visit-content ps-lg-4">
-                        <h2 class="display-6 fw-bold mb-4" style="font-family: 'Playfair Display';">Besuchen Sie unser
-                            Ladengeschäft</h2>
+                        <span class="section-eyebrow">Vor Ort erleben</span>
+                        <h2 class="visit-heading mb-4">Besuchen Sie unser Ladengeschäft</h2>
                         <p class="text-muted mb-4">Erleben Sie die Welt von <strong>Koçyiğit Betrieb&Handel</strong>
                             hautnah.
                             Entdecken Sie exklusive Produkte von <strong>MAGUREX
@@ -298,7 +343,7 @@
                             </div>
                         </div>
 
-                        <div class="hours-box p-4 rounded-4 bg-light border-start border-gold border-4">
+                        <div class="hours-box p-4 border-start border-gold border-4">
                             <h5 class="fw-bold mb-3"><i class="far fa-clock me-2"></i> Öffnungszeiten</h5>
                             <div class="d-flex justify-content-between mb-2">
                                 <span>Mo - Fr:</span>

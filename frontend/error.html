@@ -14,54 +14,135 @@
 
     <link rel="stylesheet" href="style.css">
     <style>
+        :root {
+            --gold: #b89a6a;
+            --gold-hover: #a08558;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; }
+
+        html, body {
+            overflow-x: hidden !important;
+            width: 100% !important;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #0a0a0a;
+            font-family: 'Inter', sans-serif;
+            font-weight: 300;
+            color: #ffffff;
+            min-height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            -webkit-font-smoothing: antialiased;
+        }
+
         .error-container {
-            min-height: 100vh;
+            flex: 1;
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: var(--midnight);
-            color: white;
+            padding: clamp(48px, 10vw, 96px) 24px;
             text-align: center;
         }
 
+        .animate-fadeIn {
+            animation: fadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .error-eyebrow {
+            font-size: 0.58rem;
+            font-weight: 500;
+            letter-spacing: 0.44em;
+            text-transform: uppercase;
+            color: var(--gold);
+            display: block;
+            margin-bottom: 1.4rem;
+        }
+
         .error-code {
-            font-size: 8rem;
-            font-family: 'Playfair Display', serif;
+            font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+            font-size: clamp(6rem, 18vw, 11rem);
+            font-weight: 300;
             color: var(--gold);
             line-height: 1;
-            margin-bottom: 20px;
-            opacity: 0.8;
+            letter-spacing: 0.04em;
+            margin-bottom: 0;
+        }
+
+        .error-divider {
+            width: 40px;
+            height: 1px;
+            background: var(--gold);
+            margin: 24px auto;
+            opacity: 0.5;
         }
 
         .error-title {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
-            letter-spacing: 2px;
             text-transform: uppercase;
+            letter-spacing: 0.24em;
+            font-size: 0.80rem;
             margin-bottom: 20px;
+            font-weight: 500;
+            color: rgba(255,255,255,0.75);
         }
 
         .error-msg {
-            max-width: 500px;
+            max-width: 520px;
             margin: 0 auto 40px;
-            opacity: 0.7;
-            font-weight: 400;
+            color: rgba(255,255,255,0.42);
+            font-size: 0.88rem;
+            line-height: 1.75;
         }
 
-        /* 🛡️ NOT: .btn-luxe-outline ismi teknik stabilite için korunmuştur */
         .btn-luxe-outline {
+            display: inline-flex;
+            align-items: center;
+            padding: 12px 28px;
             border: 1px solid var(--gold);
-            color: var(--gold);
-            padding: 15px 40px;
-            border-radius: 50px;
+            background: var(--gold);
+            color: #ffffff;
             text-decoration: none;
-            font-weight: 700;
-            transition: 0.3s;
+            font-size: 0.65rem;
+            font-weight: 500;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            border-radius: 0;
         }
 
         .btn-luxe-outline:hover {
-            background: var(--gold);
-            color: white;
+            background: var(--gold-hover);
+            border-color: var(--gold-hover);
+            color: #ffffff;
+        }
+
+        .btn-ghost {
+            display: inline-flex;
+            align-items: center;
+            padding: 12px 28px;
+            border: 1px solid rgba(255,255,255,0.22);
+            background: transparent;
+            color: rgba(255,255,255,0.65);
+            text-decoration: none;
+            font-size: 0.65rem;
+            font-weight: 500;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            border-radius: 0;
+        }
+
+        .btn-ghost:hover {
+            border-color: rgba(255,255,255,0.5);
+            color: #ffffff;
         }
     </style>
 </head>
@@ -70,20 +151,17 @@
 
     <div class="error-container">
         <div class="container animate-fadeIn">
+            <span class="error-eyebrow">KOÇYİĞİT Betrieb&amp;Handel</span>
             <div class="error-code">404</div>
-
+            <div class="error-divider"></div>
             <h2 class="error-title">Seite nicht gefunden</h2>
-
             <p class="error-msg">
-                Es tut uns leid, aber die von Ihnen gesuchte Seite scheint in der Kollektion von <strong>KOÇYİĞİT
-                    Betrieb&Handel</strong> nicht mehr zu
-                existieren oder wurde verschoben.
+                Die von Ihnen gesuchte Seite scheint in der Kollektion von <strong style="color:rgba(255,255,255,0.75);">KOÇYİĞİT
+                    Betrieb&amp;Handel</strong> nicht mehr zu existieren oder wurde verschoben.
             </p>
-
-            <div class="d-flex justify-content-center gap-3">
+            <div class="d-flex justify-content-center flex-wrap gap-3">
                 <a href="index.html" class="btn-luxe-outline">ZUR STARTSEITE</a>
-                <a href="track.html" class="btn-luxe-outline"
-                    style="border-color: rgba(255,255,255,0.2); color: white;">BESTELLUNG PRÜFEN</a>
+                <a href="track.html" class="btn-ghost">BESTELLUNG PRÜFEN</a>
             </div>
         </div>
     </div>

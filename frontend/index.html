@@ -353,15 +353,13 @@
      ============================================================ -->
 <div class="k-payment-strip">
   <div class="k-payment-inner">
-    <span class="k-payment-label"><i class="fas fa-lock"></i> Sichere Zahlung</span>
-    <div class="k-payment-icons">
-      <img src="https://cdn.jsdelivr.net/gh/monri/payment-icons/assets/icons/visa.svg" alt="Visa" class="k-payment-icon" loading="lazy">
-      <img src="https://cdn.jsdelivr.net/gh/monri/payment-icons/assets/icons/mastercard.svg" alt="Mastercard" class="k-payment-icon" loading="lazy">
-      <img src="https://cdn.jsdelivr.net/gh/monri/payment-icons/assets/icons/paypal.svg" alt="PayPal" class="k-payment-icon" loading="lazy">
-      <img src="https://cdn.jsdelivr.net/gh/monri/payment-icons/assets/icons/apple-pay.svg" alt="Apple Pay" class="k-payment-icon" loading="lazy">
-      <img src="https://cdn.jsdelivr.net/gh/monri/payment-icons/assets/icons/google-pay.svg" alt="Google Pay" class="k-payment-icon" loading="lazy">
-    </div>
-    <span class="k-payment-label"><i class="fas fa-shield-halved"></i> SSL gesichert</span>
+    <i class="fas fa-lock"></i>
+    <i class="fab fa-cc-visa"></i>
+    <i class="fab fa-cc-mastercard"></i>
+    <i class="fab fa-cc-paypal"></i>
+    <i class="fab fa-cc-stripe"></i>
+    <i class="fab fa-cc-apple-pay"></i>
+    <i class="fas fa-shield-halved"></i>
   </div>
 </div>
 
@@ -604,7 +602,7 @@
   var btn = document.getElementById('luxe-back-to-top');
   if(!btn) return;
   window.addEventListener('scroll', function(){
-    btn.classList.toggle('visible', window.scrollY > 600);
+    btn.classList.toggle('show', window.scrollY > 600);
   }, {passive:true});
   btn.addEventListener('click', function(){
     window.scrollTo({top:0, behavior:'smooth'});
@@ -704,7 +702,7 @@
   var revealObs = new IntersectionObserver(function(entries){
     entries.forEach(function(e){
       if(e.isIntersecting){
-        e.target.classList.add('revealed');
+        e.target.classList.add('in-view');
         revealObs.unobserve(e.target);
       }
     });
@@ -738,7 +736,7 @@
   var pre = document.getElementById('preloader');
   if(!pre) return;
   function hide(){
-    pre.classList.add('k-preloader-hidden');
+    pre.classList.add('preloader-hidden');
     setTimeout(function(){ pre.style.display='none'; }, 900);
   }
   if(document.readyState === 'complete'){

@@ -1,0 +1,500 @@
+/**
+ * KOÇYİĞİT GmbH - MASTER ADMIN STYLES (FINAL VERSION)
+ * Orijinal Düzen, Görsel Onarımlar ve Mobil AOS Fix
+ * GÜNCELLEME: Luxe Toast, Durum Renkleri ve Operasyonel Badge'ler mühürlendi.
+ */
+
+:root {
+  --gold: #c5a059;
+  --navy: #1c2541;
+  --light-navy: #3a506b;
+  --light-grey: #f8f9fa;
+  --border-color: #f0f0f0;
+  --gold-shadow: rgba(197, 160, 89, 0.2);
+  /* Durum Renkleri */
+  --status-pending: #ffc107;
+  --status-processing: #17a2b8;
+  --status-shipped: #007bff;
+  --status-delivered: #28a745;
+  --status-cancelled: #dc3545;
+}
+
+/* --- GLOBAL TEMELLER --- */
+html,
+body {
+  overflow-x: hidden !important;
+  width: 100% !important;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #f0f2f5;
+  font-family: "Montserrat", sans-serif;
+  color: var(--navy);
+  position: relative;
+}
+
+/* MOBİL AOS GÜVENLİK DUVARI */
+@media (max-width: 768px) {
+  [data-aos] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* --- NAVBAR VE PRELOADER --- */
+.navbar {
+  background-color: var(--navy);
+  border-bottom: 3px solid var(--gold);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+.navbar-brand {
+  font-size: clamp(1rem, 4vw, 1.25rem);
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+.navbar-brand span {
+  color: var(--gold);
+}
+
+#preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100dvh;
+  background-color: #0b0e17;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999999;
+  transition:
+    opacity 1s cubic-bezier(0.65, 0, 0.35, 1),
+    visibility 1s;
+  overflow: hidden;
+}
+.preloader-logo {
+  font-family: "Playfair Display", serif;
+  font-size: clamp(1.2rem, 6vw, 2.8rem);
+  color: #ffffff;
+  letter-spacing: clamp(2px, 1vw, 8px);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  text-align: center;
+  width: 90%;
+  animation: luxeFadePulse 2.5s ease-in-out infinite;
+}
+.preloader-logo span {
+  color: var(--gold);
+}
+.preloader-bar {
+  width: 150px;
+  height: 1px;
+  background: rgba(197, 160, 89, 0.1);
+  margin: 0 auto 15px;
+  position: relative;
+  overflow: hidden;
+}
+.preloader-bar::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 100%;
+  background: var(--gold);
+  position: absolute;
+  left: -60px;
+  animation: loadingSlide 2s infinite ease-in-out;
+}
+
+@keyframes loadingSlide {
+  0% {
+    left: -60px;
+  }
+  100% {
+    left: 100%;
+  }
+}
+@keyframes luxeFadePulse {
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: scale(0.98);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+.preloader-hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* --- İSTATİSTİK KARTLARI --- */
+.stat-card {
+  padding: 30px;
+  border-radius: 20px;
+  color: white;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+.stat-card::after {
+  content: "";
+  position: absolute;
+  right: -20px;
+  bottom: -20px;
+  width: 100px;
+  height: 100px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 50%;
+}
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+.bg-navy {
+  background: linear-gradient(135deg, #1c2541, #3a506b);
+}
+.bg-gold {
+  background: linear-gradient(135deg, #c5a059, #e2c08d);
+}
+.bg-dark-grey {
+  background: linear-gradient(135deg, #212529, #495057);
+}
+
+.stat-card p {
+  opacity: 0.8;
+  font-size: 0.75rem;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+
+/* --- TABLO VE VERİ YÖNETİMİ --- */
+.table-scroll-container {
+  max-height: 450px;
+  overflow-y: auto;
+  overflow-x: auto;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  background: white;
+  -webkit-overflow-scrolling: touch;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+.table thead th {
+  position: sticky;
+  top: 0;
+  background-color: #f8f9fa;
+  z-index: 10;
+  border-bottom: 2px solid #dee2e6;
+  color: #888;
+  padding: 15px 12px;
+  font-size: 0.7rem;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.table tbody td {
+  padding: 18px 12px;
+  border-bottom: 1px solid var(--border-color);
+  font-size: 0.85rem;
+  vertical-align: middle;
+}
+.customer-name,
+.product-name {
+  font-weight: 700;
+  color: var(--navy);
+}
+
+/* --- DURUM YÖNETİMİ --- */
+.status-select {
+  border-radius: 30px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 6px 15px;
+  border: 1px solid #dee2e6;
+  background-color: white;
+  width: 170px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* Dinamik Renk Mühürleri */
+.status-select[data-current="Pending"] {
+  color: #856404;
+  background-color: #fff3cd;
+  border-color: #ffeeba;
+}
+.status-select[data-current="Processing"] {
+  color: #0c5460;
+  background-color: #d1ecf1;
+  border-color: #bee5eb;
+}
+.status-select[data-current="Shipped"] {
+  color: #004085;
+  background-color: #cce5ff;
+  border-color: #b8daff;
+}
+.status-select[data-current="Delivered"] {
+  color: #155724;
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+}
+.status-select[data-current="Cancelled"] {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+}
+
+.status-select:focus {
+  border-color: var(--gold);
+  outline: none;
+  box-shadow: 0 0 0 3px var(--gold-shadow);
+}
+
+.admin-reply-badge {
+  background: rgba(40, 167, 69, 0.1);
+  color: #28a745;
+  padding: 4px 12px;
+  border-radius: 50px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border: 1px solid rgba(40, 167, 69, 0.2);
+  display: inline-block;
+}
+
+/* Yorum Metni Onarımı */
+.review-text {
+  white-space: normal !important;
+  min-width: 250px;
+  max-width: 450px;
+  word-break: break-word;
+  line-height: 1.6;
+  color: #555;
+}
+
+/* Aksiyon Butonları */
+.btn-delete {
+  color: #e53e3e;
+  background: #fff5f5;
+  border: 1px solid #fed7d7;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+.btn-delete:hover {
+  background: #e53e3e;
+  color: white;
+  border-color: #c53030;
+  transform: scale(1.1);
+}
+
+/* Inventar Görselleri - image_d39820.png FIX */
+.product-img-box-small {
+  width: 50px;
+  height: 50px;
+  overflow: hidden;
+  border-radius: 8px;
+  border: 1px solid #eee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+}
+.product-img-box-small img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.grayscale {
+  filter: grayscale(1);
+  opacity: 0.6;
+}
+
+/* --- MODALLAR VE ONAY SİSTEMİ --- */
+#statusConfirmModal .modal-content,
+#orderDetailModal .modal-content {
+  border: none;
+  border-radius: 24px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  animation: luxeSlideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  max-width: 95vw;
+  margin: 0 auto;
+}
+
+@keyframes luxeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.status-change-box {
+  background: #fdfaf3;
+  border: 1px solid rgba(197, 160, 89, 0.2);
+  border-radius: 15px;
+}
+.status-icon-circle {
+  width: 70px;
+  height: 70px;
+  background: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+  margin: 0 auto 20px;
+  color: var(--gold);
+}
+
+/* --- BUTON RENK ONARIMLARI --- */
+.btn-gold {
+  background: var(--gold) !important;
+  border-color: var(--gold) !important;
+  color: white !important;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+.btn-gold:hover {
+  background: #b38f4d !important;
+  box-shadow: 0 4px 12px var(--gold-shadow);
+}
+
+.btn-outline-primary {
+  color: var(--navy) !important;
+  border-color: var(--navy) !important;
+}
+.btn-outline-primary:hover {
+  background: var(--navy) !important;
+  color: white !important;
+}
+
+/* --- STICKY KARTLAR --- */
+.sticky-card {
+  position: sticky;
+  top: 100px;
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+  padding-right: 5px;
+}
+@media (max-width: 991px) {
+  .sticky-card {
+    position: static;
+    max-height: none;
+  }
+}
+
+/* --- LUXE TOAST BİLDİRİM SİSTEMİ --- */
+#luxe-toast-container {
+  position: fixed;
+  top: 20px;
+  right: 10px;
+  left: 10px;
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+@media (min-width: 768px) {
+  #luxe-toast-container {
+    left: auto;
+    right: 30px;
+    width: 350px;
+  }
+}
+
+.luxe-toast {
+  background: #ffffff;
+  color: var(--navy);
+  padding: 15px 20px;
+  border-radius: 12px;
+  border-left: 5px solid var(--gold);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  animation: toastSlideIn 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+  transition: all 0.4s ease;
+}
+
+.luxe-toast.error {
+  border-left-color: #e63946;
+}
+.luxe-toast i {
+  font-size: 20px;
+  color: var(--gold);
+}
+.luxe-toast.error i {
+  color: #e63946;
+}
+
+.toast-content {
+  display: flex;
+  flex-direction: column;
+}
+.toast-title {
+  font-weight: 800;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 2px;
+}
+.toast-msg {
+  font-size: 13px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+@keyframes toastSlideIn {
+  from {
+    transform: translateX(120%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.luxe-toast.fade-out {
+  opacity: 0;
+  transform: scale(0.9);
+  pointer-events: none;
+}
+
+/* --- KAYDIRMA ÇUBUĞU --- */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e0;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gold);
+}

@@ -1,0 +1,223 @@
+/* --- LUXE BERLIN PREMIUM DESIGN SYSTEM --- */
+:root {
+  --gold: #c5a059;
+  --gold-hover: #b38f4d;
+  --midnight: #1c2541;
+  --dark-midnight: #0b132b;
+  --white-opacity: rgba(255, 255, 255, 0.1);
+  --gold-opacity: rgba(197, 160, 89, 0.2);
+}
+
+/* MOBIL FIX: YATAY KAYMAYI ÖNLER */
+html,
+body {
+  overflow-x: hidden !important;
+  width: 100% !important;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #f8f9fa;
+  font-family: "Montserrat", sans-serif;
+  color: #333;
+  position: relative;
+}
+
+h2,
+h3,
+.modal-title {
+  font-family: "Playfair Display", serif;
+}
+
+.checkout-container-compact {
+  max-width: 1150px;
+  margin: 40px auto;
+  border-radius: 35px;
+  overflow: hidden;
+  display: flex;
+  min-height: 85vh;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.checkout-main {
+  flex: 1.2;
+  padding: 50px;
+  background: #ffffff;
+}
+
+.form-control {
+  border-radius: 12px;
+  padding: 12px 15px;
+  border: 1px solid #e0e0e0;
+  transition: all 0.3s ease;
+  max-width: 100%;
+}
+
+.form-control:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px var(--gold-opacity);
+}
+
+.checkout-aside {
+  flex: 0.8;
+  background: linear-gradient(
+    165deg,
+    var(--midnight),
+    var(--dark-midnight)
+  ) !important;
+  color: white !important;
+  padding: 45px !important;
+  display: flex;
+  flex-direction: column;
+}
+
+#checkout-items {
+  max-height: 380px;
+  overflow-y: auto;
+  padding-right: 15px;
+}
+
+.custom-scroll::-webkit-scrollbar {
+  width: 4px;
+}
+.custom-scroll::-webkit-scrollbar-thumb {
+  background: var(--gold);
+  border-radius: 10px;
+}
+
+/* ÖDEME YÖNTEMLERİ TEMİZLENDİ - YENİ LOGO STİLİ */
+.fab,
+.fas {
+  transition: transform 0.3s ease;
+}
+.fab:hover,
+.fas:hover {
+  transform: scale(1.2);
+}
+
+.btn-order-submit {
+  background: var(--gold) !important;
+  color: #1c2541 !important;
+  border: none;
+  padding: 18px;
+  border-radius: 50px;
+  font-weight: 700;
+  text-transform: uppercase;
+  transition: 0.4s;
+}
+
+.btn-order-submit:hover:not(:disabled) {
+  background: var(--gold-hover) !important;
+  transform: translateY(-2px);
+}
+
+.form-check-label a {
+  text-decoration: underline !important;
+}
+
+@media (max-width: 991px) {
+  .checkout-container-compact {
+    flex-direction: column;
+    margin: 15px;
+    min-height: auto;
+    border-radius: 20px;
+  }
+  .checkout-main {
+    padding: 30px 20px;
+  }
+  .checkout-aside {
+    border-top: 3px solid var(--gold);
+    border-radius: 0 0 20px 20px !important;
+    padding: 30px 20px !important;
+  }
+}
+
+/* --- LUXE PRELOADER STYLES (SENIOR RESPONSIVE FIX) --- */
+#preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100dvh;
+  background-color: #0b0e17;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999999;
+  transition:
+    opacity 1s cubic-bezier(0.65, 0, 0.35, 1),
+    visibility 1s;
+  overflow: hidden;
+}
+
+.preloader-content {
+  text-align: center;
+  width: 90%;
+  max-width: 500px;
+}
+.preloader-logo {
+  font-family: "Playfair Display", serif;
+  font-size: clamp(1.1rem, 5.5vw, 2.8rem);
+  color: #ffffff;
+  letter-spacing: clamp(1px, 1vw, 8px);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  animation: luxeFadePulse 2.5s ease-in-out infinite;
+  max-width: 100%;
+}
+.preloader-logo span {
+  color: var(--gold);
+}
+.preloader-bar {
+  width: 150px;
+  height: 1px;
+  background: rgba(197, 160, 89, 0.1);
+  margin: 0 auto 15px;
+  position: relative;
+  overflow: hidden;
+}
+.preloader-bar::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 100%;
+  background: var(--gold);
+  position: absolute;
+  left: -60px;
+  animation: loadingSlide 2s infinite ease-in-out;
+}
+.preloader-text {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: clamp(0.55rem, 2vw, 0.7rem);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+@keyframes loadingSlide {
+  0% {
+    left: -60px;
+  }
+  100% {
+    left: 100%;
+  }
+}
+@keyframes luxeFadePulse {
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: scale(0.98);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+.preloader-hidden {
+  opacity: 0;
+  visibility: hidden;
+}

@@ -1,0 +1,197 @@
+:root {
+  --gold: #c5a059;
+  --navy: #1c2541;
+  --platinum: #f8f9fa;
+}
+
+/* MOBIL FIX: YATAY KAYMAYI ÖNLER */
+html,
+body {
+  overflow-x: hidden !important;
+  width: 100% !important;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+  background-color: var(--platinum);
+  color: var(--navy);
+  position: relative;
+}
+
+.navbar-brand {
+  font-family: "Playfair Display", serif;
+  letter-spacing: 2px;
+  font-size: clamp(1rem, 4vw, 1.25rem); /* Mobilde sığma garantisi */
+}
+.navbar-brand span {
+  color: var(--gold);
+}
+
+/* İletişim Kartı Tasarımı */
+.success-card {
+  background: white;
+  border-radius: 30px;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.1);
+}
+
+/* Sol Panel: Navy & Gold Gradient */
+.contact-info-panel {
+  background: linear-gradient(135deg, var(--navy) 0%, #2c3e50 100%);
+  color: white;
+}
+
+.info-icon {
+  width: 45px;
+  height: 45px;
+  background: rgba(197, 160, 89, 0.2);
+  border: 1px solid var(--gold);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 15px;
+  font-size: 1.2rem;
+}
+
+.social-links a {
+  color: var(--gold);
+  text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: 700;
+  transition: 0.3s;
+}
+
+.social-links a:hover {
+  color: white;
+}
+
+/* Form Tasarımı */
+.form-control,
+.form-select {
+  border: 1px solid #eee;
+  padding: 14px 18px;
+  border-radius: 12px;
+  background-color: #fdfdfd;
+}
+
+.form-control:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 4px rgba(197, 160, 89, 0.1);
+}
+
+.btn-gold {
+  background: var(--gold);
+  color: white;
+  border-radius: 15px;
+  transition: 0.4s;
+  border: none;
+}
+
+.btn-gold:hover {
+  background: var(--navy);
+  transform: translateY(-5px);
+}
+
+/* --- LUXE PRELOADER STYLES (SENIOR RESPONSIVE FIX) --- */
+#preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100dvh; /* Mobil tarayıcı fix */
+  background-color: #0b0e17; /* Derin Gece Mavisi */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999999; /* İmleçten bile üstte olmalı */
+  transition:
+    opacity 1s cubic-bezier(0.65, 0, 0.35, 1),
+    visibility 1s;
+  overflow: hidden;
+}
+
+.preloader-content {
+  text-align: center;
+  width: 90%;
+  max-width: 500px;
+}
+
+.preloader-logo {
+  font-family: "Playfair Display", serif;
+  font-size: clamp(
+    1.1rem,
+    5.5vw,
+    2.5rem
+  ); /* Yazının mobilde sığmasını sağlar */
+  color: #ffffff;
+  letter-spacing: clamp(2px, 1vw, 8px);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  animation: luxeFadePulse 2.5s ease-in-out infinite;
+  max-width: 100%;
+}
+
+.preloader-logo span {
+  color: var(--gold);
+}
+
+.preloader-bar {
+  width: 150px;
+  height: 1px;
+  background: rgba(197, 160, 89, 0.1);
+  margin: 0 auto 15px;
+  position: relative;
+  overflow: hidden;
+}
+
+.preloader-bar::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 100%;
+  background: var(--gold);
+  position: absolute;
+  left: -60px;
+  animation: loadingSlide 2s infinite ease-in-out;
+}
+
+.preloader-text {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: clamp(0.55rem, 2vw, 0.7rem);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* Animasyon Tanımları */
+@keyframes loadingSlide {
+  0% {
+    left: -60px;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+@keyframes luxeFadePulse {
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: scale(0.98);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Yükleme bittiğinde eklenecek gizleme klası */
+.preloader-hidden {
+  opacity: 0;
+  visibility: hidden;
+}

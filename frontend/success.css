@@ -1,0 +1,275 @@
+/* --- LUXE BERLIN - SUCCESS PAGE STYLES --- */
+
+:root {
+  --gold: #c5a059;
+  --navy: #1c2541;
+  --platinum: #f8f9fa;
+}
+
+/* MOBIL FIX: YATAY KAYMAYI ÖNLER */
+html,
+body {
+  overflow-x: hidden !important;
+  width: 100% !important;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+  background-color: var(--platinum);
+  color: var(--navy);
+  position: relative;
+}
+
+.success-card {
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  border: none;
+  overflow: hidden;
+}
+
+.success-header {
+  background: var(--navy);
+  color: white;
+  padding: 40px;
+}
+
+/* --- CHECKMARK ANIMATIONS --- */
+.check-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.checkmark {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: block;
+  stroke-width: 2;
+  stroke: var(--gold);
+  stroke-miterlimit: 10;
+  animation:
+    fill 0.4s ease-in-out 0.4s forwards,
+    scale 0.3s ease-in-out 0.9s both;
+}
+
+.checkmark__circle {
+  stroke-dasharray: 166;
+  stroke-dashoffset: 166;
+  stroke-width: 2;
+  stroke-miterlimit: 10;
+  stroke: var(--gold);
+  fill: none;
+  animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+}
+
+.checkmark__check {
+  transform-origin: 50% 50%;
+  stroke-dasharray: 48;
+  stroke-dashoffset: 48;
+  animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+}
+
+@keyframes stroke {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes scale {
+  0%,
+  100% {
+    transform: none;
+  }
+  50% {
+    transform: scale3d(1.1, 1.1, 1);
+  }
+}
+@keyframes fill {
+  100% {
+    box-shadow: inset 0px 0px 0px 50px rgba(197, 160, 89, 0.1);
+  }
+}
+
+/* --- ORDER ID BOX & FEEDBACK --- */
+.order-id-box {
+  background: rgba(197, 160, 89, 0.1);
+  border: 1px dashed var(--gold);
+  padding: 10px 20px;
+  border-radius: 10px;
+  display: inline-block;
+  font-family: monospace;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  max-width: 100%; /* Mobilde taşmayı önler */
+  word-break: break-all;
+}
+
+.copy-feedback {
+  position: absolute;
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--navy);
+  color: white;
+  padding: 5px 12px;
+  border-radius: 5px;
+  font-size: 0.7rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.order-id-box.copied .copy-feedback {
+  opacity: 1;
+  visibility: visible;
+  top: -45px;
+}
+
+.summary-item {
+  border-bottom: 1px solid #eee;
+  padding: 12px 0;
+}
+
+.next-steps-icon {
+  width: 40px;
+  height: 40px;
+  background: var(--platinum);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 15px;
+  font-size: 1.2rem;
+}
+
+.btn-gold {
+  background: var(--gold);
+  color: white;
+  border-radius: 50px;
+  padding: 12px 30px;
+  font-weight: 700;
+  transition: 0.3s;
+  border: none;
+}
+
+.btn-gold:hover {
+  background: var(--navy);
+  transform: translateY(-2px);
+}
+
+/* --- LUXE PRELOADER STYLES (SENIOR RESPONSIVE FIX) --- */
+#preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100dvh; /* Mobil tarayıcı fix */
+  background-color: #0b0e17;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999999;
+  transition:
+    opacity 1s cubic-bezier(0.65, 0, 0.35, 1),
+    visibility 1s;
+  overflow: hidden;
+}
+
+.preloader-content {
+  text-align: center;
+  width: 90%;
+  max-width: 500px;
+}
+
+.preloader-logo {
+  font-family: "Playfair Display", serif;
+  font-size: clamp(
+    1.1rem,
+    5.5vw,
+    2.8rem
+  ); /* Metnin tam sığması için mühürlendi */
+  color: #ffffff;
+  letter-spacing: clamp(1px, 1vw, 8px);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  animation: luxeFadePulse 2.5s ease-in-out infinite;
+  max-width: 100%;
+}
+
+.preloader-logo span {
+  color: var(--gold);
+}
+
+.preloader-bar {
+  width: clamp(100px, 20vw, 150px);
+  height: 1px;
+  background: rgba(197, 160, 89, 0.1);
+  margin: 0 auto 15px;
+  position: relative;
+  overflow: hidden;
+}
+
+.preloader-bar::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 100%;
+  background: var(--gold);
+  position: absolute;
+  left: -60px;
+  animation: loadingSlide 2s infinite ease-in-out;
+}
+
+.preloader-text {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: clamp(0.55rem, 2vw, 0.7rem);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+@keyframes loadingSlide {
+  0% {
+    left: -60px;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+@keyframes luxeFadePulse {
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: scale(0.98);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.preloader-hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* MOBİL ÖZEL AYARLAR (Yazı sığması ve hizalama için) */
+@media (max-width: 576px) {
+  .success-header {
+    padding: 30px 20px;
+  }
+  .success-card {
+    margin: 10px;
+  }
+}

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KOÇYİĞİT Betrieb&Handel | Erfolg</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="success.css">
+    <link rel="icon" type="image/jpeg" href="">
+
+    <style>
+        /* Mobil AOS Failsafe */
+        @media (max-width: 768px) {
+            [data-aos] {
+                opacity: 1 !important;
+                transform: none !important;
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="preloader">
+        <div class="preloader-content">
+            <div class="preloader-logo">KOÇYİĞİT<span>Betrieb&Handel</span></div>
+            <div class="preloader-bar"></div>
+            <p class="preloader-text">KOÇYİĞİT wird geladen...</p>
+        </div>
+    </div>
+
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-md-9 col-lg-7" data-aos="fade-up" data-aos-offset="0">
+                <div class="card success-card">
+                    <div class="success-header text-center">
+                        <div class="check-container" data-aos="zoom-in" data-aos-delay="300" data-aos-offset="0">
+                            <svg class="checkmark" viewBox="0 0 52 52">
+                                <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
+                                <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+                            </svg>
+                        </div>
+                        <h1 style="font-family:'Playfair Display';" data-aos="fade-down" data-aos-offset="0">Vielen
+                            Dank!</h1>
+                        <p class="opacity-75" data-aos="fade-in" data-aos-delay="400" data-aos-offset="0">Ihre
+                            Bestellung wurde erfolgreich entgegengenommen.</p>
+
+                        <div class="order-id-box mt-2" onclick="copyOrderId()" id="idBox" data-aos="fade-up"
+                            data-aos-delay="500" data-aos-offset="0">
+                            <div class="copy-feedback" id="copyBadge">Kopiert! ✓</div>
+                            Bestell-ID: <span id="orderIdText" class="fw-bold">Laden...</span>
+                            <small style="display: block; font-size: 0.65rem; opacity: 0.7; margin-top: 3px;">(Klicken
+                                zum Kopieren)</small>
+                        </div>
+                    </div>
+
+                    <div class="card-body p-4 p-md-5">
+                        <div class="mb-5" data-aos="fade-up" data-aos-delay="600" data-aos-offset="0">
+                            <h5 class="fw-bold mb-3 border-bottom pb-2">Bestellübersicht</h5>
+                            <div id="summary-list"></div>
+
+                            <div class="d-flex justify-content-between mt-3 pt-2 border-top">
+                                <span class="text-muted small fw-bold">Zwischensumme:</span>
+                                <span class="fw-bold small text-dark" id="subtotalAmountText">0,00 €</span>
+                            </div>
+                            <div class="d-flex justify-content-between mt-2 pb-3 border-bottom">
+                                <span class="text-muted small fw-bold">Versandkosten:</span>
+                                <span class="fw-bold small" id="shippingAmountText">0,00 €</span>
+                            </div>
+                            <div class="d-flex justify-content-between mt-3 align-items-center">
+                                <span class="fw-bold">Gesamtsumme:</span>
+                                <span class="fw-bold fs-4" style="color: var(--gold);" id="totalAmountText">0,00
+                                    €</span>
+                            </div>
+                        </div>
+
+                        <div class="mb-5 bg-light p-3 rounded-4" data-aos="fade-up" data-aos-delay="700"
+                            data-aos-offset="0">
+                            <h6 class="text-uppercase small fw-bold text-muted mb-2">Lieferadresse</h6>
+                            <p class="mb-0 fw-semibold" id="addressText">--</p>
+                        </div>
+
+                        <div class="d-grid gap-3" data-aos="fade-up" data-aos-delay="800" data-aos-offset="0">
+                            <a href="#" id="invoiceDownloadBtn" target="_blank"
+                                class="btn btn-outline-dark rounded-pill fw-bold d-none py-2 shadow-sm">
+                                <i class="fas fa-file-pdf me-2"></i> Rechnung Herunterladen
+                            </a>
+                            <a href="track.html" id="trackBtn" class="btn btn-gold rounded-pill py-2">BESTELLUNG
+                                VERFOLGEN</a>
+                            <a href="index.html" class="btn btn-link text-decoration-none text-muted small">Zurück zum
+                                Shop</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="success.js"></script>
+</body>
+
+</html>

@@ -109,15 +109,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;600;700&display=swap"
+    <link 
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark sticky-top shadow-sm">
+    <nav class="navbar navbar-expand-lg sticky-top">
         <div class="container">
             <a class="navbar-brand" href="index.html">KOÇYİĞİT<span>Betrieb&Handel</span></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -149,10 +149,18 @@
 
     <header class="hero-section">
         <div class="hero-overlay"></div>
-        <div class="container text-center text-white" style="position: relative; z-index: 2;">
-            <h1 class="display-3 fw-bold" data-aos="fade-up">EXKLUSIVITÄT IN JEDEM DETAIL</h1>
+        <div class="container" style="position: relative; z-index: 2; padding-left: clamp(1.5rem, 5vw, 4rem);">
+            <span class="hero-eyebrow" data-aos="fade-up">Berghülen, Deutschland</span>
+            <h1 class="hero-title" data-aos="fade-up" data-aos-delay="100">EXKLUSIVITÄT<br>IN JEDEM DETAIL</h1>
+            <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="200">
+                Premium Mode &amp; Lifestyle — Koçyiğit Betrieb&amp;Handel.<br>
+                Willkommen bei Ihrem offiziellen Store in Berghülen.
+            </p>
+            <div data-aos="fade-up" data-aos-delay="300">
+                <a href="#produkte" class="hero-cta">Kollektion entdecken <i class="fas fa-arrow-right" style="font-size:0.7rem;"></i></a>
+            </div>
             <p class="visually-hidden">
-                Willkommen bei Koçyiğit Betrieb&Handel in Berghülen. Wir sind Ihr offizieller Store für exklusive
+                Willkommen bei Koçyiğit Betrieb&amp;Handel in Berghülen. Wir sind Ihr offizieller Store für exklusive
                 Magurex Care Autopflegeprodukte, Yaşam Garden Gartenartikel und Premium Lifestyle Mode in Deutschland.
             </p>
         </div>
@@ -161,7 +169,7 @@
     <section class="container mt-5 pt-4" data-aos="fade-up" data-aos-delay="200">
         <div class="search-container text-center">
             <div class="search-input-wrapper">
-                <span class="search-icon-fixed">🔍</span>
+                <span class="search-icon-fixed"><i class="fas fa-search"></i></span>
                 <input type="text" id="mainSearchInput" class="luxe-search-input"
                     placeholder="Suchen Sie in unserer Kollektion..." onkeyup="filterProducts()">
             </div>
@@ -179,6 +187,11 @@
     </section>
 
     <main class="container my-5 py-4" id="produkte" data-aos="fade-up">
+        <div class="text-center mb-5">
+            <span class="section-eyebrow">Entdecken Sie unsere Produkte</span>
+            <h2 style="font-family: var(--font-display, 'Cormorant Garamond', serif); font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 300; letter-spacing: 0.04em;">Unsere Kollektion</h2>
+            <div class="gold-divider mx-auto"></div>
+        </div>
         <div id="product-grid-container" class="row g-4"></div>
         <div class="text-center mt-5" id="show-more-products-wrapper" style="display: none;">
             <button id="showMoreProductsBtn" class="btn btn-outline-dark rounded-pill px-5 fw-bold">MEHR PRODUKTE
@@ -189,7 +202,8 @@
     <section id="testimonials" class="py-5 bg-light border-top border-bottom">
         <div class="container">
             <div class="text-center mb-5" data-aos="fade-down">
-                <h2 class="display-5 fw-bold" style="font-family: 'Playfair Display';">Kundenstimmen</h2>
+                <span class="section-eyebrow">Was unsere Kunden sagen</span>
+                <h2 style="font-family: var(--font-display, 'Cormorant Garamond', serif); font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 300; letter-spacing: 0.04em;">Kundenstimmen</h2>
                 <div class="gold-divider mx-auto"></div>
             </div>
 
@@ -320,17 +334,40 @@
         </div>
     </section>
 
-    <footer class="py-4 text-center text-muted small border-top bg-white luxe-footer">
+    <footer class="luxe-footer">
         <div class="container">
-            <div class="mb-3">
-                <a href="Impressum.html" class="mx-2 text-decoration-none text-muted footer-link">Impressum</a>
-                <a href="Datenschutz.html" class="mx-2 text-decoration-none text-muted footer-link">Datenschutz</a>
-                <a href="Widerruf.html" class="mx-2 text-decoration-none text-muted footer-link">Widerrufsbelehrung</a>
-                <a href="agb.html" class="mx-2 text-decoration-none text-muted footer-link">AGB</a>
+            <div class="row g-5">
+                <div class="col-lg-5">
+                    <a href="index.html" class="footer-brand">KOÇYİĞİT<span>Betrieb&amp;Handel</span></a>
+                    <p class="footer-tagline">Premium Mode &amp; Lifestyle</p>
+                    <p style="color:rgba(255,255,255,0.30); font-size:0.78rem; line-height:1.75; max-width:260px; font-weight:300;">
+                        Sinkenbreite 1<br>89180 Berghülen, Deutschland<br>
+                        <a href="tel:+4915125387018" style="color:rgba(255,255,255,0.35); text-decoration:none; font-size:0.75rem;">+49 151 25387018</a>
+                    </p>
+                </div>
+                <div class="col-lg-3 offset-lg-1">
+                    <h6 style="color:rgba(255,255,255,0.25); font-size:0.6rem; letter-spacing:0.32em; text-transform:uppercase; margin-bottom:20px; font-weight:500;">Navigation</h6>
+                    <div class="d-flex flex-column" style="gap:4px;">
+                        <a href="#produkte" class="footer-link">Kollektion</a>
+                        <a href="track.html" class="footer-link">Bestellverfolgung</a>
+                        <a href="contact.html" class="footer-link">Kontakt</a>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <h6 style="color:rgba(255,255,255,0.25); font-size:0.6rem; letter-spacing:0.32em; text-transform:uppercase; margin-bottom:20px; font-weight:500;">Rechtliches</h6>
+                    <div class="d-flex flex-column" style="gap:4px;">
+                        <a href="Impressum.html" class="footer-link">Impressum</a>
+                        <a href="Datenschutz.html" class="footer-link">Datenschutz</a>
+                        <a href="Widerruf.html" class="footer-link">Widerrufsbelehrung</a>
+                        <a href="agb.html" class="footer-link">AGB</a>
+                    </div>
+                </div>
             </div>
-            <p class="mb-1 opacity-75">© 2026 Koçyiğit Betrieb&Handel. Alle Rechte vorbehalten.</p>
-            <p class="mb-0">Fragen? <a href="contact.html" class="fw-bold text-decoration-none"
-                    style="color: var(--gold);">Kontaktieren Sie uns</a></p>
+            <div class="footer-divider"></div>
+            <div class="d-flex justify-content-between align-items-center flex-wrap" style="gap:12px;">
+                <p class="footer-copy mb-0">© 2026 Koçyiğit Betrieb&amp;Handel. Alle Rechte vorbehalten.</p>
+                <a href="contact.html" class="footer-contact-link">Fragen? Kontaktieren Sie uns</a>
+            </div>
         </div>
     </footer>
 

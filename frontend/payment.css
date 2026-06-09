@@ -1,16 +1,17 @@
-/* --- LUXE BERLIN PREMIUM DESIGN SYSTEM --- */
+/* ============================================================
+   KOCYIGIT — CHECKOUT / PAYMENT
+   Editorial · Minimal · Premium
+   ============================================================ */
+
 :root {
-  --gold: #c5a059;
-  --gold-hover: #b38f4d;
-  --midnight: #1c2541;
-  --dark-midnight: #0b132b;
-  --white-opacity: rgba(255, 255, 255, 0.1);
-  --gold-opacity: rgba(197, 160, 89, 0.2);
+  --gold: #b89a6a;
+  --gold-hover: #a08558;
+  --gold-opacity: rgba(184, 154, 106, 0.12);
+  --black: #0a0a0a;
+  --dark: #111111;
 }
 
-/* MOBIL FIX: YATAY KAYMAYI ÖNLER */
-html,
-body {
+html, body {
   overflow-x: hidden !important;
   width: 100% !important;
   margin: 0;
@@ -19,205 +20,219 @@ body {
 }
 
 body {
-  background-color: #f8f9fa;
-  font-family: "Montserrat", sans-serif;
-  color: #333;
-  position: relative;
+  background-color: #f4f1ed;
+  font-family: 'Inter', 'Montserrat', sans-serif;
+  font-weight: 300;
+  color: #111;
+  -webkit-font-smoothing: antialiased;
 }
 
-h2,
-h3,
-.modal-title {
-  font-family: "Playfair Display", serif;
+h2, h3, .modal-title {
+  font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+  font-weight: 400;
 }
 
 .checkout-container-compact {
-  max-width: 1150px;
-  margin: 40px auto;
-  border-radius: 35px;
+  max-width: 1100px;
+  margin: 48px auto;
+  border-radius: 0;
   overflow: hidden;
   display: flex;
-  min-height: 85vh;
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  min-height: 82vh;
+  border: 1px solid rgba(0,0,0,0.06);
+  box-shadow: 0 4px 40px rgba(0, 0, 0, 0.07);
 }
 
 .checkout-main {
-  flex: 1.2;
-  padding: 50px;
+  flex: 1.3;
+  padding: 56px 52px;
   background: #ffffff;
 }
 
+.form-label {
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #666;
+  margin-bottom: 6px;
+}
+
 .form-control {
-  border-radius: 12px;
-  padding: 12px 15px;
-  border: 1px solid #e0e0e0;
+  border-radius: 0 !important;
+  padding: 13px 16px;
+  border: 1px solid #ddd8d2;
+  font-size: 0.88rem;
+  font-weight: 300;
   transition: all 0.3s ease;
   max-width: 100%;
+  letter-spacing: 0.02em;
+  background: #fff;
+  color: #111;
 }
 
 .form-control:focus {
   border-color: var(--gold);
-  box-shadow: 0 0 0 3px var(--gold-opacity);
+  box-shadow: 0 0 0 2px var(--gold-opacity);
+  outline: none;
+  background: #fff;
 }
 
 .checkout-aside {
-  flex: 0.8;
-  background: linear-gradient(
-    165deg,
-    var(--midnight),
-    var(--dark-midnight)
-  ) !important;
+  flex: 0.7;
+  background: linear-gradient(170deg, #111111 0%, #0a0a0a 100%) !important;
   color: white !important;
-  padding: 45px !important;
+  padding: 52px 44px !important;
   display: flex;
   flex-direction: column;
 }
 
 #checkout-items {
-  max-height: 380px;
+  max-height: 360px;
   overflow-y: auto;
-  padding-right: 15px;
+  padding-right: 12px;
 }
 
-.custom-scroll::-webkit-scrollbar {
-  width: 4px;
-}
+.custom-scroll::-webkit-scrollbar { width: 3px; }
 .custom-scroll::-webkit-scrollbar-thumb {
   background: var(--gold);
-  border-radius: 10px;
+  border-radius: 0;
 }
 
-/* ÖDEME YÖNTEMLERİ TEMİZLENDİ - YENİ LOGO STİLİ */
-.fab,
-.fas {
+.fab, .fas {
   transition: transform 0.3s ease;
 }
-.fab:hover,
-.fas:hover {
-  transform: scale(1.2);
-}
+.fab:hover, .fas:hover { transform: scale(1.12); }
 
 .btn-order-submit {
   background: var(--gold) !important;
-  color: #1c2541 !important;
+  color: #ffffff !important;
   border: none;
   padding: 18px;
-  border-radius: 50px;
-  font-weight: 700;
+  border-radius: 0;
+  font-weight: 500;
+  font-size: 0.70rem;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  transition: 0.4s;
+  transition: all 0.3s ease;
+  font-family: 'Inter', sans-serif;
+  width: 100%;
 }
 
 .btn-order-submit:hover:not(:disabled) {
   background: var(--gold-hover) !important;
-  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(184, 154, 106, 0.2);
+}
+
+.form-check-input:checked {
+  background-color: var(--gold);
+  border-color: var(--gold);
 }
 
 .form-check-label a {
   text-decoration: underline !important;
+  color: inherit;
+}
+
+.summary-total {
+  letter-spacing: 0.02em;
 }
 
 @media (max-width: 991px) {
   .checkout-container-compact {
     flex-direction: column;
-    margin: 15px;
+    margin: 0;
     min-height: auto;
-    border-radius: 20px;
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
   }
+
   .checkout-main {
-    padding: 30px 20px;
+    padding: 32px 24px;
   }
+
   .checkout-aside {
-    border-top: 3px solid var(--gold);
-    border-radius: 0 0 20px 20px !important;
-    padding: 30px 20px !important;
+    border-top: 2px solid var(--gold) !important;
+    padding: 32px 24px !important;
   }
 }
 
-/* --- LUXE PRELOADER STYLES (SENIOR RESPONSIVE FIX) --- */
+/* ============================================================
+   PRELOADER
+   ============================================================ */
+
 #preloader {
   position: fixed;
-  top: 0;
-  left: 0;
+  top: 0; left: 0;
   width: 100%;
   height: 100dvh;
-  background-color: #0b0e17;
+  background-color: #0a0a0a;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 999999;
-  transition:
-    opacity 1s cubic-bezier(0.65, 0, 0.35, 1),
-    visibility 1s;
+  transition: opacity 0.8s ease, visibility 0.8s;
   overflow: hidden;
 }
 
 .preloader-content {
   text-align: center;
   width: 90%;
-  max-width: 500px;
+  max-width: 480px;
 }
+
 .preloader-logo {
-  font-family: "Playfair Display", serif;
-  font-size: clamp(1.1rem, 5.5vw, 2.8rem);
+  font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+  font-size: clamp(1rem, 5vw, 2rem);
   color: #ffffff;
-  letter-spacing: clamp(1px, 1vw, 8px);
+  letter-spacing: clamp(0.18em, 1vw, 0.45em);
   text-transform: uppercase;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   animation: luxeFadePulse 2.5s ease-in-out infinite;
   max-width: 100%;
 }
-.preloader-logo span {
-  color: var(--gold);
-}
+
+.preloader-logo span { color: var(--gold); }
+
 .preloader-bar {
-  width: 150px;
+  width: 100px;
   height: 1px;
-  background: rgba(197, 160, 89, 0.1);
-  margin: 0 auto 15px;
+  background: rgba(184, 154, 106, 0.10);
+  margin: 0 auto 14px;
   position: relative;
   overflow: hidden;
 }
+
 .preloader-bar::after {
-  content: "";
+  content: '';
   display: block;
-  width: 60px;
+  width: 50%;
   height: 100%;
   background: var(--gold);
   position: absolute;
-  left: -60px;
-  animation: loadingSlide 2s infinite ease-in-out;
+  left: -50%;
+  animation: loadingSlide 1.6s infinite ease-in-out;
 }
+
 .preloader-text {
-  color: rgba(255, 255, 255, 0.4);
-  font-size: clamp(0.55rem, 2vw, 0.7rem);
-  letter-spacing: 2px;
+  color: rgba(255,255,255,0.24);
+  font-size: 0.58rem;
+  letter-spacing: 0.26em;
   text-transform: uppercase;
 }
 
 @keyframes loadingSlide {
-  0% {
-    left: -60px;
-  }
-  100% {
-    left: 100%;
-  }
+  0%   { left: -50%; }
+  100% { left: 100%; }
 }
+
 @keyframes luxeFadePulse {
-  0%,
-  100% {
-    opacity: 0.4;
-    transform: scale(0.98);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1);
-  }
+  0%, 100% { opacity: 0.30; transform: scale(0.98); }
+  50%       { opacity: 1;    transform: scale(1); }
 }
-.preloader-hidden {
-  opacity: 0;
-  visibility: hidden;
-}
+
+.preloader-hidden { opacity: 0; visibility: hidden; }

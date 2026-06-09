@@ -1,12 +1,17 @@
+/* ============================================================
+   KOCYIGIT — CONTACT PAGE
+   Clean · Minimal · Premium
+   ============================================================ */
+
 :root {
-  --gold: #c5a059;
-  --navy: #1c2541;
-  --platinum: #f8f9fa;
+  --gold: #b89a6a;
+  --gold-hover: #a08558;
+  --gold-opacity: rgba(184, 154, 106, 0.12);
+  --navy: #111111;
+  --cream: #f9f7f4;
 }
 
-/* MOBIL FIX: YATAY KAYMAYI ÖNLER */
-html,
-body {
+html, body {
   overflow-x: hidden !important;
   width: 100% !important;
   margin: 0;
@@ -15,121 +20,129 @@ body {
 }
 
 body {
-  font-family: "Montserrat", sans-serif;
-  background-color: var(--platinum);
+  font-family: 'Inter', 'Montserrat', sans-serif;
+  font-weight: 300;
+  background-color: var(--cream);
   color: var(--navy);
-  position: relative;
+  -webkit-font-smoothing: antialiased;
 }
 
 .navbar-brand {
-  font-family: "Playfair Display", serif;
-  letter-spacing: 2px;
-  font-size: clamp(1rem, 4vw, 1.25rem); /* Mobilde sığma garantisi */
-}
-.navbar-brand span {
-  color: var(--gold);
+  font-family: 'Cormorant Garamond', 'Playfair Display', serif !important;
+  letter-spacing: 0.14em;
+  font-size: clamp(0.85rem, 3.5vw, 1.1rem);
+  font-weight: 400;
 }
 
-/* İletişim Kartı Tasarımı */
+.navbar-brand span { color: var(--gold); }
+
+/* Contact Card */
 .success-card {
   background: white;
-  border-radius: 30px;
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.1);
+  border-radius: 0;
+  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.06);
+  border: 1px solid #ebe7e0;
 }
 
-/* Sol Panel: Navy & Gold Gradient */
+/* Info Panel */
 .contact-info-panel {
-  background: linear-gradient(135deg, var(--navy) 0%, #2c3e50 100%);
+  background: linear-gradient(150deg, #111111 0%, #1e2a3a 100%);
   color: white;
 }
 
 .info-icon {
-  width: 45px;
-  height: 45px;
-  background: rgba(197, 160, 89, 0.2);
-  border: 1px solid var(--gold);
-  border-radius: 12px;
+  width: 42px;
+  height: 42px;
+  background: rgba(184, 154, 106, 0.15);
+  border: 1px solid rgba(184, 154, 106, 0.25);
+  border-radius: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-right: 15px;
-  font-size: 1.2rem;
+  margin-right: 14px;
+  font-size: 1rem;
+  color: var(--gold);
 }
 
 .social-links a {
   color: var(--gold);
   text-decoration: none;
-  font-size: 0.8rem;
-  font-weight: 700;
-  transition: 0.3s;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  transition: color 0.3s ease;
 }
 
-.social-links a:hover {
-  color: white;
-}
+.social-links a:hover { color: white; }
 
-/* Form Tasarımı */
-.form-control,
-.form-select {
-  border: 1px solid #eee;
-  padding: 14px 18px;
-  border-radius: 12px;
-  background-color: #fdfdfd;
+/* Form */
+.form-control, .form-select {
+  border: 1px solid #ddd8d0 !important;
+  padding: 13px 16px !important;
+  border-radius: 0 !important;
+  background-color: #fdfcfa !important;
+  font-size: 0.88rem;
+  font-weight: 300;
+  font-family: 'Inter', sans-serif;
 }
 
 .form-control:focus {
-  border-color: var(--gold);
-  box-shadow: 0 0 0 4px rgba(197, 160, 89, 0.1);
+  border-color: var(--gold) !important;
+  box-shadow: 0 0 0 2px var(--gold-opacity) !important;
+}
+
+.form-label {
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #666;
 }
 
 .btn-gold {
   background: var(--gold);
   color: white;
-  border-radius: 15px;
-  transition: 0.4s;
+  border-radius: 0;
+  transition: all 0.3s ease;
   border: none;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
 }
 
 .btn-gold:hover {
-  background: var(--navy);
-  transform: translateY(-5px);
+  background: var(--gold-hover);
 }
 
-/* --- LUXE PRELOADER STYLES (SENIOR RESPONSIVE FIX) --- */
+/* Preloader */
 #preloader {
   position: fixed;
-  top: 0;
-  left: 0;
+  top: 0; left: 0;
   width: 100%;
-  height: 100dvh; /* Mobil tarayıcı fix */
-  background-color: #0b0e17; /* Derin Gece Mavisi */
+  height: 100dvh;
+  background-color: #0a0a0a;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 999999; /* İmleçten bile üstte olmalı */
-  transition:
-    opacity 1s cubic-bezier(0.65, 0, 0.35, 1),
-    visibility 1s;
+  z-index: 999999;
+  transition: opacity 0.8s ease, visibility 0.8s;
   overflow: hidden;
 }
 
 .preloader-content {
   text-align: center;
   width: 90%;
-  max-width: 500px;
+  max-width: 480px;
 }
 
 .preloader-logo {
-  font-family: "Playfair Display", serif;
-  font-size: clamp(
-    1.1rem,
-    5.5vw,
-    2.5rem
-  ); /* Yazının mobilde sığmasını sağlar */
+  font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+  font-size: clamp(1rem, 5vw, 2rem);
   color: #ffffff;
-  letter-spacing: clamp(2px, 1vw, 8px);
+  letter-spacing: clamp(0.18em, 1vw, 0.45em);
   text-transform: uppercase;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -137,61 +150,43 @@ body {
   max-width: 100%;
 }
 
-.preloader-logo span {
-  color: var(--gold);
-}
+.preloader-logo span { color: var(--gold); }
 
 .preloader-bar {
-  width: 150px;
+  width: 100px;
   height: 1px;
-  background: rgba(197, 160, 89, 0.1);
-  margin: 0 auto 15px;
+  background: rgba(184, 154, 106, 0.10);
+  margin: 0 auto 14px;
   position: relative;
   overflow: hidden;
 }
 
 .preloader-bar::after {
-  content: "";
+  content: '';
   display: block;
-  width: 60px;
+  width: 50%;
   height: 100%;
   background: var(--gold);
   position: absolute;
-  left: -60px;
-  animation: loadingSlide 2s infinite ease-in-out;
+  left: -50%;
+  animation: loadingSlide 1.6s infinite ease-in-out;
 }
 
 .preloader-text {
-  color: rgba(255, 255, 255, 0.4);
-  font-size: clamp(0.55rem, 2vw, 0.7rem);
-  letter-spacing: 2px;
+  color: rgba(255,255,255,0.24);
+  font-size: 0.58rem;
+  letter-spacing: 0.26em;
   text-transform: uppercase;
 }
 
-/* Animasyon Tanımları */
 @keyframes loadingSlide {
-  0% {
-    left: -60px;
-  }
-  100% {
-    left: 100%;
-  }
+  0%   { left: -50%; }
+  100% { left: 100%; }
 }
 
 @keyframes luxeFadePulse {
-  0%,
-  100% {
-    opacity: 0.4;
-    transform: scale(0.98);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1);
-  }
+  0%, 100% { opacity: 0.30; transform: scale(0.98); }
+  50%       { opacity: 1;    transform: scale(1); }
 }
 
-/* Yükleme bittiğinde eklenecek gizleme klası */
-.preloader-hidden {
-  opacity: 0;
-  visibility: hidden;
-}
+.preloader-hidden { opacity: 0; visibility: hidden; }

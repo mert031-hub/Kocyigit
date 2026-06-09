@@ -1,90 +1,107 @@
-/* LUXE BERLIN - GLOBAL DESIGN SYSTEM */
+/* ============================================================
+   KOCYIGIT BETRIEB & HANDEL — PREMIUM DESIGN SYSTEM v2.0
+   Luxury · Editorial · Minimal
+   ============================================================ */
+
 :root {
-  --gold: #c5a059;
-  --gold-hover: #b38f4d;
-  --midnight: #1c2541;
-  --dark-midnight: #0b132b;
+  /* Core Palette */
+  --black: #0a0a0a;
   --white: #ffffff;
-  --platinum: #f8f9fa;
-  --success: #27ae60;
-  --bg-primary: #f8f9fa;
-  --bg-secondary: #ffffff;
+  --cream: #f9f7f4;
+  --cream-dark: #edeae4;
+
+  /* Gold — warm, refined */
+  --gold: #b89a6a;
+  --gold-hover: #a08558;
+  --gold-light: rgba(184, 154, 106, 0.10);
+  --gold-opacity: rgba(184, 154, 106, 0.15);
+  --gold-border: rgba(184, 154, 106, 0.28);
+
+  /* Legacy (backward compat) */
+  --midnight: #111111;
+  --dark-midnight: #0a0a0a;
+
+  /* Text */
   --text-main: #111111;
-  --text-muted: #6c757d;
+  --text-muted: #888888;
+  --text-subtle: #b5b5b5;
+
+  /* Backgrounds */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f9f7f4;
   --card-bg: #ffffff;
-  --border-color: #eeeeee;
-  --gold-opacity: rgba(197, 160, 89, 0.2);
-  --soft-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-  /* ULTRA YUMUŞAK GEÇİŞ EFEKTİ SÜRESİ */
-  --theme-transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Borders */
+  --border-color: #e8e4de;
+
+  /* Shadows */
+  --soft-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
+  --hover-shadow: 0 16px 48px rgba(0, 0, 0, 0.10);
+
+  /* Transitions */
+  --theme-transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Fonts */
+  --font-display: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+  --font-sans: 'Inter', 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Misc */
+  --success: #2d7a4f;
 }
 
-/* DARK MODE RENK TANIMLARI */
+/* Dark Mode */
 body.dark-mode {
-  --bg-primary: #0b0e14;
-  --bg-secondary: #161b22;
-  --text-main: #ffffff;
-  --text-muted: #b0b3b8;
-  --card-bg: #1c2541;
-  --border-color: #30363d;
-  --soft-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  --bg-primary: #0d0d0d;
+  --bg-secondary: #161616;
+  --text-main: #f0ede8;
+  --text-muted: #888888;
+  --card-bg: #1a1a1a;
+  --border-color: #2a2a2a;
+  --soft-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+  --hover-shadow: 0 16px 48px rgba(0, 0, 0, 0.55);
 }
 
-/* 🎨 GLOBAL YUMUŞAK GEÇİŞ AYARI (TÜM ANA BİLEŞENLER) */
-body,
-nav,
-section,
-footer,
-main,
-.product-card,
-.testimonial-card,
-.modal-content,
-input,
-button,
-.luxe-payment-showcase,
-.payment-title,
-.brand-item i,
-.navbar-brand,
-.nav-link,
-.footer-link,
-.luxe-back-to-top {
-  transition: var(--theme-transition) !important;
+/* ============================================================
+   BASE
+   ============================================================ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
 }
 
-/* MOBIL FIX: YATAY KAYMAYI ÖNLER */
-html,
-body {
+html, body {
   overflow-x: hidden !important;
   width: 100% !important;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
 body {
-  font-family: "Montserrat", sans-serif;
+  font-family: var(--font-sans);
+  font-weight: 300;
   color: var(--text-main);
   background-color: var(--bg-primary);
   scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   position: relative;
 }
 
-/* 🔔 LOGO RENK VE HİZALAMA MÜHRÜ - FIX: MOBİL KAYMAYI ÖNLER */
-.navbar-brand,
-.preloader-logo {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  gap: 8px;
-  white-space: nowrap !important; /* Kelimelerin bölünmesini engeller */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 400;
 }
 
-.navbar-brand span,
-.preloader-logo span {
-  color: var(--gold) !important;
+/* Theme transitions on key elements */
+body, nav, section, footer, main,
+.product-card, .testimonial-card, .modal-content,
+input, button, .navbar, .luxe-back-to-top,
+.navbar-brand, .nav-link, .footer-link,
+.luxe-payment-showcase, .brand-item i {
+  transition: var(--theme-transition) !important;
 }
 
-/* AOS MOBİL GÜVENLİK DUVARI */
+/* AOS mobile safety */
 @media (max-width: 768px) {
   [data-aos] {
     opacity: 1 !important;
@@ -93,103 +110,135 @@ body {
   }
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-span,
-li,
-label,
-div {
-  transition: color 0.6s ease;
-}
+/* Dark mode Bootstrap overrides */
+body.dark-mode .text-muted { color: var(--text-muted) !important; }
+body.dark-mode .text-dark { color: var(--text-main) !important; }
+body.dark-mode .bg-light { background-color: var(--bg-secondary) !important; }
+body.dark-mode .bg-white { background-color: var(--bg-primary) !important; }
+body.dark-mode .border-top { border-color: var(--border-color) !important; }
+body.dark-mode .border-bottom { border-color: var(--border-color) !important; }
 
-body.dark-mode .text-muted {
-  color: var(--text-muted) !important;
-}
-body.dark-mode .text-dark {
-  color: var(--text-main) !important;
-}
-body.dark-mode .bg-light {
-  background-color: var(--bg-secondary) !important;
-}
+/* ============================================================
+   NAVBAR
+   ============================================================ */
 
-/* NAVBAR */
 .navbar {
-  background-color: var(--midnight) !important;
-  border-bottom: 2px solid var(--gold);
-  padding: 0.8rem 0;
+  background-color: var(--white) !important;
+  border-bottom: 1px solid var(--border-color);
+  padding: 0;
+  min-height: 68px;
 }
-.navbar-brand {
-  font-family: "Playfair Display", serif;
-  font-weight: 700;
-  letter-spacing: 1px;
-  color: white !important;
-  font-size: clamp(0.9rem, 3.2vw, 1.5rem); /* Mobil için optimize edildi */
+
+body.dark-mode .navbar {
+  background-color: #0d0d0d !important;
+  border-bottom-color: var(--border-color);
 }
-.nav-link {
-  color: rgba(255, 255, 255, 0.8) !important;
-  font-weight: 600;
-  font-size: 0.75rem;
+
+.navbar-brand,
+.preloader-logo {
+  font-family: var(--font-display) !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.14em !important;
+  color: var(--text-main) !important;
+  font-size: clamp(0.85rem, 2.8vw, 1.1rem) !important;
   text-transform: uppercase;
-  margin-left: 15px;
+  white-space: nowrap !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px;
 }
-.nav-link:hover {
+
+.navbar-brand span,
+.preloader-logo span {
   color: var(--gold) !important;
 }
 
-/* 🛡️ HERO SECTION (GENİŞ FOTOĞRAF İÇİN ANİMASYONLU LÜKS DİZAYN) */
-.hero-section {
-  position: relative;
-  min-height: 75vh;
-  width: 100%;
-  display: flex;
-  align-items: flex-end; /* Yazıyı aşağı, dükkan içine doğru iter */
-  justify-content: center;
-  padding-bottom: 12vh;
-  overflow: hidden;
-  background: var(--dark-midnight);
+.navbar-toggler {
+  border: 1px solid var(--border-color);
+  padding: 6px 10px;
+  background: transparent;
 }
 
-/* Resim katmanı: Animasyon sadece bu katmanda çalışır, yazıyı oynatmaz */
-.hero-section::before {
-  content: "";
+.navbar-toggler:focus { box-shadow: none; }
+
+/* Dark hamburger icon */
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%280%2C 0%2C 0%2C 0.7%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+}
+
+body.dark-mode .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255%2C 255%2C 255%2C 0.75%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+}
+
+.nav-link {
+  color: var(--text-main) !important;
+  font-size: 0.68rem !important;
+  font-weight: 500 !important;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  padding: 0.5rem 1rem !important;
+  position: relative;
+}
+
+.nav-link::after {
+  content: '';
   position: absolute;
-  top: 0;
-  left: 0;
+  bottom: 4px;
+  left: 1rem;
+  right: 1rem;
+  height: 1px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.nav-link:hover { color: var(--gold) !important; }
+.nav-link:hover::after { transform: scaleX(1); }
+
+#cart-badge {
+  font-size: 0.5rem !important;
+  background: var(--gold) !important;
+  color: var(--white) !important;
+  border-radius: 50% !important;
+}
+
+/* ============================================================
+   HERO SECTION
+   ============================================================ */
+
+.hero-section {
+  position: relative;
+  min-height: 90vh;
   width: 100%;
-  height: 100%;
-  background: url("hero.jpg") no-repeat center center / cover;
-  /* 18 saniyeden 12 saniyeye düşürdük, hareket daha çabuk fark edilecek */
-  animation: luxeZoom 12s infinite alternate ease-in-out;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  overflow: hidden;
+  background: var(--black);
+}
+
+.hero-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('hero.jpg') no-repeat center 30% / cover;
+  animation: luxeZoom 18s infinite alternate ease-in-out;
   z-index: 0;
 }
 
-/* Lüks Zoom Animasyonu (Daha Belirgin Hali) */
 @keyframes luxeZoom {
-  0% {
-    transform: scale(1);
-  }
-  /* 1.06 olan yakınlaşma oranını 1.15'e çıkardık, artık çok daha belirgin */
-  100% {
-    transform: scale(1.15);
-  }
+  0%   { transform: scale(1); }
+  100% { transform: scale(1.07); }
 }
 
-/* Karanlık Filtre: Üst taraf (tabela) parlak, alt taraf (yazı) karanlık */
 .hero-overlay {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   background: linear-gradient(
-    to bottom,
-    rgba(28, 37, 65, 0.15) 0%,
-    rgba(28, 37, 65, 0.95) 90%
+    105deg,
+    rgba(0,0,0,0.78) 0%,
+    rgba(0,0,0,0.42) 55%,
+    rgba(0,0,0,0.08) 100%
   );
   z-index: 1;
 }
@@ -197,82 +246,150 @@ body.dark-mode .bg-light {
 .hero-section .container {
   position: relative;
   z-index: 2;
+  padding-bottom: 10vh;
+}
+
+/* Hero typography */
+.hero-eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.4rem;
+  display: block;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 6.5vw, 5.5rem);
+  font-weight: 300;
+  line-height: 1.06;
+  color: var(--white);
+  margin-bottom: 1.4rem;
+  letter-spacing: 0.01em;
+}
+
+.hero-subtitle {
+  font-family: var(--font-sans);
+  font-size: clamp(0.78rem, 1.4vw, 0.92rem);
+  font-weight: 300;
+  color: rgba(255,255,255,0.60);
+  letter-spacing: 0.06em;
+  line-height: 1.75;
+  max-width: 340px;
+  margin-bottom: 2.4rem;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid rgba(255,255,255,0.40);
+  color: var(--white);
+  padding: 13px 30px;
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.hero-cta:hover {
+  background: var(--white);
+  color: var(--black);
+  border-color: var(--white);
+}
+
+.hero-cta-gold {
+  border-color: var(--gold);
+  background: var(--gold);
+  color: var(--white);
+}
+
+.hero-cta-gold:hover {
+  background: transparent;
+  color: var(--gold);
 }
 
 @media (max-width: 768px) {
   .hero-section {
-    min-height: 50vh;
-    padding-bottom: 40px;
+    min-height: 65vh;
+    padding-bottom: 0;
   }
-  .hero-section h1.display-3 {
-    font-size: 2rem;
+  .hero-section .container {
+    padding-bottom: 6vh;
   }
 }
 
-/* ARAMA ÇUBUĞU */
+/* ============================================================
+   SEARCH
+   ============================================================ */
+
 .search-container {
   max-width: 700px;
   margin: 0 auto;
-  position: relative;
 }
+
 .search-input-wrapper {
-  max-width: 600px;
+  max-width: 580px;
   margin: 0 auto;
   position: relative;
 }
+
 .luxe-search-input {
   width: 100%;
-  padding: 15px 25px 15px 60px;
+  padding: 15px 28px 15px 54px;
   border: 1px solid var(--border-color);
-  border-radius: 50px;
-  font-family: "Montserrat", sans-serif;
-  font-size: 0.95rem;
+  border-radius: 0;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 300;
   background-color: var(--bg-secondary);
   color: var(--text-main);
-  box-shadow: var(--soft-shadow);
   outline: none;
+  transition: all 0.3s ease;
+  letter-spacing: 0.02em;
   box-sizing: border-box;
 }
+
 .luxe-search-input:focus {
   border-color: var(--gold);
-  box-shadow: 0 10px 25px rgba(197, 160, 89, 0.15);
-  transform: translateY(-2px);
+  background-color: var(--bg-primary);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  transform: translateY(-1px);
 }
+
 .search-icon-fixed {
   position: absolute;
-  left: 25px;
+  left: 18px;
   top: 50%;
   transform: translateY(-50%);
   color: var(--gold);
-  font-size: 1.2rem;
+  font-size: 1rem;
   pointer-events: none;
   z-index: 5;
 }
 
-/* ==========================================================================
-   🛡️ ARAMA ÇUBUĞU ALTI SABİT KARGO UYARISI (GECE/GÜNDÜZ MODU KALKANI)
-   ========================================================================== */
-
 .search-shipping-pill {
-  background-color: var(--midnight) !important;
-  border: 1px solid var(--gold) !important;
+  background-color: var(--black) !important;
+  border: 1px solid var(--gold-border) !important;
   transition: var(--theme-transition);
 }
 
-/* ☀️ GÜNDÜZ MODU: Arka plan lacivert, Yazılar Kar Beyazı, İkon Altın Sarısı */
 .search-shipping-pill .shipping-text,
 .search-shipping-pill #search-shipping-threshold {
   color: #ffffff !important;
 }
 
-.search-shipping-pill .shipping-icon {
-  color: var(--gold) !important;
-}
+.search-shipping-pill .shipping-icon { color: var(--gold) !important; }
 
-/* 🌙 GECE MODU (DARK MODE): Arka plan kart rengi, Yazı Açık Gri, Tutar ve İkon Altın Sarısı */
 body.dark-mode .search-shipping-pill {
   background-color: var(--card-bg) !important;
-  box-shadow: 0 5px 15px rgba(197, 160, 89, 0.1) !important;
+  box-shadow: none !important;
 }
 
 body.dark-mode .search-shipping-pill .shipping-text {
@@ -282,217 +399,323 @@ body.dark-mode .search-shipping-pill .shipping-text {
 body.dark-mode .search-shipping-pill #search-shipping-threshold,
 body.dark-mode .search-shipping-pill .shipping-icon {
   color: var(--gold) !important;
-  text-shadow: 0 0 5px rgba(197, 160, 89, 0.2);
 }
 
-/* ÜRÜN KARTLARI */
+/* ============================================================
+   PRODUCT CARDS
+   ============================================================ */
+
 .product-card {
   border: 1px solid var(--border-color);
-  border-radius: 12px;
+  border-radius: 0;
   cursor: pointer;
   background: var(--card-bg);
   overflow: hidden;
   height: 100%;
   position: relative;
-  box-shadow: var(--soft-shadow);
+  box-shadow: none;
   display: flex;
   flex-direction: column;
 }
+
 .product-card:hover {
-  transform: translateY(-12px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15) !important;
+  transform: translateY(-8px);
+  box-shadow: var(--hover-shadow) !important;
+  border-color: var(--gold-border);
 }
+
 .product-card::after {
-  content: "DETAILS ANSEHEN";
+  content: "ENTDECKEN";
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -20%);
-  background: rgba(28, 37, 65, 0.9);
+  transform: translate(-50%, -30%);
+  background: rgba(10, 10, 10, 0.90);
   color: var(--gold);
-  padding: 10px 22px;
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 2px;
+  padding: 10px 24px;
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
   opacity: 0;
-  transition: all 0.4s ease;
+  transition: all 0.35s ease;
   pointer-events: none;
-  border-radius: 4px;
   z-index: 5;
 }
+
 .product-card:hover::after {
   opacity: 1;
   transform: translate(-50%, -50%);
 }
+
 .product-tag {
   position: absolute;
-  top: 15px;
-  left: 15px;
+  top: 12px;
+  left: 12px;
   z-index: 9;
-  padding: 6px 14px;
-  font-size: 0.65rem;
-  font-weight: 700;
+  padding: 5px 12px;
+  font-size: 0.58rem;
+  font-weight: 600;
   text-transform: uppercase;
-  border-radius: 4px;
+  letter-spacing: 0.12em;
+  border-radius: 0;
   background: var(--gold);
-  color: white;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-  letter-spacing: 0.5px;
+  color: var(--white);
 }
 
-/* 🛡️ SALE TAG REVIZE - DAHA TOK BİR KIRMIZI */
 .sale-tag {
   position: absolute;
-  top: 15px;
-  right: 15px;
-  background: #d63031;
-  color: white;
-  padding: 5px 12px;
-  border-radius: 4px;
-  font-size: 0.6rem;
-  font-weight: 800;
+  top: 12px;
+  right: 12px;
+  background: #c0392b;
+  color: var(--white);
+  padding: 5px 10px;
+  border-radius: 0;
+  font-size: 0.58rem;
+  font-weight: 600;
   z-index: 10;
-  box-shadow: 0 4px 15px rgba(214, 48, 49, 0.3);
-  letter-spacing: 1.5px;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
 }
 
-/* GÖRSEL KUTUSU */
 .product-img-box {
   height: 320px;
   overflow: hidden;
-  background: #fdfdfd;
+  background: #fafafa;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  padding: 24px;
 }
-body.dark-mode .product-img-box {
-  background: #111;
-}
+
+body.dark-mode .product-img-box { background: #141414; }
+
 .product-img-box img {
   max-width: 100%;
   max-height: 100%;
   width: auto;
   height: auto;
   object-fit: contain;
-  transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition: transform 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
-.product-card:hover .product-img-box img {
-  transform: scale(1.08);
-}
+
+.product-card:hover .product-img-box img { transform: scale(1.07); }
 
 .price {
-  color: var(--gold);
-  font-weight: 700;
-  font-size: 1.25rem;
+  color: var(--text-main);
+  font-weight: 500;
+  font-size: 1.1rem;
+  font-family: var(--font-sans);
+  letter-spacing: 0.03em;
 }
 
-/* 🛡️ SALE PRICE DESIGN: Üstü çizili eski fiyat stili - ESTETİK DOKUNUŞ */
 .price-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 2px;
-  margin-top: 5px;
+  margin-top: 4px;
 }
 
 .old-price {
   text-decoration: line-through;
-  color: #a0a0a0 !important;
-  font-size: 0.85rem;
-  font-weight: 400;
-  opacity: 0.7;
+  color: var(--text-subtle) !important;
+  font-size: 0.82rem;
+  font-weight: 300;
+  opacity: 0.8;
   margin-bottom: -3px;
 }
 
 .price.text-gold {
-  font-size: 1.35rem;
+  color: var(--gold) !important;
+  font-size: 1.15rem;
 }
 
-/* TESTIMONIALS */
-.gold-divider {
-  width: 60px;
-  height: 3px;
-  background-color: var(--gold);
-  margin-top: 15px;
+/* ============================================================
+   SECTION LABELS & DIVIDERS
+   ============================================================ */
+
+.section-eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: block;
+  margin-bottom: 1rem;
 }
+
+.gold-divider {
+  width: 40px;
+  height: 1px;
+  background-color: var(--gold);
+  margin-top: 14px;
+}
+
+/* ============================================================
+   TESTIMONIALS
+   ============================================================ */
+
 .testimonial-card {
   background: var(--card-bg);
-  padding: 35px;
-  border-radius: 25px;
-  box-shadow: var(--soft-shadow);
+  padding: 36px 32px;
+  border-radius: 0;
+  box-shadow: none;
   height: 100%;
   border: 1px solid var(--border-color);
   position: relative;
+  display: flex;
+  flex-direction: column;
 }
+
 .testimonial-card:hover {
-  border-color: var(--gold);
+  border-color: var(--gold-border);
+  box-shadow: var(--soft-shadow) !important;
 }
+
+.testimonial-card::before {
+  content: '\201C';
+  position: absolute;
+  top: 16px;
+  left: 22px;
+  font-family: var(--font-display);
+  font-size: 5rem;
+  line-height: 1;
+  color: var(--gold);
+  opacity: 0.14;
+  pointer-events: none;
+}
+
 .testimonial-text {
   font-style: italic;
   color: var(--text-main);
-  line-height: 1.7;
-  font-size: 1.05rem;
-}
-.testimonial-date {
-  font-size: 0.7rem;
-  color: var(--gold);
-  background: rgba(197, 160, 89, 0.12);
-  padding: 4px 12px;
-  border-radius: 50px;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  border: 1px solid rgba(197, 160, 89, 0.2);
-}
-.btn-outline-dark {
-  border: 2px solid var(--midnight);
-  color: var(--midnight);
-  padding: 12px 40px;
-  border-radius: 50px;
-  font-weight: 700;
-  transition: 0.3s;
-  background: transparent;
-}
-.btn-outline-dark:hover {
-  background-color: var(--midnight);
-  color: white;
-  transform: translateY(-2px);
+  line-height: 1.82;
+  font-size: 0.93rem;
+  font-weight: 300;
+  flex-grow: 1;
+  padding-top: 12px;
 }
 
-/* MODAL */
-.modal-content {
-  border-radius: 20px;
-  overflow: hidden;
+.testimonial-date {
+  font-size: 0.66rem;
+  color: var(--gold);
+  background: var(--gold-opacity);
+  padding: 3px 12px;
+  border-radius: 0;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  border: 1px solid var(--gold-border);
+  display: inline-block;
+}
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+
+.btn-outline-dark {
+  border: 1px solid var(--text-main);
+  color: var(--text-main);
+  padding: 13px 40px;
+  border-radius: 0;
+  font-weight: 500;
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  background: transparent;
+}
+
+.btn-outline-dark:hover {
+  background-color: var(--text-main);
+  color: var(--white);
+}
+
+body.dark-mode .btn-outline-dark {
+  border-color: var(--white);
+  color: var(--white);
+}
+
+body.dark-mode .btn-outline-dark:hover {
+  background: var(--white);
+  color: var(--black);
+}
+
+.btn-luxe {
+  background: var(--black);
+  color: var(--white);
   border: none;
+  padding: 16px;
+  font-weight: 500;
+  font-size: 0.7rem;
+  width: 100%;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  border-radius: 0;
+  transition: all 0.3s ease;
+  font-family: var(--font-sans);
+}
+
+body.dark-mode .btn-luxe {
+  background: var(--white);
+  color: var(--black);
+  border: none;
+}
+
+.btn-luxe:hover:not(:disabled) {
+  background: var(--gold);
+  color: var(--white);
+}
+
+.btn-gold {
+  background: var(--gold);
+  color: var(--white);
+  border: none;
+  border-radius: 0;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+
+.btn-gold:hover {
+  background: var(--gold-hover);
+  color: var(--white);
+}
+
+/* ============================================================
+   MODAL
+   ============================================================ */
+
+.modal-content {
+  border-radius: 0;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
   background-color: var(--card-bg);
   color: var(--text-main);
 }
 
-/* --- MODAL ÇIKIŞ BUTONU (X) --- */
 #luxeModal .btn-close {
-  background: var(--midnight)
-    url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23c5a059'%3e%3cpath d='M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z'/%3e%3c/svg%3e")
+  background: var(--black)
+    url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23b89a6a'%3e%3cpath d='M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z'/%3e%3c/svg%3e")
     center/50% no-repeat !important;
   opacity: 1;
-  border: 2px solid var(--gold);
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  top: 20px;
-  right: 20px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--gold-border);
+  border-radius: 0;
+  width: 36px;
+  height: 36px;
+  top: 18px;
+  right: 18px;
   z-index: 1060;
-  transition:
-    transform 0.3s ease,
-    background-color 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 #luxeModal .btn-close:hover {
-  transform: rotate(90deg) scale(1.1);
-  background-color: var(--gold-hover);
+  background-color: var(--gold) !important;
+  transform: rotate(90deg);
 }
 
 .modal-split-body {
@@ -501,62 +724,67 @@ body.dark-mode .product-img-box {
   min-height: 450px;
   width: 100%;
 }
+
 @media (min-width: 768px) {
-  .modal-split-body {
-    flex-direction: row;
-  }
+  .modal-split-body { flex-direction: row; }
 }
+
 .modal-img-side {
   flex: 1;
-  background: #fdfdfd;
+  background: var(--cream);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  padding: 24px;
   min-width: 300px;
 }
-body.dark-mode .modal-img-side {
-  background: #111;
-}
+
+body.dark-mode .modal-img-side { background: #141414; }
+
 .modal-img-side img {
-  max-height: 450px;
+  max-height: 440px;
   width: 100%;
   object-fit: contain;
 }
+
 .modal-info-side {
   flex: 1.1;
-  padding: 40px;
+  padding: 48px 40px;
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-/* MİKTAR KONTROL */
 .qty-control-luxe {
   display: flex;
   align-items: center;
   border: 1px solid var(--border-color);
-  border-radius: 50px;
+  border-radius: 0;
   width: fit-content;
-  padding: 5px 15px;
+  padding: 6px 16px;
   background: var(--bg-primary);
 }
+
 body.dark-mode .qty-control-luxe {
   background: var(--bg-secondary);
-  border-color: var(--gold);
-}
-.qty-input {
-  width: 60px;
-  text-align: center;
-  border: none;
-  font-weight: 700;
-  background: transparent;
-  color: var(--text-main);
-  font-size: 1.1rem;
+  border-color: var(--gold-border);
 }
 
-/* 🛡️ YÜZEN SEPET KONTEYNERI (YENİ YAPI) */
+.qty-input {
+  width: 56px;
+  text-align: center;
+  border: none;
+  font-weight: 500;
+  background: transparent;
+  color: var(--text-main);
+  font-size: 1rem;
+}
+
+/* ============================================================
+   FLOATING CART
+   ============================================================ */
+
 .floating-cart-container {
   position: fixed;
   bottom: 30px;
@@ -570,534 +798,516 @@ body.dark-mode .qty-control-luxe {
   gap: 8px;
   width: auto;
 }
+
 .floating-cart-container.active {
   transform: translateX(-50%) translateY(0);
 }
 
-/* 🛡️ ÜSTTEKİ DİNAMİK UYARI HAPI (1. RESİM) */
 .shipping-alert-pill {
-  background: var(--midnight);
+  background: var(--black);
   color: var(--gold);
-  border: 1px solid var(--gold);
+  border: 1px solid var(--gold-border);
   padding: 6px 20px;
-  border-radius: 50px;
-  font-size: 0.75rem;
-  font-weight: 700;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  border-radius: 0;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
   text-align: center;
   white-space: nowrap;
   transition: var(--theme-transition);
 }
 
-/* ANA SEPET KARTUŞU */
 .floating-cart-pill {
-  background: var(--midnight);
-  color: white;
-  padding: 10px 10px 10px 25px;
-  border-radius: 100px;
+  background: var(--black);
+  color: var(--white);
+  padding: 10px 10px 10px 24px;
+  border-radius: 0;
   display: flex;
   align-items: center;
   gap: 20px;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
-  border: 1px solid var(--gold);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.28);
+  border: 1px solid var(--gold-border);
   min-width: 320px;
   justify-content: space-between;
 }
+
 .float-price-info {
   display: flex;
   flex-direction: column;
-  line-height: 1.1;
+  line-height: 1.2;
 }
+
 .float-price-info small {
-  font-size: 0.6rem;
+  font-size: 0.58rem;
   text-transform: uppercase;
   color: var(--gold);
-  letter-spacing: 1px;
-  font-weight: 700;
+  letter-spacing: 0.16em;
+  font-weight: 500;
 }
+
 .float-price-info span {
-  font-size: 1.3rem;
-  font-weight: 800;
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
 }
+
 .float-checkout-btn {
   background: var(--gold);
-  color: var(--midnight);
+  color: var(--white);
   border: none;
-  padding: 14px 28px;
-  border-radius: 100px;
-  font-weight: 800;
+  padding: 14px 24px;
+  border-radius: 0;
+  font-weight: 500;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
   text-decoration: none;
-  font-size: 0.9rem;
-  transition: 0.3s;
+  transition: all 0.3s ease;
   display: flex;
   align-items: center;
   gap: 8px;
 }
+
 .float-checkout-btn:hover {
-  background: white;
-  transform: scale(1.05);
-  color: var(--midnight);
+  background: var(--gold-hover);
+  color: var(--white);
 }
 
-.btn-luxe {
-  background: var(--midnight);
-  color: white;
-  border: none;
-  padding: 16px;
-  font-weight: 700;
-  width: 100%;
-  text-transform: uppercase;
-  border-radius: 50px;
-}
-body.dark-mode .btn-luxe {
-  border: 1px solid var(--gold);
-}
-.btn-luxe:hover:not(:disabled) {
-  background: var(--gold);
-  transform: translateY(-2px);
-}
-.btn-gold {
-  background: var(--gold);
-  color: white;
-  border: none;
-  border-radius: 50px;
-  transition: 0.3s;
-}
-.btn-gold:hover {
-  background: var(--midnight);
-  color: white;
-}
+/* ============================================================
+   VISIT US
+   ============================================================ */
 
-/* BESUCHEN SIE UNS STYLES */
 .icon-circle {
-  width: 50px;
-  height: 50px;
-  background: var(--midnight);
+  width: 46px;
+  height: 46px;
+  background: var(--black);
   color: var(--gold);
-  border-radius: 50%;
+  border-radius: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.2rem;
-}
-.border-gold {
-  border-color: var(--gold) !important;
-}
-.map-wrapper {
-  border: 1px solid var(--gold);
-  box-shadow: var(--soft-shadow);
-}
-.map-wrapper:hover {
-  transform: scale(1.01);
-}
-.visit-us-area {
-  background-color: var(--bg-secondary) !important;
+  font-size: 1rem;
 }
 
-/* 🛡️ SOSYAL MEDYA (INSTA-IMG) TASARIMI - TAŞMA ÖNLEYİCİ VE GECE MODU */
+.border-gold { border-color: var(--gold-border) !important; }
+
+.map-wrapper {
+  border: 1px solid var(--gold-border);
+  box-shadow: var(--soft-shadow);
+}
+
+.map-wrapper:hover { transform: scale(1.005); }
+
+.visit-us-area { background-color: var(--bg-secondary) !important; }
+
+/* ============================================================
+   SOCIAL GALLERY
+   ============================================================ */
+
 .insta-img {
   width: 100%;
   aspect-ratio: 1 / 1;
   object-fit: cover;
-  transition: var(--theme-transition);
+  transition: all 0.4s ease;
 }
 
-body.dark-mode .insta-img {
-  filter: brightness(0.85) contrast(1.1);
-}
+body.dark-mode .insta-img { filter: brightness(0.78); }
+body.dark-mode .insta-img:hover { filter: brightness(1); }
 
-body.dark-mode .insta-img:hover {
-  filter: brightness(1) contrast(1.1);
-}
+/* ============================================================
+   PAYMENT SHOWCASE
+   ============================================================ */
 
-/* 💳 PAYMENT SHOWCASE */
 .luxe-payment-showcase {
   background-color: var(--bg-secondary);
-  padding: 20px 0;
+  padding: 24px 0;
   width: 100%;
 }
+
 .payment-title {
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 3px;
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.32em;
   color: var(--text-muted);
   margin-bottom: 12px;
-  opacity: 0.6;
+  opacity: 0.65;
   text-transform: uppercase;
 }
+
 .payment-brand-grid {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 25px;
+  gap: 24px;
   flex-wrap: wrap;
-  opacity: 0.7;
+  opacity: 0.60;
 }
+
 .brand-item i {
-  font-size: 2rem;
+  font-size: 1.8rem;
   cursor: pointer;
-  transition: var(--theme-transition);
+  transition: all 0.3s ease;
 }
+
 .brand-item:hover i {
-  transform: translateY(-3px) scale(1.1);
+  transform: translateY(-2px);
   opacity: 1;
 }
-.fa-cc-stripe {
-  color: #635bff;
-}
-.fa-cc-visa {
-  color: #1a1f71;
-}
-.fa-cc-mastercard {
-  color: #eb001b;
-}
-.fa-cc-paypal {
-  color: #003087;
-}
-.fa-cc-apple-pay {
-  color: var(--text-main);
-}
-.fa-cc-google-pay {
-  color: #4285f4;
-}
-body.dark-mode .payment-brand-grid {
-  opacity: 0.6;
-}
-body.dark-mode .payment-brand-grid:hover {
-  opacity: 0.9;
-}
 
-/* 🏛️ KOMPAKT FOOTER */
+.fa-cc-stripe  { color: #635bff; }
+.fa-cc-visa    { color: #1a1f71; }
+.fa-cc-mastercard { color: #eb001b; }
+.fa-cc-paypal  { color: #003087; }
+.fa-cc-apple-pay { color: var(--text-main); }
+.fa-cc-google-pay { color: #4285f4; }
+
+body.dark-mode .payment-brand-grid { opacity: 0.45; }
+body.dark-mode .payment-brand-grid:hover { opacity: 0.85; }
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+
 .luxe-footer {
-  background-color: var(--bg-secondary) !important;
-  border-top: 1px solid var(--border-color);
-  padding: 30px 0 110px 0 !important;
-  text-align: center !important;
-  width: 100%;
-}
-.luxe-footer .container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-.footer-link {
-  color: var(--text-muted);
-  font-weight: 500;
-  text-decoration: none;
-  position: relative;
-  font-size: 0.85rem;
-}
-.footer-link::after {
-  content: "";
-  position: absolute;
-  width: 0;
-  height: 1px;
-  bottom: 0;
-  left: 0;
-  background-color: var(--gold);
-  transition: 0.3s;
-}
-.footer-link:hover {
-  color: var(--gold) !important;
-}
-.footer-link:hover::after {
+  background-color: #0a0a0a !important;
+  padding: 64px 0 96px 0 !important;
   width: 100%;
 }
 
-/* WHATSAPP & BACK TO TOP */
+.luxe-footer .footer-brand {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--white);
+  text-decoration: none;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+.luxe-footer .footer-brand span { color: var(--gold); }
+
+.luxe-footer .footer-tagline {
+  font-size: 0.68rem;
+  color: rgba(255,255,255,0.32);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+
+.footer-divider {
+  height: 1px;
+  background: rgba(255,255,255,0.07);
+  margin: 40px 0 28px;
+}
+
+.footer-link {
+  color: rgba(255,255,255,0.42);
+  font-size: 0.78rem;
+  font-weight: 300;
+  text-decoration: none;
+  letter-spacing: 0.06em;
+  transition: color 0.3s ease;
+  display: inline-block;
+  padding: 4px 0;
+}
+
+.footer-link:hover { color: var(--gold) !important; }
+
+.footer-link::after { display: none; }
+
+.footer-copy {
+  font-size: 0.68rem;
+  color: rgba(255,255,255,0.22);
+  letter-spacing: 0.05em;
+}
+
+.footer-contact-link {
+  color: var(--gold);
+  text-decoration: none;
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+}
+
+.footer-contact-link:hover { color: rgba(255,255,255,0.8); }
+
+/* ============================================================
+   WHATSAPP & BACK TO TOP
+   ============================================================ */
+
 .luxe-whatsapp-float {
   position: fixed;
   bottom: 115px;
   right: 30px;
-  background-color: var(--midnight);
-  color: white !important;
-  padding: 12px 25px;
-  border-radius: 50px;
+  background-color: var(--black);
+  color: var(--white) !important;
+  padding: 12px 20px;
+  border-radius: 0;
   z-index: 1040;
-  border: 1px solid var(--gold);
-  transition: 0.4s;
+  border: 1px solid var(--gold-border);
+  transition: all 0.3s ease;
   display: flex;
   align-items: center;
   gap: 8px;
 }
-.luxe-whatsapp-float i {
-  font-size: 1.2rem;
-}
+
+.luxe-whatsapp-float i { font-size: 1.1rem; }
+
 .luxe-whatsapp-text {
-  font-weight: 600;
-  font-size: 0.9rem;
+  font-weight: 500;
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
 }
+
 .luxe-whatsapp-float:hover {
   background-color: var(--gold);
-  transform: translateY(-5px);
+  border-color: var(--gold);
 }
+
 .luxe-back-to-top {
   position: fixed;
   bottom: 180px;
   right: 30px;
-  width: 45px;
-  height: 45px;
-  background-color: var(--midnight);
+  width: 40px;
+  height: 40px;
+  background-color: var(--black);
   color: var(--gold);
-  border: 1px solid var(--gold);
-  border-radius: 50%;
+  border: 1px solid var(--gold-border);
+  border-radius: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.2rem;
+  font-size: 0.9rem;
   cursor: pointer;
   z-index: 1000;
   opacity: 0;
   visibility: hidden;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
   outline: none !important;
   transition: var(--theme-transition);
 }
-.luxe-back-to-top.show {
-  opacity: 1;
-  visibility: visible;
-}
+
+.luxe-back-to-top.show { opacity: 1; visibility: visible; }
+
 @media (hover: hover) {
   .luxe-back-to-top:hover {
     background-color: var(--gold);
-    color: white;
-    transform: scale(1.1) translateY(-5px);
+    color: var(--white);
   }
 }
+
 .luxe-back-to-top:active {
   transform: scale(0.9) !important;
   background-color: var(--gold) !important;
-  color: white !important;
+  color: var(--white) !important;
 }
 
-/* TOAST BİLDİRİMLERİ */
+/* ============================================================
+   TOAST
+   ============================================================ */
+
 #luxe-toast-container {
   position: fixed;
-  top: 30px;
-  right: 30px;
+  top: 28px;
+  right: 28px;
   z-index: 9999;
   pointer-events: none;
 }
+
 .luxe-toast {
-  background: var(--midnight);
-  color: white;
-  padding: 18px 25px;
-  border-radius: 15px;
+  background: var(--black);
+  color: var(--white);
+  padding: 16px 22px;
+  border-radius: 0;
   margin-bottom: 10px;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-  border-left: 5px solid var(--gold);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.22);
+  border-left: 3px solid var(--gold);
   display: flex;
   align-items: center;
-  gap: 15px;
-  min-width: 320px;
-  animation: toastSlideIn 0.5s forwards;
+  gap: 14px;
+  min-width: 300px;
+  animation: toastSlideIn 0.4s forwards;
   pointer-events: auto;
 }
+
 @keyframes toastSlideIn {
-  from {
-    transform: translateX(120%);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
+  from { transform: translateX(120%); opacity: 0; }
+  to   { transform: translateX(0); opacity: 1; }
 }
-.luxe-toast.fade-out {
-  animation: toastFadeOut 0.5s ease forwards;
-}
+
+.luxe-toast.fade-out { animation: toastFadeOut 0.4s ease forwards; }
+
 @keyframes toastFadeOut {
-  to {
-    transform: translateY(-20px);
-    opacity: 0;
-  }
+  to { transform: translateY(-16px); opacity: 0; }
 }
-.luxe-toast i {
-  color: var(--gold);
-  font-size: 1.4rem;
-}
+
+.luxe-toast i { color: var(--gold); font-size: 1.2rem; }
+
 .luxe-toast .toast-title {
-  font-weight: 700;
+  font-weight: 600;
   color: var(--gold);
-  font-size: 0.8rem;
-  letter-spacing: 1px;
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   margin-bottom: 2px;
 }
+
 .luxe-toast .toast-msg {
-  font-size: 0.9rem;
-  font-weight: 500;
+  font-size: 0.84rem;
+  font-weight: 300;
 }
 
-/* ⏳ PRELOADER (SENIOR RESPONSIVE FIX) */
+/* ============================================================
+   PRELOADER
+   ============================================================ */
+
 #preloader {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100dvh;
-  background-color: #0b0e17;
+  background-color: #0a0a0a;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 9999999;
-  transition:
-    opacity 0.8s,
-    visibility 0.8s;
+  transition: opacity 0.8s ease, visibility 0.8s;
   overflow: hidden;
 }
 
 .preloader-content {
   text-align: center;
   width: 90%;
-  max-width: 500px;
+  max-width: 480px;
   margin: 0 auto;
 }
 
-.preloader-logo {
-  font-family: "Playfair Display", serif;
-  font-size: clamp(1.1rem, 5.5vw, 2.5rem);
-  color: #ffffff;
-  letter-spacing: clamp(1px, 0.8vw, 4px);
-  text-transform: uppercase;
-  margin-bottom: 25px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  animation: luxeFadePulse 2.5s ease-in-out infinite;
-  max-width: 100%;
-}
-
 .preloader-bar {
-  width: clamp(100px, 25vw, 150px);
+  width: clamp(80px, 18vw, 120px);
   height: 1px;
-  background: rgba(197, 160, 89, 0.1);
-  margin: 0 auto 15px;
+  background: rgba(184, 154, 106, 0.10);
+  margin: 0 auto 14px;
   position: relative;
   overflow: hidden;
 }
+
 .preloader-bar::after {
-  content: "";
+  content: '';
   display: block;
-  width: 60px;
+  width: 50%;
   height: 100%;
   background: var(--gold);
   position: absolute;
-  left: -60px;
+  left: -50%;
   animation: loadingSlide 1.5s infinite ease-in-out;
 }
+
 .preloader-text {
-  color: rgba(255, 255, 255, 0.4);
-  font-size: clamp(0.55rem, 2vw, 0.7rem);
-  letter-spacing: 2px;
+  color: rgba(255,255,255,0.28);
+  font-size: clamp(0.5rem, 1.6vw, 0.62rem);
+  letter-spacing: 0.26em;
   text-transform: uppercase;
-  text-align: center;
   display: block;
   width: 100%;
 }
+
 @keyframes loadingSlide {
-  0% {
-    left: -60px;
-  }
-  100% {
-    left: 100%;
-  }
-}
-@keyframes luxeFadePulse {
-  0%,
-  100% {
-    opacity: 0.4;
-    transform: scale(0.98);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-.preloader-hidden {
-  opacity: 0;
-  visibility: hidden;
+  0%   { left: -50%; }
+  100% { left: 100%; }
 }
 
-/* GENEL EFEKTLER */
+@keyframes luxeFadePulse {
+  0%, 100% { opacity: 0.30; transform: scale(0.98); }
+  50%       { opacity: 1;    transform: scale(1); }
+}
+
+.preloader-hidden { opacity: 0; visibility: hidden; }
+
+/* ============================================================
+   MISC / ANIMATIONS
+   ============================================================ */
+
 .animate-fadeIn {
   animation: fadeIn 0.4s ease forwards;
 }
+
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-/* COOKIE BANNER */
+/* ============================================================
+   COOKIE BANNER
+   ============================================================ */
+
 .luxe-cookie-banner {
   position: fixed;
   bottom: 20px;
   left: 10px;
   right: 10px;
-  background: var(--midnight);
-  color: white;
-  padding: 25px;
-  border-radius: 20px;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  background: #0a0a0a;
+  color: var(--white);
+  padding: 24px;
+  border-radius: 0;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.55);
   z-index: 999999;
-  border: 1px solid var(--gold);
-  animation: cookieSlideUp 0.6s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
-}
-@keyframes cookieSlideUp {
-  from {
-    transform: translateY(150%);
-  }
-  to {
-    transform: translateY(0);
-  }
-}
-.luxe-cookie-banner h5 {
-  color: var(--gold);
-  font-family: "Playfair Display", serif;
-}
-.luxe-cookie-banner p {
-  line-height: 1.5;
+  border: 1px solid var(--gold-border);
+  animation: cookieSlideUp 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
 }
 
-/* 📱 MOBILE RESPONSIVE FIXES (CART & WHATSAPP OVERLAP) */
+@keyframes cookieSlideUp {
+  from { transform: translateY(130%); }
+  to   { transform: translateY(0); }
+}
+
+.luxe-cookie-banner h5 {
+  color: var(--gold);
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1.05rem;
+  letter-spacing: 0.05em;
+}
+
+.luxe-cookie-banner p {
+  line-height: 1.65;
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.58);
+}
+
+/* ============================================================
+   RESPONSIVE — MOBILE
+   ============================================================ */
+
 @media (max-width: 768px) {
+
   .row-cols-1 {
     display: flex !important;
     flex-wrap: wrap !important;
   }
+
   .row-cols-1 > * {
     flex: 0 0 50% !important;
     max-width: 50% !important;
-    padding: 8px !important;
+    padding: 6px !important;
   }
 
   .product-img-box {
-    height: 160px !important;
-    padding: 10px !important;
+    height: 190px !important;
+    padding: 12px !important;
   }
 
   .product-card .h5,
   .product-card h5 {
-    font-size: 0.85rem !important;
-    margin-bottom: 5px !important;
-    height: 38px;
+    font-size: 0.80rem !important;
+    margin-bottom: 4px !important;
+    height: 36px;
     overflow: hidden;
   }
 
-  .price {
-    font-size: 1rem !important;
-  }
-
-  .price.text-gold {
-    font-size: 1.15rem !important;
-  }
+  .price { font-size: 1rem !important; }
+  .price.text-gold { font-size: 1.1rem !important; }
 
   .product-card::after {
     font-size: 0.5rem !important;
@@ -1105,54 +1315,56 @@ body.dark-mode .payment-brand-grid:hover {
   }
 
   .sale-tag {
-    padding: 3px 8px !important;
     font-size: 0.5rem !important;
-    top: 10px !important;
-    right: 10px !important;
-  }
-  .old-price {
-    font-size: 0.75rem !important;
+    padding: 3px 8px !important;
+    top: 8px !important;
+    right: 8px !important;
   }
 
-  /* 🛡️ WHATSAPP & YÜZEN SEPET KESİŞME (OVERLAP) ÇÖZÜMÜ */
+  .old-price { font-size: 0.74rem !important; }
+
   .floating-cart-container {
     width: 92%;
-    bottom: 15px; /* Sepet ekranın tam altına otursun */
+    bottom: 14px;
   }
+
   .floating-cart-pill {
     width: 100%;
     min-width: unset;
-    padding: 8px 8px 8px 20px;
+    padding: 8px 8px 8px 18px;
     gap: 10px;
   }
-  .float-price-info span {
-    font-size: 1.1rem;
-  }
+
+  .float-price-info span { font-size: 1.05rem; }
+
   .float-checkout-btn {
-    padding: 12px 20px;
-    font-size: 0.8rem;
+    padding: 12px 16px;
+    font-size: 0.62rem;
   }
+
   .shipping-alert-pill {
-    font-size: 0.7rem;
-    padding: 5px 15px;
+    font-size: 0.67rem;
+    padding: 5px 14px;
   }
+
   .luxe-whatsapp-float {
-    bottom: 125px; /* Whatsapp butonu sepetin tam üstüne çıkarıldı */
+    bottom: 120px;
     right: 15px;
     padding: 12px;
-    width: 50px;
-    height: 50px;
+    width: 48px;
+    height: 48px;
     justify-content: center;
   }
-  .luxe-whatsapp-text {
-    display: none; /* Mobilde yer kaplamaması için yazı gizlendi, sadece ikon kaldı */
-  }
-  .luxe-whatsapp-float i {
-    font-size: 1.6rem;
-    margin: 0;
-  }
+
+  .luxe-whatsapp-text { display: none; }
+  .luxe-whatsapp-float i { font-size: 1.5rem; margin: 0; }
+
   .luxe-back-to-top {
-    bottom: 185px; /* Yukarı çık butonu da WhatsApp'ın üstüne çıkarıldı */
+    bottom: 182px;
     right: 15px;
+  }
+
+  .luxe-footer {
+    padding: 48px 0 80px 0 !important;
   }
 }

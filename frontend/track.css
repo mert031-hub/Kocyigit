@@ -1,18 +1,17 @@
-/**
- * KOÇYİĞİT GmbH - MASTER TRACKING STYLES
- * Yapı bozulmadan hizalama ve renk onarımları yapılmıştır.
- */
+/* ============================================================
+   KOCYIGIT — ORDER TRACKING
+   Premium · Minimal · Editorial
+   ============================================================ */
 
 :root {
-  --gold: #c5a059;
-  --navy: #1c2541;
-  --platinum: #f8f9fa;
-  --gold-shadow: rgba(197, 160, 89, 0.4);
+  --gold: #b89a6a;
+  --gold-hover: #a08558;
+  --gold-shadow: rgba(184, 154, 106, 0.35);
+  --navy: #111111;
+  --cream: #f9f7f4;
 }
 
-/* MOBIL FIX: YATAY KAYMAYI ÖNLER */
-html,
-body {
+html, body {
   overflow-x: hidden !important;
   width: 100% !important;
   margin: 0;
@@ -21,129 +20,141 @@ body {
 }
 
 body {
-  font-family: "Montserrat", sans-serif;
-  background-color: var(--platinum);
+  font-family: 'Inter', 'Montserrat', sans-serif;
+  font-weight: 300;
+  background-color: var(--cream);
   color: var(--navy);
   -webkit-font-smoothing: antialiased;
-  position: relative;
 }
 
 .navbar-brand {
-  font-family: "Playfair Display", serif;
-  letter-spacing: 2px;
-  font-size: clamp(1rem, 4vw, 1.25rem); /* Mobil uyumlu font */
-}
-.navbar-brand span {
-  color: var(--gold);
+  font-family: 'Cormorant Garamond', 'Playfair Display', serif !important;
+  letter-spacing: 0.14em;
+  font-size: clamp(0.85rem, 3.5vw, 1.1rem);
+  font-weight: 400;
 }
 
+.navbar-brand span { color: var(--gold); }
+
+/* Track Card */
 .track-card {
   background: white;
-  border-radius: 30px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04);
-  padding: 50px;
-  margin-top: 30px;
+  border-radius: 0;
+  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.06);
+  border: 1px solid #ebe7e0;
+  padding: 52px;
+  margin-top: 32px;
 }
 
-/* --- TRACKING SEARCH BOX --- */
+/* Tracking search box */
 .tracking-search-box {
   transition: all 0.3s ease;
-  border: 1px solid #eee !important;
+  border: 1px solid #ddd8d0 !important;
   background: white !important;
   display: flex !important;
   max-width: 100%;
+  border-radius: 0 !important;
 }
 
 .tracking-search-box input#orderIdInput {
-  color: #1c2541 !important;
+  color: #111111 !important;
   background-color: white !important;
-  font-size: 16px !important;
+  font-size: 0.9rem !important;
+  font-weight: 300;
   -webkit-appearance: none;
   opacity: 1 !important;
   flex-grow: 1;
+  border-radius: 0 !important;
+  border: none !important;
+  padding: 12px 16px;
+  font-family: 'Inter', sans-serif;
 }
 
 .tracking-search-box input::placeholder {
-  color: #a0aec0 !important;
+  color: #aaa !important;
+  letter-spacing: 0.03em;
 }
 
-/* --- BUTON RENK ONARIMLARI --- */
+/* Buttons */
 .btn-gold {
   background: var(--gold) !important;
   color: white !important;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.3s ease;
   border: none;
-  font-weight: 700;
+  font-weight: 500;
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  border-radius: 0 !important;
+  font-family: 'Inter', sans-serif;
 }
+
 .btn-gold:hover {
-  background: #b38f4d !important;
-  transform: translateY(-2px);
+  background: var(--gold-hover) !important;
 }
 
 .btn-outline-danger {
-  color: #dc3545 !important;
-  border: 2px solid #dc3545 !important;
-  font-weight: 600;
-  transition: 0.3s;
+  color: #dc2626 !important;
+  border: 1px solid #dc2626 !important;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border-radius: 0 !important;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
 }
+
 .btn-outline-danger:hover {
-  background-color: #dc3545 !important;
+  background-color: #dc2626 !important;
   color: white !important;
 }
 
 .btn-danger {
-  background-color: #dc3545 !important;
+  background-color: #dc2626 !important;
   border: none !important;
   color: white !important;
-  font-weight: 700;
+  font-weight: 500;
+  border-radius: 0 !important;
 }
 
-/* --- CANCEL MODAL ANIMATION --- */
+/* Cancel modal */
 #cancelConfirmModal .modal-content {
-  animation: luxeSlideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  border: none;
-  border-radius: 24px;
+  animation: luxeSlideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid #ebe7e0;
+  border-radius: 0;
 }
 
 @keyframes luxeSlideUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px) scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
+  from { opacity: 0; transform: translateY(24px) scale(0.96); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 .cancel-icon-circle {
-  width: 80px;
-  height: 80px;
-  background: #fff5f5;
-  border: 1px solid #fed7d7;
-  border-radius: 50%;
+  width: 72px;
+  height: 72px;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #e53e3e;
+  color: #dc2626;
   margin: 0 auto 20px;
 }
 
-/* --- PROGRESS TRACKER --- */
+/* Progress Tracker */
 .track-container {
-  margin: 60px 0;
+  margin: 56px 0;
   display: flex;
   flex-direction: column;
   position: relative;
-  gap: 45px;
+  gap: 44px;
 }
 
 .track-container::before {
-  content: "";
+  content: '';
   position: absolute;
-  background: #f0f0f0;
+  background: #ebe7e0;
   z-index: 1;
-  border-radius: 10px;
 }
 
 .progress-line-fill {
@@ -151,64 +162,72 @@ body {
   background: var(--gold);
   z-index: 2;
   transition: all 1.5s cubic-bezier(0.65, 0, 0.35, 1);
-  box-shadow: 0 0 15px var(--gold-shadow);
+  box-shadow: 0 0 12px var(--gold-shadow);
 }
 
-/* MASAÜSTÜ HİZALAMA */
+/* Desktop */
 @media (min-width: 768px) {
   .track-container {
     flex-direction: row;
     justify-content: space-between;
     gap: 0;
   }
+
   .track-container::before {
     top: 32.5px;
     left: 5%;
     right: 5%;
-    height: 4px;
+    height: 2px;
   }
+
   .progress-line-fill {
     top: 32.5px;
     left: 5%;
-    height: 4px;
+    height: 2px;
     width: 0%;
   }
+
   .step {
     flex-direction: column;
     text-align: center;
     width: 25%;
   }
+
   .step-text {
     margin-left: 0;
-    margin-top: 15px;
+    margin-top: 14px;
   }
 }
 
-/* MOBİL HİZALAMA */
+/* Mobile */
 @media (max-width: 767px) {
   .track-container::before {
     top: 10px;
     bottom: 10px;
     left: 32.5px;
-    width: 4px;
+    width: 2px;
   }
+
   .progress-line-fill {
     left: 32.5px;
     top: 10px;
-    width: 4px;
+    width: 2px;
     height: 0%;
   }
+
   .step {
     flex-direction: row;
     align-items: center;
     text-align: left;
   }
+
   .step-text {
-    margin-left: 20px;
+    margin-left: 18px;
     margin-top: 0;
   }
+
   .track-card {
-    padding: 30px 15px;
+    padding: 28px 16px;
   }
 }
 
@@ -226,17 +245,17 @@ body {
 }
 
 .step-icon {
-  width: 65px;
-  height: 65px;
+  width: 62px;
+  height: 62px;
   background: white;
-  border: 2px solid #eee;
-  border-radius: 50%;
+  border: 1px solid #ddd8d0;
+  border-radius: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
   flex-shrink: 0;
 }
 
@@ -244,8 +263,8 @@ body {
   border-color: var(--gold);
   background: var(--gold);
   color: white;
-  transform: scale(1.15);
-  box-shadow: 0 0 30px var(--gold-shadow);
+  transform: scale(1.12);
+  box-shadow: 0 0 24px var(--gold-shadow);
   animation: pulse-gold 2s infinite;
 }
 
@@ -262,164 +281,142 @@ body {
 }
 
 .step-text {
-  font-size: 0.75rem;
+  font-size: 0.68rem;
   text-transform: uppercase;
-  color: #aaa;
-  font-weight: 600;
-  letter-spacing: 1px;
+  color: #bbb;
+  font-weight: 500;
+  letter-spacing: 0.12em;
 }
 
 .step.active .step-text,
 .step.completed .step-text {
   color: var(--navy);
-  font-weight: 700;
-}
-.step.cancelled-step .step-text {
-  color: #dc3545 !important;
-  font-weight: 800;
+  font-weight: 600;
 }
 
-/* --- DETAY ALANLARI --- */
+.step.cancelled-step .step-text {
+  color: #dc2626 !important;
+  font-weight: 700;
+}
+
+/* Detail areas */
 .cancel-notice {
-  background: #fff5f5;
-  border: 1px solid #feb2b2;
-  color: #c53030;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #b91c1c;
   padding: 20px;
-  border-radius: 15px;
-  margin: 30px 0;
+  border-radius: 0;
+  margin: 28px 0;
   display: flex;
   align-items: center;
   text-align: left;
 }
 
 .order-details-box {
-  background: #fdfdfd;
-  border: 1px solid #f0f0f0;
-  border-radius: 20px;
-  padding: 30px;
-  margin-top: 40px;
+  background: #fdfbf8;
+  border: 1px solid #ebe7e0;
+  border-radius: 0;
+  padding: 28px;
+  margin-top: 36px;
 }
+
 .product-item {
-  border-bottom: 1px solid #f5f5f5;
-  padding: 15px 0;
+  border-bottom: 1px solid #f0ede8;
+  padding: 14px 0;
 }
+
 .product-thumb {
-  width: 65px;
-  height: 65px;
+  width: 62px;
+  height: 62px;
   object-fit: cover;
-  border-radius: 12px;
-  border: 1px solid #eee;
+  border-radius: 0;
+  border: 1px solid #ebe7e0;
 }
 
-/* --- ANIMASYONLAR --- */
+/* Animations */
 @keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-@keyframes pulse-gold {
-  0% {
-    box-shadow: 0 0 0 0 rgba(197, 160, 89, 0.7);
-  }
-  70% {
-    box-shadow: 0 0 0 15px rgba(197, 160, 89, 0);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(197, 160, 89, 0);
-  }
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-/* --- PRELOADER (SENIOR RESPONSIVE FIX) --- */
+@keyframes pulse-gold {
+  0%   { box-shadow: 0 0 0 0 rgba(184, 154, 106, 0.65); }
+  70%  { box-shadow: 0 0 0 14px rgba(184, 154, 106, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(184, 154, 106, 0); }
+}
+
+/* Preloader */
 #preloader {
   position: fixed;
-  top: 0;
-  left: 0;
+  top: 0; left: 0;
   width: 100%;
-  height: 100dvh; /* Mobil bar fix */
-  background-color: #0b0e17;
+  height: 100dvh;
+  background-color: #0a0a0a;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 999999;
-  transition:
-    opacity 1s cubic-bezier(0.65, 0, 0.35, 1),
-    visibility 1s;
+  transition: opacity 0.8s ease, visibility 0.8s;
   overflow: hidden;
 }
 
 .preloader-content {
   text-align: center;
   width: 90%;
-  max-width: 500px;
+  max-width: 480px;
 }
 
 .preloader-logo {
-  font-family: "Playfair Display", serif;
-  font-size: clamp(1.1rem, 5.5vw, 2.5rem); /* Metin sığma garantisi */
+  font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+  font-size: clamp(1rem, 5vw, 2rem);
   color: #ffffff;
-  letter-spacing: clamp(1px, 1vw, 8px);
+  letter-spacing: clamp(0.18em, 1vw, 0.45em);
   text-transform: uppercase;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   animation: luxeFadePulse 2.5s ease-in-out infinite;
   max-width: 100%;
 }
-.preloader-logo span {
-  color: var(--gold);
-}
+
+.preloader-logo span { color: var(--gold); }
 
 .preloader-bar {
-  width: clamp(100px, 20vw, 150px);
+  width: 100px;
   height: 1px;
-  background: rgba(197, 160, 89, 0.1);
-  margin: 0 auto 15px;
+  background: rgba(184, 154, 106, 0.10);
+  margin: 0 auto 14px;
   position: relative;
   overflow: hidden;
 }
+
 .preloader-bar::after {
-  content: "";
+  content: '';
   display: block;
-  width: 60px;
+  width: 50%;
   height: 100%;
   background: var(--gold);
   position: absolute;
-  left: -60px;
-  animation: loadingSlide 2s infinite ease-in-out;
+  left: -50%;
+  animation: loadingSlide 1.6s infinite ease-in-out;
 }
+
 .preloader-text {
-  color: rgba(255, 255, 255, 0.4);
-  font-size: clamp(0.55rem, 2vw, 0.7rem);
-  letter-spacing: 2px;
+  color: rgba(255,255,255,0.24);
+  font-size: 0.58rem;
+  letter-spacing: 0.26em;
   text-transform: uppercase;
 }
 
 @keyframes loadingSlide {
-  0% {
-    left: -60px;
-  }
-  100% {
-    left: 100%;
-  }
+  0%   { left: -50%; }
+  100% { left: 100%; }
 }
+
 @keyframes luxeFadePulse {
-  0%,
-  100% {
-    opacity: 0.4;
-    transform: scale(0.98);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1);
-  }
+  0%, 100% { opacity: 0.30; transform: scale(0.98); }
+  50%       { opacity: 1;    transform: scale(1); }
 }
-.preloader-hidden {
-  opacity: 0;
-  visibility: hidden;
-}
+
+.preloader-hidden { opacity: 0; visibility: hidden; }

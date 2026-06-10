@@ -47,6 +47,14 @@ body.light-mode {
   --tx-inv: #f0ede8;
 }
 
+body.light-mode #testimonials      { background: #f4f1ed; background-image: none; border-color: rgba(0,0,0,0.07); }
+body.light-mode .k-testi-stats    { background: rgba(0,0,0,0.03); border-color: rgba(0,0,0,0.08); }
+body.light-mode .k-testi-stat     { border-right-color: rgba(0,0,0,0.07); }
+body.light-mode .k-testi-stat-label { color: rgba(0,0,0,0.35); }
+body.light-mode .testimonial-card { background: rgba(0,0,0,0.03); border-color: rgba(0,0,0,0.08); }
+body.light-mode .testimonial-text { color: rgba(0,0,0,0.6); }
+body.light-mode .testimonial-name { color: #1a1a1a; }
+body.light-mode .k-testi-trust    { color: rgba(0,0,0,0.22); }
 body.light-mode .k-trust-bar    { background: #f0ede8; border-color: rgba(0,0,0,0.07); }
 body.light-mode .k-trust-title  { color: #1a1a1a; }
 body.light-mode .k-trust-desc   { color: #6b6b6b; }
@@ -1016,23 +1024,99 @@ body.light-mode .tag-dark {
 /* ── 10. TESTIMONIALS ─────────────────────────────────────── */
 #testimonials {
   padding: clamp(56px, 7vw, 96px) 0;
-  background: var(--bg-2);
-  border-top: 1px solid var(--bd);
-  border-bottom: 1px solid var(--bd);
+  background: #080808;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(200,166,106,0.045) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 35% at 0% 100%, rgba(200,166,106,0.02) 0%, transparent 60%);
+  border-top: 1px solid rgba(255,255,255,0.06);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  overflow: hidden;
 }
 
-/* Section head with horizontal padding (used inside full-bleed sections) */
+/* Section head with horizontal padding */
 .k-section-head {
   padding-left: var(--px);
   padding-right: var(--px);
 }
 
+/* — Statistics trust grid — */
+.k-testi-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  width: calc(100% - 2 * var(--px));
+  max-width: var(--max-w);
+  margin: clamp(40px, 5vw, 64px) auto clamp(56px, 7vw, 80px);
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.k-testi-stat {
+  padding: clamp(28px, 3.5vw, 48px) clamp(16px, 2vw, 32px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  border-right: 1px solid rgba(255,255,255,0.06);
+  transition: background 0.3s;
+}
+.k-testi-stat:last-child { border-right: none; }
+.k-testi-stat:hover { background: rgba(200,166,106,0.04); }
+
+.k-testi-stat-icon {
+  font-size: 1.15rem;
+  color: #c8a66a;
+  margin-bottom: 14px;
+  opacity: 0.8;
+}
+
+.k-testi-stat-num {
+  font-family: var(--serif);
+  font-size: clamp(2.6rem, 4.5vw, 3.8rem);
+  font-weight: 300;
+  color: #c8a66a;
+  line-height: 1;
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+}
+
+.k-testi-stat-word {
+  font-size: clamp(1.1rem, 1.8vw, 1.5rem);
+  font-weight: 300;
+  color: #c8a66a;
+  line-height: 1;
+  margin-bottom: 8px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.k-testi-stat-stars {
+  color: #c8a66a;
+  font-size: 0.6rem;
+  letter-spacing: 5px;
+  margin-bottom: 10px;
+  opacity: 0.85;
+}
+
+.k-testi-stat-label {
+  font-family: var(--sans);
+  font-size: 0.5rem;
+  font-weight: 600;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.28);
+}
+
+/* Testimonial container */
 #testimonial-container {
   display: grid !important;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1px;
-  background: var(--bd);
+  gap: 16px !important;
+  background: transparent;
   margin: 0 !important;
+  width: calc(100% - 2 * var(--px));
+  max-width: var(--max-w);
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
 
 #testimonial-container > [class*="col"] {
@@ -1040,32 +1124,47 @@ body.light-mode .tag-dark {
   max-width: 100% !important;
   width: 100% !important;
   padding: 0 !important;
-  background: var(--bg-2);
+  background: transparent;
 }
 
 /* ---- Card ---- */
 .testimonial-card {
-  background: var(--bg-2);
+  background: rgba(255,255,255,0.025);
+  border: 1px solid rgba(255,255,255,0.08);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   padding: 32px 28px;
   display: flex;
   flex-direction: column;
   height: 100%;
   opacity: 0;
-  border-top: 2px solid transparent;
-  transition: opacity 0.5s var(--ease), border-color 0.3s var(--ease);
+  transform: translateY(16px);
+  transition: opacity 0.55s var(--ease), transform 0.55s var(--ease), border-color 0.3s, box-shadow 0.3s;
 }
-.testimonial-card.visible { opacity: 1; }
-.testimonial-card:hover { border-top-color: var(--bd-gold); }
+.testimonial-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.testimonial-card:hover {
+  border-color: rgba(200,166,106,0.42);
+  transform: translateY(-5px) !important;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(200,166,106,0.1);
+}
 
-/* Remove decorative quote — text from JS already contains quotes */
+/* Staggered reveal (CSS delay only applies before .visible) */
+#testimonial-container > :nth-child(1) .testimonial-card:not(.visible) { transition-delay: 0ms; }
+#testimonial-container > :nth-child(2) .testimonial-card:not(.visible) { transition-delay: 80ms; }
+#testimonial-container > :nth-child(3) .testimonial-card:not(.visible) { transition-delay: 160ms; }
+#testimonial-container > :nth-child(4) .testimonial-card:not(.visible) { transition-delay: 240ms; }
+
 .testimonial-card::before { display: none; }
 
-/* Stars: make emoji golden via text-shadow trick */
+/* Stars */
 .testimonial-card .stars,
 .stars.mb-2 {
   color: transparent !important;
-  text-shadow: 0 0 0 var(--gold) !important;
-  font-size: 0.7rem !important;
+  text-shadow: 0 0 0 #c8a66a !important;
+  font-size: 0.72rem !important;
   letter-spacing: 3px !important;
   margin-bottom: 16px !important;
   display: block !important;
@@ -1075,7 +1174,7 @@ body.light-mode .tag-dark {
 .testimonial-text {
   font-size: 0.875rem;
   font-weight: 300;
-  color: var(--tx-2);
+  color: rgba(255,255,255,0.58);
   line-height: 1.85;
   font-style: italic;
   flex: 1;
@@ -1099,24 +1198,44 @@ body.light-mode .tag-dark {
 .testimonial-card > div:last-child {
   margin-top: 20px;
   padding-top: 16px;
-  border-top: 1px solid var(--bd);
+  border-top: 1px solid rgba(255,255,255,0.07);
 }
 
 .testimonial-name {
   font-size: 0.68rem;
   font-weight: 500;
   letter-spacing: 0.14em;
-  color: var(--tx);
+  color: #f5f5f5;
   text-transform: uppercase;
   display: block;
 }
 
 .testimonial-date {
   font-size: 0.6rem !important;
-  color: var(--gold) !important;
+  color: #c8a66a !important;
   letter-spacing: 0.1em;
   margin-top: 3px;
   display: block;
+}
+
+/* Trust badge (bottom of section) */
+.k-testi-trust {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: clamp(32px, 4vw, 52px) var(--px);
+  font-family: var(--sans);
+  font-size: 0.54rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.2);
+}
+.k-testi-trust i {
+  color: #c8a66a;
+  font-size: 0.8rem;
+  opacity: 0.65;
 }
 
 /* ---- Review form ---- */
@@ -2954,7 +3073,9 @@ body.light-mode .k-map { filter: none; opacity: 1; }
   .k-hamburger { display: flex; }
   /* Tablet: 2 columns */
   #product-grid-container { grid-template-columns: repeat(2, 1fr); gap: 14px; }
-  #testimonial-container  { grid-template-columns: 1fr; }
+  .k-testi-stats  { grid-template-columns: repeat(2, 1fr); }
+  .k-testi-stat:nth-child(2) { border-right: none; }
+  #testimonial-container { grid-template-columns: 1fr 1fr !important; }
   .k-visit-grid   { grid-template-columns: 1fr; }
   .k-trust-inner { grid-template-columns: repeat(2, 1fr); }
   .k-trust-item:nth-child(2) { border-right: none; }
@@ -3002,6 +3123,10 @@ body.light-mode .k-map { filter: none; opacity: 1; }
   #luxe-social-gallery    { grid-template-columns: repeat(2, 1fr); gap: 8px; }
   .k-social-aside { gap: 12px; }
   .k-social-follow { padding: 8px 16px; }
+  .k-testi-stats  { grid-template-columns: repeat(2, 1fr); }
+  .k-testi-stat:nth-child(2) { border-right: none; }
+  .k-testi-stat:nth-child(4) { border-right: none; }
+  #testimonial-container { grid-template-columns: 1fr 1fr !important; gap: 10px !important; }
   .k-trust-inner { grid-template-columns: 1fr 1fr; gap: 0; }
   .k-trust-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.05); padding: 16px 12px; }
   .k-trust-item:nth-child(3), .k-trust-item:nth-child(4) { border-bottom: none; }

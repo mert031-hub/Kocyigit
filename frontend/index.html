@@ -264,6 +264,31 @@
     <p class="k-section-sub">Echte Bewertungen von echten Menschen.</p>
   </div>
 
+  <!-- Statistics / trust grid -->
+  <div class="k-testi-stats k-reveal">
+    <div class="k-testi-stat">
+      <div class="k-testi-stat-icon"><i class="fas fa-star"></i></div>
+      <div class="k-testi-stat-num"><span class="k-counter" data-target="4.9" data-decimals="1">0</span></div>
+      <div class="k-testi-stat-stars">★★★★★</div>
+      <div class="k-testi-stat-label">Durchschnittsbewertung</div>
+    </div>
+    <div class="k-testi-stat">
+      <div class="k-testi-stat-icon"><i class="fas fa-users"></i></div>
+      <div class="k-testi-stat-num"><span class="k-counter" data-target="500" data-suffix="+">0</span></div>
+      <div class="k-testi-stat-label">Zufriedene Kunden</div>
+    </div>
+    <div class="k-testi-stat">
+      <div class="k-testi-stat-icon"><i class="fas fa-thumbs-up"></i></div>
+      <div class="k-testi-stat-num"><span class="k-counter" data-target="98" data-suffix="%">0</span></div>
+      <div class="k-testi-stat-label">Weiterempfehlung</div>
+    </div>
+    <div class="k-testi-stat">
+      <div class="k-testi-stat-icon"><i class="fas fa-truck-fast"></i></div>
+      <div class="k-testi-stat-num k-testi-stat-word">Deutschlandweit</div>
+      <div class="k-testi-stat-label">Schneller Versand</div>
+    </div>
+  </div>
+
   <!-- Testimonial cards injected by main.js -->
   <div id="testimonial-container" class="row g-0"></div>
   <div id="show-more-reviews-wrapper" style="display:none;text-align:center;padding:48px 0">
@@ -276,7 +301,13 @@
     </button>
   </div>
 
-  <!-- Review form -->
+  <!-- Bottom trust badge -->
+  <div class="k-testi-trust k-reveal">
+    <i class="fas fa-shield-halved"></i>
+    <span>Vertrauen Sie über 500+ Kunden</span>
+  </div>
+
+  <!-- Review form (shown when purchase verified) -->
   <div class="k-review-form-wrap k-reveal" id="verified-review-box" style="display:none">
     <div class="k-review-form-inner">
       <div class="k-review-form-head">
@@ -859,6 +890,38 @@
     });
   }, {threshold:0.5});
   els.forEach(function(el){ heroObs.observe(el); });
+})();
+
+/* ---- Stats counter animation (.k-counter) ---- */
+(function(){
+  var els = document.querySelectorAll('.k-counter');
+  if(!els.length) return;
+  var duration = 1600;
+  function easeOut(t){ return 1 - Math.pow(1 - t, 3); }
+  function animateCounter(el){
+    var target  = parseFloat(el.dataset.target  || 0);
+    var dec     = parseInt(el.dataset.decimals  || 0);
+    var suffix  = el.dataset.suffix || '';
+    var start   = performance.now();
+    function tick(now){
+      var p = Math.min((now - start) / duration, 1);
+      el.textContent = (target * easeOut(p)).toFixed(dec) + suffix;
+      if(p < 1) requestAnimationFrame(tick);
+      else el.textContent = target.toFixed(dec) + suffix;
+    }
+    requestAnimationFrame(tick);
+  }
+  var statsEl = document.querySelector('.k-testi-stats');
+  if(!statsEl) return;
+  var fired = false;
+  var obs = new IntersectionObserver(function(entries){
+    if(!fired && entries[0].isIntersecting){
+      fired = true;
+      els.forEach(animateCounter);
+      obs.disconnect();
+    }
+  }, {threshold: 0.25});
+  obs.observe(statsEl);
 })();
 
 /* ---- Card reveal (product + testimonials) ---- */

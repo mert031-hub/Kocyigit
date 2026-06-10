@@ -1,147 +1,126 @@
 <!DOCTYPE html>
 <html lang="de">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KOÇYİĞİT Betrieb&Handel | Kontakt</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="contact.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kontakt — KOÇYİĞİT</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="contact.css">
+
+  <script>
+    (function(){
+      var t = localStorage.getItem('luxeTheme');
+      if(t === 'light') document.documentElement.classList.add('light-mode-pending');
+    })();
+  </script>
 </head>
-
 <body>
+<script>
+  if(document.documentElement.classList.contains('light-mode-pending')){
+    document.body.classList.add('light-mode');
+    document.documentElement.classList.remove('light-mode-pending');
+  }
+</script>
 
-    <nav class="navbar navbar-expand-lg sticky-top">
-        <div class="container justify-content-center">
-            <a class="navbar-brand" href="index.html">KOÇYİĞİT<span>Betrieb&amp;Handel</span></a>
+<!-- Preloader -->
+<div id="preloader">
+  <div class="k-loader-content">
+    <div class="k-loader-logo">KOÇYİĞİT<span>.</span></div>
+    <div class="k-loader-bar"><div class="k-loader-bar-inner"></div></div>
+    <div class="k-loader-sub">Kontakt</div>
+  </div>
+</div>
+
+<!-- Nav -->
+<nav class="c-nav">
+  <div class="c-nav-inner">
+    <a href="/" class="c-logo">KOÇYİĞİT<span>.</span></a>
+    <a href="/" class="c-nav-back">
+      <i class="fas fa-arrow-left"></i> Zurück zum Shop
+    </a>
+  </div>
+</nav>
+
+<!-- Page -->
+<div class="c-page">
+  <div class="c-container">
+
+    <!-- Left: Info -->
+    <div class="c-info">
+      <div class="c-info-eyebrow">Kontakt</div>
+      <h1 class="c-info-title">Wir sind für Sie da.</h1>
+      <p class="c-info-sub">Bei Fragen zu Ihrer Bestellung, unseren Produkten oder anderem – schreiben Sie uns. Wir antworten in der Regel innerhalb von 24 Stunden.</p>
+
+      <div class="c-contact-items">
+        <div class="c-contact-item">
+          <div class="c-contact-icon"><i class="fas fa-location-dot"></i></div>
+          <div class="c-contact-text">
+            <div class="c-contact-label">Adresse</div>
+            <div class="c-contact-val">Sinkenbreite 1<br>89180 Berghülen, Deutschland</div>
+          </div>
         </div>
-    </nav>
-
-    <div class="container py-5 mt-md-4">
-        <div class="row g-0 success-card overflow-hidden shadow-lg" data-aos="fade-up">
-            <div class="col-lg-5 contact-info-panel p-5 d-flex flex-column justify-content-center text-white"
-                style="background: var(--black, #0a0a0a);" data-aos="fade-right" data-aos-delay="200">
-                <h2 class="display-6 fw-bold mb-4" style="font-family:'Cormorant Garamond', serif;">Kontakt-Infos</h2>
-                <p class="opacity-75 mb-5">Haben Sie Fragen? Wir sind 24/7 für Sie erreichbar.</p>
-
-                <div class="mb-4 d-flex align-items-center" data-aos="fade-up" data-aos-delay="400">
-                    <div class="info-icon me-3">📍</div>
-                    <div>
-                        <h6 class="mb-0 fw-bold">Adresse</h6>
-                        <p class="mb-0 small opacity-75">Kurfürstendamm 21, Berlin</p>
-                    </div>
-                </div>
-
-                <div class="mb-4 d-flex align-items-center" data-aos="fade-up" data-aos-delay="500">
-                    <div class="info-icon me-3">📞</div>
-                    <div>
-                        <h6 class="mb-0 fw-bold">Telefon</h6>
-                        <p class="mb-0 small opacity-75">+4915125387018</p>
-                    </div>
-                </div>
-
-                <div class="mb-5 d-flex align-items-center" data-aos="fade-up" data-aos-delay="600">
-                    <div class="info-icon me-3">✉️</div>
-                    <div>
-                        <h6 class="mb-0 fw-bold">E-Mail</h6>
-                        <p class="mb-0 small opacity-75">kocyigit.trade@gmail.com</p>
-                    </div>
-                </div>
-
-                <div class="social-links mt-auto" data-aos="fade-in" data-aos-delay="800">
-                    <span class="small text-uppercase opacity-50 d-block mb-3">Folgen Sie uns</span>
-                    <a href="#" class="text-white text-decoration-none me-3">Instagram</a>
-                    <a href="#" class="text-white text-decoration-none">TikTok</a>
-                </div>
-            </div>
-
-            <div class="col-lg-7 p-5" style="background:#fff;" data-aos="fade-left" data-aos-delay="300">
-                <form id="contactForm">
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label small fw-bold text-uppercase">Name</label>
-                            <input type="text" id="contactName" class="form-control" placeholder="Ihr Name" required>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label small fw-bold text-uppercase">E-Mail</label>
-                            <input type="email" id="contactEmail" class="form-control" placeholder="name@beispiel.com"
-                                required>
-                        </div>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label small fw-bold text-uppercase">Betreff</label>
-                        <select id="contactSubject" class="form-select">
-                            <option value="Bestellung">Frage zur Bestellung</option>
-                            <option value="Rückgabe">Rückgabe & Umtausch</option>
-                            <option value="Sonstiges">Sonstiges</option>
-                        </select>
-                    </div>
-                    <div class="mb-4">
-                        <label class="form-label small fw-bold text-uppercase">Nachricht</label>
-                        <textarea id="contactMessage" class="form-control" rows="5" placeholder="Wie können wir helfen?"
-                            required></textarea>
-                    </div>
-                    <div class="d-grid">
-                        <button type="submit" class="btn btn-dark py-3 fw-bold shadow-sm"
-                            style="background: var(--gold, #b89a6a); border: none; letter-spacing:0.12em;">NACHRICHT SENDEN</button>
-                    </div>
-                </form>
-                <div id="responseMessage" class="mt-4 d-none text-center p-3 rounded-3"></div>
-            </div>
+        <div class="c-contact-item">
+          <div class="c-contact-icon"><i class="fas fa-phone"></i></div>
+          <div class="c-contact-text">
+            <div class="c-contact-label">Telefon</div>
+            <a href="tel:+4915125387018" class="c-contact-val c-contact-link">+49 151 25387018</a>
+          </div>
         </div>
+        <div class="c-contact-item">
+          <div class="c-contact-icon"><i class="fas fa-envelope"></i></div>
+          <div class="c-contact-text">
+            <div class="c-contact-label">E-Mail</div>
+            <div class="c-contact-val">info@kocyigit.de</div>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div id="preloader">
-        <div class="preloader-content">
-            <div class="preloader-logo">KOÇYİĞİT<span>Betrieb&Handel</span></div>
-            <div class="preloader-bar"></div>
-            <p class="preloader-text">KOÇYİĞİT wird geladen...</p>
-        </div>
+    <!-- Right: Form -->
+    <div class="c-form-wrap">
+      <div class="c-card">
+        <div class="c-card-title">Nachricht senden</div>
+
+        <form id="contactForm" novalidate>
+          <div class="c-form-row">
+            <div class="c-form-group">
+              <label class="c-label" for="contactName">Name *</label>
+              <input type="text" id="contactName" name="contactName" class="c-input" placeholder="Max Mustermann" required autocomplete="name">
+            </div>
+            <div class="c-form-group">
+              <label class="c-label" for="contactEmail">E-Mail *</label>
+              <input type="email" id="contactEmail" name="contactEmail" class="c-input" placeholder="max@beispiel.de" required autocomplete="email">
+            </div>
+          </div>
+
+          <div class="c-form-group">
+            <label class="c-label" for="contactSubject">Betreff *</label>
+            <input type="text" id="contactSubject" name="contactSubject" class="c-input" placeholder="Worum geht es?" required>
+          </div>
+
+          <div class="c-form-group">
+            <label class="c-label" for="contactMessage">Nachricht *</label>
+            <textarea id="contactMessage" name="contactMessage" class="c-input c-textarea" placeholder="Ihre Nachricht…" rows="5" required></textarea>
+          </div>
+
+          <!-- Response message rendered by contact.js with Bootstrap alert classes -->
+          <div id="responseMessage" class="d-none"></div>
+
+          <button type="submit" class="c-submit">
+            <i class="fas fa-paper-plane"></i>
+            Nachricht senden
+          </button>
+        </form>
+      </div>
     </div>
 
-    <footer class="luxe-footer">
-        <div class="container">
-            <div class="row g-5">
-                <div class="col-lg-5">
-                    <a href="index.html" class="footer-brand">KOÇYİĞİT<span>Betrieb&amp;Handel</span></a>
-                    <p class="footer-tagline">Premium Mode &amp; Lifestyle</p>
-                    <p style="color:rgba(255,255,255,0.30); font-size:0.78rem; line-height:1.75; max-width:260px; font-weight:300;">
-                        Sinkenbreite 1<br>89180 Berghülen, Deutschland<br>
-                        <a href="tel:+4915125387018" style="color:rgba(255,255,255,0.35); text-decoration:none; font-size:0.75rem;">+49 151 25387018</a>
-                    </p>
-                </div>
-                <div class="col-lg-3 offset-lg-1">
-                    <h6 style="color:rgba(255,255,255,0.25); font-size:0.6rem; letter-spacing:0.32em; text-transform:uppercase; margin-bottom:20px; font-weight:500;">Navigation</h6>
-                    <div class="d-flex flex-column" style="gap:4px;">
-                        <a href="index.html#produkte" class="footer-link">Kollektion</a>
-                        <a href="track.html" class="footer-link">Bestellverfolgung</a>
-                        <a href="contact.html" class="footer-link">Kontakt</a>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <h6 style="color:rgba(255,255,255,0.25); font-size:0.6rem; letter-spacing:0.32em; text-transform:uppercase; margin-bottom:20px; font-weight:500;">Rechtliches</h6>
-                    <div class="d-flex flex-column" style="gap:4px;">
-                        <a href="Impressum.html" class="footer-link">Impressum</a>
-                        <a href="Datenschutz.html" class="footer-link">Datenschutz</a>
-                        <a href="Widerruf.html" class="footer-link">Widerrufsbelehrung</a>
-                        <a href="agb.html" class="footer-link">AGB</a>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-divider"></div>
-            <div class="d-flex justify-content-between align-items-center flex-wrap" style="gap:12px;">
-                <p class="footer-copy mb-0">© 2026 Koçyiğit Betrieb&amp;Handel. Alle Rechte vorbehalten.</p>
-                <a href="contact.html" class="footer-contact-link">Fragen? Kontaktieren Sie uns</a>
-            </div>
-        </div>
-    </footer>
+  </div>
+</div>
 
-    <script src="contact.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script src="contact.js"></script>
 </body>
-
 </html>

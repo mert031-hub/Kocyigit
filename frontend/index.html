@@ -576,7 +576,12 @@
     </button>
   </div>
   <div class="k-cart-shipping" id="k-cart-shipping">
-    <span id="float-shipping-text"></span>
+    <div class="k-shipping-bar-wrap">
+      <span id="float-shipping-text"></span>
+      <div class="k-shipping-track">
+        <div class="k-shipping-fill" id="float-shipping-fill"></div>
+      </div>
+    </div>
   </div>
   <div class="k-floating-cart-body" id="floating-cart-items"></div>
   <div class="k-floating-cart-footer" id="cart-footer">
@@ -810,6 +815,25 @@
 
     container.innerHTML = html;
     if(totalEl) totalEl.innerText = fmt.format(total);
+
+    /* — Shipping progress bar — */
+    (function(){
+      var FREE_THRESHOLD = 49;
+      var msgEl  = document.getElementById('float-shipping-text');
+      var fillEl = document.getElementById('float-shipping-fill');
+      if(!msgEl) return;
+      var remaining = Math.max(0, FREE_THRESHOLD - total);
+      var pct = Math.min(100, (total / FREE_THRESHOLD) * 100);
+      if(remaining <= 0){
+        msgEl.innerHTML = '<i class="fas fa-truck"></i> Kostenloser Versand erzielt!';
+        msgEl.className = 'shipping-free';
+        if(fillEl){ fillEl.style.width = '100%'; fillEl.className = 'k-shipping-fill is-free'; }
+      } else {
+        msgEl.innerHTML = 'Noch <strong>' + fmt.format(remaining) + '</strong> bis zum kostenlosen Versand';
+        msgEl.className = '';
+        if(fillEl){ fillEl.style.width = pct + '%'; fillEl.className = 'k-shipping-fill'; }
+      }
+    })();
 
     container.querySelectorAll('.k-cart-item-remove').forEach(function(btn){
       btn.addEventListener('click', function(e){

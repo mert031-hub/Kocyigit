@@ -14,7 +14,7 @@
   --tx-3: rgba(240,237,232,0.35);
   --gold: #c9a96e;
   --gold-dim: rgba(201,169,110,0.12);
-  --gold-hover: #d4b47a;
+  --gold-hover: #b8955a;
   --sans: 'Inter', sans-serif;
   --serif: 'Cormorant Garamond', serif;
   --bd-focus: rgba(201,169,110,0.5);
@@ -22,14 +22,14 @@
 }
 
 body.light-mode {
-  --bg: #f8f6f2;
-  --bg-2: #f0ede8;
+  --bg: #fafaf9;
+  --bg-2: #f4f1ed;
   --sf: #ffffff;
-  --sf-2: #f5f3ef;
+  --sf-2: #f7f6f4;
   --bd: rgba(0,0,0,0.08);
-  --tx: #1a1614;
-  --tx-2: rgba(26,22,20,0.65);
-  --tx-3: rgba(26,22,20,0.38);
+  --tx: #0a0a0a;
+  --tx-2: rgba(10,10,10,0.65);
+  --tx-3: rgba(10,10,10,0.38);
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -104,14 +104,15 @@ body.light-mode .s-nav { background: rgba(248,246,242,0.92); }
 .s-nav-inner {
   max-width: 1100px; margin: 0 auto;
   padding: 0 24px;
-  height: 60px;
+  height: 62px;
   display: flex; align-items: center; justify-content: space-between;
 }
 .s-logo {
   font-family: var(--serif);
-  font-size: 1.25rem;
-  font-weight: 300;
-  letter-spacing: 0.2em;
+  font-size: 1.2rem;
+  font-weight: 400;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
   color: var(--tx);
   text-decoration: none;
 }
@@ -130,7 +131,7 @@ body.light-mode .s-nav { background: rgba(248,246,242,0.92); }
 
 /* --- Page Layout --- */
 .s-page {
-  min-height: calc(100vh - 60px);
+  min-height: calc(100vh - 62px);
   padding: 52px 24px 80px;
 }
 .s-container {

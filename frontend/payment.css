@@ -79,9 +79,9 @@ body {
 
 .p-logo {
   font-family: var(--serif);
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   font-weight: 400;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--tx);
   text-decoration: none;
@@ -92,14 +92,16 @@ body {
 .p-nav-back {
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-size: 0.8rem;
-  color: var(--tx-2);
+  gap: 8px;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--tx-3);
   text-decoration: none;
   transition: color 0.2s;
 }
 
-.p-nav-back:hover { color: var(--tx); }
+.p-nav-back:hover { color: var(--gold); }
 
 .p-nav-secure {
   display: flex;

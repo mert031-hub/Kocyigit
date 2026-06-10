@@ -930,6 +930,9 @@ textarea.a-input, textarea.form-control {
 @media (max-width: 1200px) {
   .a-stats-grid { grid-template-columns: repeat(2, 1fr); }
   .a-chart-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 1100px) {
   .a-insta-grid { grid-template-columns: repeat(2, 1fr); }
 }
 

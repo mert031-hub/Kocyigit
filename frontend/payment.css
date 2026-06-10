@@ -39,7 +39,7 @@ body.light-mode {
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
 
 body {
   background: var(--bg);
@@ -50,6 +50,7 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   min-height: 100dvh;
+  overflow-x: hidden;
 }
 
 /* ---- Nav ---- */
@@ -590,6 +591,7 @@ body {
     position: static;
     order: -1;
   }
+  .p-summary-items { max-height: 220px; }
 }
 
 @media (max-width: 600px) {
@@ -597,4 +599,6 @@ body {
   .p-card { padding: 20px 16px; }
   .p-page { padding-top: calc(var(--nav-h) + 24px); padding-left: 16px; padding-right: 16px; }
   .p-nav { padding: 0 16px; }
+  /* Prevent iOS Safari auto-zoom on input focus */
+  .p-input, select, textarea { font-size: 16px !important; }
 }

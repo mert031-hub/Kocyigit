@@ -32,7 +32,7 @@ body.light-mode {
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
 
 body {
   font-family: var(--sans);
@@ -42,6 +42,7 @@ body {
   color: var(--tx);
   -webkit-font-smoothing: antialiased;
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
 /* --- Utility --- */
@@ -148,8 +149,8 @@ body.light-mode .c-nav { background: rgba(248,246,242,0.92); }
   max-width: 1060px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1fr 520px;
-  gap: 64px;
+  grid-template-columns: 1fr minmax(0, 480px);
+  gap: 56px;
   align-items: start;
 }
 
@@ -283,18 +284,24 @@ body.light-mode .c-input { background: var(--bg-2); }
 .c-submit:disabled { opacity: 0.6; cursor: not-allowed; }
 
 /* --- Responsive --- */
-@media (max-width: 900px) {
+@media (max-width: 960px) {
   .c-container {
     grid-template-columns: 1fr;
     gap: 40px;
   }
   .c-info { order: -1; }
   .c-info-sub { max-width: 100%; }
+  .c-info-title { font-size: clamp(2rem, 5vw, 2.8rem); }
 }
+
+@media (max-width: 680px) {
+  .c-form-row { grid-template-columns: 1fr; }
+}
+
 @media (max-width: 600px) {
   .c-page { padding: 32px 16px 60px; }
   .c-nav-inner { padding: 0 16px; }
-  .c-info-title { font-size: 2.2rem; }
-  .c-form-row { grid-template-columns: 1fr; }
   .c-card { padding: 24px 20px; }
+  /* Prevent iOS Safari auto-zoom */
+  .c-input, input, select, textarea { font-size: 16px !important; }
 }

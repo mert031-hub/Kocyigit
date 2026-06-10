@@ -34,7 +34,7 @@ body.light-mode {
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
 
 body {
   font-family: var(--sans);
@@ -44,6 +44,7 @@ body {
   color: var(--tx);
   -webkit-font-smoothing: antialiased;
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
 /* --- Preloader --- */
@@ -183,7 +184,7 @@ body.light-mode .s-nav { background: rgba(248,246,242,0.92); }
 /* --- Headings --- */
 .s-title {
   font-family: var(--serif);
-  font-size: 2.6rem;
+  font-size: clamp(1.9rem, 6vw, 2.6rem);
   font-weight: 300;
   letter-spacing: 0.04em;
   text-align: center;
@@ -410,6 +411,8 @@ body.light-mode .s-nav { background: rgba(248,246,242,0.92); }
 }
 @media (max-width: 600px) {
   .s-page { padding: 32px 16px 60px; }
-  .s-title { font-size: 2.1rem; }
   .s-nav-inner { padding: 0 16px; }
+  .s-actions { gap: 8px; }
+  /* Prevent iOS Safari auto-zoom on any potential interactive elements */
+  input, select, textarea { font-size: 16px !important; }
 }

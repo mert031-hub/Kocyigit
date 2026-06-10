@@ -34,7 +34,7 @@ body.light-mode {
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
 
 body {
   font-family: var(--sans);
@@ -44,6 +44,7 @@ body {
   color: var(--tx);
   -webkit-font-smoothing: antialiased;
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
 /* --- Utility --- */
@@ -186,7 +187,7 @@ body.light-mode .t-nav { background: rgba(248,246,242,0.92); }
 .t-header { text-align: center; margin-bottom: 40px; }
 .t-title {
   font-family: var(--serif);
-  font-size: 2.6rem; font-weight: 300;
+  font-size: clamp(1.9rem, 6vw, 2.6rem); font-weight: 300;
   letter-spacing: 0.04em;
   margin-bottom: 10px;
 }
@@ -533,12 +534,7 @@ body.light-mode .t-nav { background: rgba(248,246,242,0.92); }
 @keyframes spin { to { transform: rotate(360deg); } }
 
 /* --- Responsive --- */
-@media (max-width: 600px) {
-  .t-page { padding: 32px 16px 60px; }
-  .t-title { font-size: 2.1rem; }
-  .t-nav-inner { padding: 0 16px; }
-  .t-search-btn span { display: none; }
-  .t-search-btn { padding: 0 16px; }
+@media (max-width: 680px) {
   .track-container { flex-direction: column; gap: 0; }
   .progress-line-fill {
     left: 20px; top: 20px;
@@ -546,6 +542,17 @@ body.light-mode .t-nav { background: rgba(248,246,242,0.92); }
     transition: height 0.6s ease;
   }
   .step { flex-direction: row; gap: 14px; text-align: left; flex: unset; width: 100%; padding: 10px 0; }
+}
+
+@media (max-width: 600px) {
+  .t-page { padding: 32px 16px 60px; }
+  .t-title { font-size: clamp(1.8rem, 7vw, 2.1rem); }
+  .t-nav-inner { padding: 0 16px; }
+  .t-search-btn span { display: none; }
+  .t-search-btn { padding: 0 16px; }
   .t-modal-body { padding: 28px 20px; }
   .t-modal-actions { flex-direction: column; }
+  .t-address-row span:last-child { max-width: 100%; }
+  /* Prevent iOS Safari auto-zoom */
+  .t-search-input, input, select, textarea { font-size: 16px !important; }
 }

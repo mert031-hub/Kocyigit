@@ -15,7 +15,7 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
 
 body {
   background: var(--bg);
@@ -25,6 +25,7 @@ body {
   font-size: 15px;
   -webkit-font-smoothing: antialiased;
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
 /* --- Nav --- */
@@ -71,7 +72,7 @@ body {
 }
 .l-h1 {
   font-family: var(--serif);
-  font-size: 2.8rem; font-weight: 300;
+  font-size: clamp(2rem, 6vw, 2.8rem); font-weight: 300;
   letter-spacing: 0.03em;
   margin-bottom: 14px;
 }
@@ -131,6 +132,7 @@ a:hover { text-decoration: underline; }
 
 @media (max-width: 600px) {
   .l-main { padding: 36px 16px 60px; }
-  .l-h1 { font-size: 2.2rem; }
   .l-nav-inner { padding: 0 16px; }
+  .l-back { font-size: 0; }
+  .l-back::before { content: '←'; font-size: 1.1rem; color: var(--tx-3); }
 }

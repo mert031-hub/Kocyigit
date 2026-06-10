@@ -209,18 +209,35 @@
      ============================================================ -->
 <div class="k-product-bar" id="k-product-bar">
   <div class="k-product-bar-inner">
-    <h2 class="k-section-label">Produkte</h2>
+
+    <!-- Left: label -->
+    <div class="k-bar-left">
+      <span class="k-section-label">Produkte</span>
+    </div>
+
+    <!-- Center: Search -->
     <div class="k-search-wrap">
-      <i class="fas fa-search k-search-icon"></i>
+      <i class="fas fa-magnifying-glass k-search-icon"></i>
       <input
         type="search"
         id="mainSearchInput"
         class="k-search-input"
-        placeholder="Suchen…"
+        placeholder="Produkte suchen…"
         autocomplete="off"
         onkeyup="filterProducts()"
         aria-label="Produkte suchen">
     </div>
+
+    <!-- Right: decorative view toggle -->
+    <div class="k-bar-right">
+      <button class="k-view-btn k-view-btn--active" aria-label="Gitteransicht" tabindex="-1">
+        <i class="fas fa-grip"></i>
+      </button>
+      <button class="k-view-btn" aria-label="Listenansicht" tabindex="-1">
+        <i class="fas fa-list"></i>
+      </button>
+    </div>
+
   </div>
 </div>
 

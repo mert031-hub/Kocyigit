@@ -1149,87 +1149,171 @@ body.light-mode .tag-dark {
   background: var(--sf) !important;
 }
 
-/* ── 11. SOCIAL ───────────────────────────────────────────── */
-#social {
-  background: var(--bg);
-  border-top: 1px solid var(--bd);
-  padding: clamp(40px, 5vw, 64px) 0;
+/* ── 11. SOCIAL / INSTAGRAM SHOWCASE ─────────────────────── */
+.k-social-section {
+  padding: clamp(52px, 7vw, 88px) 0;
 }
 
-.k-social-head {
-  padding: clamp(56px, 7vw, 88px) 0 clamp(40px, 5vw, 64px);
-  text-align: center;
+/* Two-column layout: sidebar text + image grid */
+.k-social-inner {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 48px;
+  align-items: start;
+  padding: 0 var(--px);
+  max-width: var(--max-w);
+  margin: 0 auto;
 }
 
+/* ---- Left: text aside ---- */
+.k-social-aside {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: sticky;
+  top: calc(var(--nav-h) + 32px);
+}
+
+/* Handle — appropriately sized, not page-filling */
 .k-social-handle {
   font-family: var(--serif);
-  font-size: clamp(1.8rem, 5vw, 4rem);
+  font-size: clamp(1.1rem, 1.6vw, 1.45rem);
   font-weight: 300;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.02em;
   color: var(--tx);
-  margin-bottom: 28px;
-  line-height: 1.1;
+  line-height: 1.35;
+  text-decoration: none;
+  word-break: break-word;
+  display: block;
+  transition: color 0.2s;
+}
+.k-social-handle:hover { color: var(--gold); }
+
+.k-social-desc {
+  font-size: 0.8rem;
+  color: var(--tx-2);
+  line-height: 1.7;
+  margin: 0;
 }
 
+/* Follow button — pill shape */
 .k-social-follow {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  padding: 12px 28px;
+  gap: 8px;
+  padding: 10px 20px;
   border: 1px solid var(--bd-gold);
   color: var(--tx-2);
+  font-family: var(--sans);
   font-size: 0.62rem;
   font-weight: 400;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  transition: all 0.25s;
+  border-radius: 100px;
+  transition: all 0.22s;
+  align-self: flex-start;
+  text-decoration: none;
 }
+.k-social-follow i { color: var(--gold); font-size: 0.9rem; transition: color 0.22s; }
+.k-social-follow:hover { background: var(--gold); border-color: var(--gold); color: #0a0a0a; }
+.k-social-follow:hover i { color: #0a0a0a; }
 
-.k-social-follow i { color: var(--gold); font-size: 1rem; }
-.k-social-follow:hover { background: var(--gold); border-color: var(--gold); color: #fff; }
-.k-social-follow:hover i { color: #fff; }
+/* Dead class kept for any residual CSS */
+.k-social-head { display: contents; }
 
+/* ---- Right: image grid ---- */
 #luxe-social-gallery {
   display: grid !important;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1px;
-  background: var(--bd);
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  background: transparent !important;
   margin: 0 !important;
 }
 
+/* All grid cells */
 #luxe-social-gallery > [class*="col"],
 #luxe-social-gallery > div {
   flex: unset !important;
   max-width: 100% !important;
   width: 100% !important;
   padding: 0 !important;
-  aspect-ratio: 1/1;
+  aspect-ratio: 1 / 1;
   overflow: hidden;
   position: relative;
+  background: var(--sf-2);
+  border-radius: 8px;
+  cursor: pointer;
 }
 
+/* Featured: first cell spans 2 columns and 2 rows (editorial look) */
+#luxe-social-gallery > [class*="col"]:nth-child(1),
+#luxe-social-gallery > div:nth-child(1) {
+  grid-column: span 2;
+  grid-row: span 2;
+  aspect-ratio: auto;  /* let the span define height */
+}
+
+/* Images — full-bleed cover, no alt-text overflow */
 .insta-img {
   width: 100% !important;
   height: 100% !important;
   object-fit: cover !important;
-  border-radius: 0 !important;
+  object-position: center !important;
+  border-radius: 8px !important;
   box-shadow: none !important;
-  transition: transform 0.5s var(--ease);
   display: block !important;
+  font-size: 0 !important;         /* hide alt text on broken img */
+  color: transparent !important;
+  transition: transform 0.55s var(--ease);
 }
+#luxe-social-gallery > [class*="col"]:hover .insta-img,
+#luxe-social-gallery > div:hover .insta-img { transform: scale(1.05); }
 
-#luxe-social-gallery > div:hover .insta-img { transform: scale(1.06); }
-
-#luxe-social-gallery > div::after {
+/* Hover: dark scrim */
+#luxe-social-gallery > [class*="col"]::before,
+#luxe-social-gallery > div::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: rgba(8,8,8,0.45);
-  opacity: 0;
-  transition: opacity 0.3s;
+  background: rgba(0,0,0,0);
+  z-index: 1;
+  transition: background 0.3s;
+  border-radius: 8px;
+  pointer-events: none;
+}
+#luxe-social-gallery > [class*="col"]:hover::before,
+#luxe-social-gallery > div:hover::before {
+  background: rgba(0,0,0,0.32);
 }
 
-#luxe-social-gallery > div:hover::after { opacity: 1; }
+/* Instagram icon — bottom-left, fades in on hover */
+#luxe-social-gallery > [class*="col"]::after,
+#luxe-social-gallery > div::after {
+  content: '\f16d';
+  font-family: 'Font Awesome 6 Brands';
+  font-weight: 400;
+  position: absolute;
+  bottom: 10px; left: 10px;
+  width: 28px; height: 28px;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 50%;
+  color: rgba(255,255,255,0.88);
+  font-size: 0.8rem;
+  line-height: 28px;
+  text-align: center;
+  z-index: 3;
+  opacity: 0;
+  transform: scale(0.85);
+  transition: opacity 0.3s, transform 0.3s;
+  pointer-events: none;
+}
+#luxe-social-gallery > [class*="col"]:hover::after,
+#luxe-social-gallery > div:hover::after {
+  opacity: 1;
+  transform: scale(1);
+}
 
 /* ── 12. VISIT ────────────────────────────────────────────── */
 #besuch {
@@ -2147,14 +2231,8 @@ body.dark-mode { /* default is already dark */ }
 .k-star-lbl:hover,
 .k-star-lbl:hover ~ .k-star-lbl { color: var(--gold); }
 
-/* Social section head restructure */
-.k-social-head {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-  text-align: center;
-}
+/* Dead rule kept as no-op */
+.k-social-head { }
 
 /* Visit info grid */
 .k-visit-info {
@@ -2719,9 +2797,16 @@ body.light-mode .k-map { filter: none; opacity: 1; }
   /* Tablet: 2 columns */
   #product-grid-container { grid-template-columns: repeat(2, 1fr); gap: 14px; }
   #testimonial-container  { grid-template-columns: 1fr; }
-  #luxe-social-gallery    { grid-template-columns: repeat(2, 1fr); }
   .k-visit-grid   { grid-template-columns: 1fr; }
   .k-footer-grid  { grid-template-columns: 1fr 1fr; }
+  /* Social: stack aside above gallery */
+  .k-social-inner { grid-template-columns: 1fr; gap: 32px; }
+  .k-social-aside { position: static; flex-direction: row; flex-wrap: wrap; align-items: center; gap: 16px; }
+  .k-social-handle { font-size: 1rem; }
+  /* Gallery: 2-col, remove featured span at tablet */
+  #luxe-social-gallery { grid-template-columns: repeat(3, 1fr); }
+  #luxe-social-gallery > [class*="col"]:nth-child(1),
+  #luxe-social-gallery > div:nth-child(1) { grid-column: span 1; grid-row: span 1; aspect-ratio: 1/1; }
 }
 
 @media (max-width: 640px) {
@@ -2752,7 +2837,9 @@ body.light-mode .k-map { filter: none; opacity: 1; }
   .price-container::after { width: 28px; height: 28px; background-size: 13px; }
   .product-img-box::before { width: 26px; height: 26px; font-size: 0.7rem; top: 8px; right: 8px; }
   #testimonial-container  { grid-template-columns: 1fr; }
-  #luxe-social-gallery    { grid-template-columns: repeat(2, 1fr); }
+  #luxe-social-gallery    { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  .k-social-aside { gap: 12px; }
+  .k-social-follow { padding: 8px 16px; }
   .k-footer-grid { grid-template-columns: 1fr 1fr; gap: 28px; }
   .k-footer-brand { grid-column: span 2; }
   .k-footer-bottom { flex-direction: column; align-items: flex-start; gap: 12px; }

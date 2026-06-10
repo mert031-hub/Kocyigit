@@ -15,11 +15,17 @@
   <script>
     (function(){
       var t = localStorage.getItem('luxeTheme');
-      if(t === 'light') document.body && document.body.classList.add('light-mode');
+      if(t === 'light') document.documentElement.classList.add('light-mode-pending');
     })();
   </script>
 </head>
 <body>
+<script>
+  if(document.documentElement.classList.contains('light-mode-pending')){
+    document.body.classList.add('light-mode');
+    document.documentElement.classList.remove('light-mode-pending');
+  }
+</script>
 
 <!-- Preloader -->
 <div id="preloader">
@@ -116,7 +122,7 @@
             </label>
           </div>
 
-          <button type="submit" class="p-submit" style="margin-top:20px">
+          <button type="submit" class="p-submit btn-order-submit" style="margin-top:20px">
             <i class="fas fa-lock"></i>
             Jetzt kostenpflichtig bestellen
           </button>
@@ -139,6 +145,9 @@
             <!-- injected by payment.js -->
           </div>
         </div>
+        <button type="button" class="p-clear-cart-btn" onclick="clearCartTrigger()">
+          <i class="fas fa-trash-can"></i> Warenkorb leeren
+        </button>
 
         <div class="p-summary-lines">
           <div class="p-summary-line">
@@ -186,7 +195,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Abbrechen</button>
-        <button type="button" class="btn btn-danger" id="confirm-clear-btn">Leeren</button>
+        <button type="button" class="btn btn-danger" id="confirm-clear-btn" onclick="confirmClearFullCart()">Leeren</button>
       </div>
     </div>
   </div>

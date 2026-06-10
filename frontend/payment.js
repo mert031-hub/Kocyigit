@@ -43,26 +43,27 @@ function loadCheckout() {
     let sub = 0;
 
     if (cart.length === 0) {
-        container.innerHTML = "<div class='text-center py-5 opacity-50 text-white'>Warenkorb leer.</div>";
+        container.innerHTML = '<div class="checkout-empty"><i class="fas fa-bag-shopping"></i><p>Warenkorb ist leer.</p></div>';
     } else {
-        container.innerHTML = cart.map((item, index) => {
+        container.innerHTML = cart.map((item) => {
             const p = products.find(x => x.id === item.id);
             if (!p) return "";
             sub += p.price * item.qty;
             return `
-                <div class="d-flex align-items-center mb-4 pb-3 border-bottom border-white border-opacity-10 cart-item-anim" 
-                     style="animation-delay: ${index * 0.1}s">
-                    <img src="${p.img}" width="55" class="me-3 rounded shadow-sm" loading="lazy">
-                    <div class="flex-grow-1">
-                        <div class="small fw-bold mb-1 text-white">${p.name}</div>
-                        <div class="d-flex align-items-center">
-                            <button type="button" class="btn btn-xs btn-outline-light py-0 px-2" onclick="updateCartItemQty('${p.id}', -1)">-</button>
-                            <span id="qty-${p.id}" class="mx-2 small text-white">${item.qty}</span>
-                            <button type="button" class="btn btn-xs btn-outline-light py-0 px-2" onclick="updateCartItemQty('${p.id}', 1)">+</button>
-                            <button type="button" onclick="removeFromCart('${p.id}')" class="btn p-0 text-danger border-0 ms-3" style="font-size:0.6rem; font-weight:700;">LÖSCHEN</button>
+                <div class="checkout-item">
+                    <img src="${p.img}" class="checkout-item-img" loading="lazy" alt="${p.name}">
+                    <div class="checkout-item-info">
+                        <div class="checkout-item-name">${p.name}</div>
+                        <div class="checkout-item-qty">
+                            <button type="button" class="checkout-qty-btn" onclick="updateCartItemQty('${p.id}', -1)">−</button>
+                            <span id="qty-${p.id}">${item.qty}</span>
+                            <button type="button" class="checkout-qty-btn" onclick="updateCartItemQty('${p.id}', 1)">+</button>
+                            <button type="button" class="checkout-remove-btn" onclick="removeFromCart('${p.id}')">
+                                <i class="fas fa-xmark"></i>
+                            </button>
                         </div>
                     </div>
-                    <div class="text-end fw-bold text-white">${euro.format(p.price * item.qty)}</div>
+                    <div class="checkout-item-price">${euro.format(p.price * item.qty)}</div>
                 </div>`;
         }).join('');
     }
@@ -200,7 +201,7 @@ window.addEventListener("load", function () {
     const preloader = document.getElementById("preloader");
     if (preloader) {
         setTimeout(() => {
-            preloader.classList.add("preloader-hidden");
+            preloader.classList.add("k-preloader-hidden");
             setTimeout(() => {
                 if (typeof AOS !== 'undefined') {
                     AOS.init({ duration: 1000, once: true, offset: 50, disableMutationObserver: false });

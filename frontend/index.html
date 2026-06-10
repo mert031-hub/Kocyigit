@@ -214,8 +214,13 @@
      PRODUCTS
      ============================================================ -->
 <main id="produkte" class="k-products-section">
-  <!-- Injected by main.js into #product-grid-container -->
   <div id="product-grid-container" class="row g-0"></div>
+  <div id="show-more-products-wrapper" style="display:none;text-align:center;padding:48px 0">
+    <button id="showMoreProductsBtn" class="k-btn k-btn-more">
+      <i class="fas fa-chevron-down"></i>
+      Mehr Produkte laden
+    </button>
+  </div>
 </main>
 
 <!-- ============================================================
@@ -230,6 +235,15 @@
 
   <!-- Testimonial cards injected by main.js -->
   <div id="testimonial-container" class="row g-0"></div>
+  <div id="show-more-reviews-wrapper" style="display:none;text-align:center;padding:48px 0">
+    <p style="font-size:0.72rem;color:var(--tx-3);margin-bottom:12px">
+      Noch <span id="remaining-reviews">0</span> Bewertungen vorhanden
+    </p>
+    <button id="showMoreReviewsBtn" class="k-btn k-btn-more">
+      <i class="fas fa-chevron-down"></i>
+      Mehr Bewertungen laden
+    </button>
+  </div>
 
   <!-- Review form -->
   <div class="k-review-form-wrap k-reveal" id="verified-review-box" style="display:none">
@@ -266,7 +280,8 @@
         </div>
         <div class="k-form-group">
           <label class="k-label" for="revText">Kommentar</label>
-          <textarea id="revText" class="k-input k-textarea" rows="4" placeholder="Deine Erfahrung…" required></textarea>
+          <textarea id="revText" class="k-input k-textarea" rows="4" placeholder="Deine Erfahrung…" required maxlength="500"></textarea>
+          <small id="char-count" style="font-size:0.62rem;color:var(--tx-3);text-align:right;display:block;margin-top:4px">0 / 500</small>
         </div>
         <button type="submit" class="k-btn k-btn-primary k-btn-full">
           <i class="fas fa-paper-plane"></i>

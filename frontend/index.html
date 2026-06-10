@@ -427,15 +427,17 @@
       <i class="fas fa-xmark"></i>
     </button>
   </div>
-  <div class="k-floating-cart-body" id="floating-cart-items">
-    <!-- injected by cartSync.js -->
+  <div class="k-cart-shipping" id="k-cart-shipping">
+    <span id="float-shipping-text"></span>
   </div>
-  <div class="k-floating-cart-footer">
+  <div class="k-floating-cart-body" id="floating-cart-items"></div>
+  <div class="k-floating-cart-footer" id="cart-footer">
     <div class="k-floating-cart-total">
       <span>Gesamt</span>
-      <strong id="floating-cart-total">0,00 €</strong>
+      <strong id="float-total-amount">0,00 €</strong>
     </div>
     <a href="/payment.html" class="k-btn k-btn-primary k-btn-full" id="checkout-link">
+      <i class="fas fa-lock"></i>
       Zur Kasse
     </a>
   </div>
@@ -574,7 +576,7 @@
   links.forEach(function(l){ l.addEventListener('click', closeNav); });
 })();
 
-/* ---- Cart drawer ---- */
+/* ---- Cart drawer open/close ---- */
 (function(){
   var openBtn  = document.getElementById('cart-open-btn');
   var closeBtn = document.getElementById('cart-close-btn');
@@ -582,19 +584,101 @@
   var drawer   = document.getElementById('luxe-floating-cart');
 
   function openCart(){
-    if(drawer) drawer.classList.add('open');
-    if(overlay) overlay.classList.add('open');
+    if(drawer){ drawer.classList.add('open'); }
+    if(overlay){ overlay.classList.add('open'); }
     document.body.style.overflow = 'hidden';
+    if(typeof renderCartDrawer === 'function') renderCartDrawer();
   }
   function closeCart(){
-    if(drawer) drawer.classList.remove('open');
-    if(overlay) overlay.classList.remove('open');
+    if(drawer){ drawer.classList.remove('open'); }
+    if(overlay){ overlay.classList.remove('open'); }
     document.body.style.overflow = '';
   }
 
   if(openBtn)  openBtn.addEventListener('click', openCart);
   if(closeBtn) closeBtn.addEventListener('click', closeCart);
   if(overlay)  overlay.addEventListener('click', closeCart);
+})();
+
+/* ---- Cart drawer item renderer ---- */
+(function(){
+  var fmt = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' });
+
+  function getProducts(){
+    try{ return (typeof products !== 'undefined' && products.length) ? products : []; }
+    catch(e){ return []; }
+  }
+
+  window.renderCartDrawer = function(){
+    var cartData = JSON.parse(localStorage.getItem('luxeCartArray') || '[]');
+    var container = document.getElementById('floating-cart-items');
+    var totalEl   = document.getElementById('float-total-amount');
+    var footer    = document.getElementById('cart-footer');
+    var shipping  = document.getElementById('k-cart-shipping');
+    if(!container) return;
+
+    var prods = getProducts();
+    var valid = cartData.filter(function(i){
+      return !prods.length || prods.some(function(p){ return p.id === i.id; });
+    });
+
+    if(valid.length === 0){
+      container.innerHTML =
+        '<div class="k-cart-empty">' +
+          '<i class="fas fa-bag-shopping"></i>' +
+          '<p>Dein Warenkorb ist leer.</p>' +
+        '</div>';
+      if(footer)   footer.style.display   = 'none';
+      if(shipping) shipping.style.display = 'none';
+      return;
+    }
+
+    if(footer)   footer.style.display   = '';
+    if(shipping) shipping.style.display = '';
+
+    var total = 0;
+    var html = valid.map(function(item){
+      var prod  = prods.find(function(p){ return p.id === item.id; });
+      var name  = prod ? prod.name  : 'Artikel';
+      var price = prod ? prod.price : 0;
+      var img   = prod ? prod.img   : '';
+      total += price * item.qty;
+      return [
+        '<div class="k-cart-item">',
+          img ? '<div class="k-cart-item-img"><img src="'+img+'" alt="" loading="lazy"></div>' : '',
+          '<div class="k-cart-item-info">',
+            '<p class="k-cart-item-name">'+name+'</p>',
+            '<div class="k-cart-item-meta">',
+              '<span class="k-cart-item-qty">'+item.qty+' ×</span>',
+              '<span class="k-cart-item-unit">'+fmt.format(price)+'</span>',
+            '</div>',
+          '</div>',
+          '<button class="k-cart-item-remove" data-id="'+item.id+'" aria-label="Entfernen">',
+            '<i class="fas fa-xmark"></i>',
+          '</button>',
+        '</div>'
+      ].join('');
+    }).join('');
+
+    container.innerHTML = html;
+    if(totalEl) totalEl.innerText = fmt.format(total);
+
+    container.querySelectorAll('.k-cart-item-remove').forEach(function(btn){
+      btn.addEventListener('click', function(e){
+        e.stopPropagation();
+        var id = btn.getAttribute('data-id');
+        var c  = JSON.parse(localStorage.getItem('luxeCartArray') || '[]');
+        localStorage.setItem('luxeCartArray', JSON.stringify(c.filter(function(i){ return String(i.id) !== String(id); })));
+        window.renderCartDrawer();
+        if(typeof refreshCartUI  === 'function') refreshCartUI();
+        if(typeof updateCartUI   === 'function') updateCartUI();
+      });
+    });
+  };
+
+  window.addEventListener('storage', function(e){
+    if(e.key === 'luxeCartArray') window.renderCartDrawer();
+  });
 })();
 
 /* ---- Back to top ---- */

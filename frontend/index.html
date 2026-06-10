@@ -367,10 +367,14 @@
          target="_blank" rel="noopener"
          class="k-social-handle">@kocyigit.betrieb.und.handel</a>
       <p class="k-social-desc">Einblicke in unsere Produkte, Anwendungen und echte Ergebnisse.</p>
+      <div class="k-social-followers">
+        <i class="fab fa-instagram"></i>
+        <span>Folge uns auf Instagram</span>
+      </div>
       <a href="https://www.instagram.com/kocyigit.betrieb.und.handel/"
          target="_blank" rel="noopener"
-         class="k-btn k-btn-ghost k-btn-sm k-social-follow">
-        <i class="fab fa-instagram"></i> Folgen
+         class="k-social-follow">
+        <i class="fab fa-instagram"></i> Jetzt folgen
       </a>
     </aside>
 
@@ -473,13 +477,16 @@
      ============================================================ -->
 <div class="k-newsletter-band">
   <div class="k-newsletter-card">
-    <p class="k-newsletter-eyebrow">Newsletter</p>
-    <h2 class="k-newsletter-title">Bleiben Sie auf dem Laufenden</h2>
-    <p class="k-newsletter-sub">Neue Produkte, exklusive Angebote und Insider-News — direkt in Ihr Postfach.</p>
-    <form class="k-newsletter-form" id="newsletter-form" onsubmit="return false;">
-      <input type="email" class="k-newsletter-input" id="newsletter-email" placeholder="Ihre E-Mail-Adresse" autocomplete="email" required>
-      <button type="submit" class="k-newsletter-btn">Abonnieren</button>
-    </form>
+    <div class="k-newsletter-left">
+      <p class="k-newsletter-eyebrow">Newsletter</p>
+      <h2 class="k-newsletter-title">Bleiben Sie auf dem Laufenden</h2>
+    </div>
+    <div class="k-newsletter-right">
+      <form class="k-newsletter-form" id="newsletter-form" onsubmit="return false;">
+        <input type="email" class="k-newsletter-input" id="newsletter-email" placeholder="Ihre E-Mail-Adresse" autocomplete="email" required>
+        <button type="submit" class="k-newsletter-btn">Abonnieren</button>
+      </form>
+    </div>
   </div>
 </div>
 
@@ -542,14 +549,22 @@
 
   <div class="k-footer-divider"></div>
 
+  <div class="k-footer-trust-bar">
+    <span class="k-footer-trust-item"><i class="fas fa-lock"></i> SSL-verschlüsselt</span>
+    <span class="k-footer-trust-item"><i class="fas fa-shield-halved"></i> DSGVO-konform</span>
+    <span class="k-footer-trust-item"><i class="fas fa-rotate-left"></i> 14 Tage Widerruf</span>
+    <span class="k-footer-trust-item"><i class="fas fa-truck"></i> Versand ab 3,99 €</span>
+  </div>
+
   <div class="k-footer-bottom">
     <span class="k-footer-copy">© 2025 KOÇYİĞİT Betrieb &amp; Handel. Alle Rechte vorbehalten.</span>
-    <span class="k-footer-made">Made in Berlin</span>
+    <span class="k-footer-made">EST. 2020 · Berlin</span>
     <div class="k-footer-payments">
-      <i class="fab fa-cc-visa k-pay-icon"       title="Visa"></i>
+      <i class="fab fa-cc-visa k-pay-icon"        title="Visa"></i>
       <i class="fab fa-cc-mastercard k-pay-icon"  title="Mastercard"></i>
       <i class="fab fa-cc-paypal k-pay-icon"      title="PayPal"></i>
       <i class="fab fa-cc-apple-pay k-pay-icon"   title="Apple Pay"></i>
+      <i class="fab fa-cc-stripe k-pay-icon"      title="Stripe"></i>
     </div>
   </div>
 </footer>

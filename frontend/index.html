@@ -530,12 +530,12 @@
           <div id="mStockStatus" class="k-modal-stock"></div>
           <p id="mDesc" class="k-modal-desc"></p>
           <div class="k-modal-qty-row">
-            <button class="k-qty-btn" id="qty-minus" aria-label="Menge verringern"><i class="fas fa-minus"></i></button>
-            <input type="number" id="qtyInput" class="k-qty-input" value="1" min="1" max="99" aria-label="Menge">
-            <button class="k-qty-btn" id="qty-plus" aria-label="Menge erhöhen"><i class="fas fa-plus"></i></button>
+            <button class="k-qty-btn" id="qty-minus" aria-label="Menge verringern" onclick="changeQty(-1)"><i class="fas fa-minus"></i></button>
+            <input type="number" id="qtyInput" class="k-qty-input" value="1" min="1" max="99" aria-label="Menge" oninput="validateManualQty(this)" onkeydown="blockNonIntegers(event)">
+            <button class="k-qty-btn" id="qty-plus" aria-label="Menge erhöhen" onclick="changeQty(1)"><i class="fas fa-plus"></i></button>
           </div>
           <p id="mQtyError" class="k-modal-qty-error" style="display:none"></p>
-          <button id="add-to-cart-btn" class="k-btn k-btn-primary k-btn-full">
+          <button id="add-to-cart-btn" class="k-btn k-btn-primary k-btn-full" onclick="addToCart()">
             <i class="fas fa-bag-shopping"></i>
             In den Warenkorb
           </button>

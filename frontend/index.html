@@ -402,17 +402,53 @@
 </section>
 
 <!-- ============================================================
-     PAYMENT STRIP
+     TRUST BAR
      ============================================================ -->
-<div class="k-payment-strip">
-  <div class="k-payment-inner">
-    <i class="fas fa-lock"></i>
-    <i class="fab fa-cc-visa"></i>
-    <i class="fab fa-cc-mastercard"></i>
-    <i class="fab fa-cc-paypal"></i>
-    <i class="fab fa-cc-stripe"></i>
-    <i class="fab fa-cc-apple-pay"></i>
-    <i class="fas fa-shield-halved"></i>
+<div class="k-trust-bar">
+  <div class="k-trust-inner">
+    <div class="k-trust-item">
+      <div class="k-trust-icon"><i class="fas fa-truck"></i></div>
+      <div class="k-trust-text">
+        <strong class="k-trust-title">Kostenloser Versand</strong>
+        <span class="k-trust-desc">Ab 49 € deutschlandweit</span>
+      </div>
+    </div>
+    <div class="k-trust-item">
+      <div class="k-trust-icon"><i class="fas fa-shield-halved"></i></div>
+      <div class="k-trust-text">
+        <strong class="k-trust-title">Sichere Zahlung</strong>
+        <span class="k-trust-desc">SSL-verschlüsselt · PayPal · Stripe</span>
+      </div>
+    </div>
+    <div class="k-trust-item">
+      <div class="k-trust-icon"><i class="fas fa-gem"></i></div>
+      <div class="k-trust-text">
+        <strong class="k-trust-title">Premium Qualität</strong>
+        <span class="k-trust-desc">Kuratierte Produkte mit Anspruch</span>
+      </div>
+    </div>
+    <div class="k-trust-item">
+      <div class="k-trust-icon"><i class="fas fa-headset"></i></div>
+      <div class="k-trust-text">
+        <strong class="k-trust-title">Persönlicher Support</strong>
+        <span class="k-trust-desc">Wir sind für dich da · Mo–Sa</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     NEWSLETTER BAND
+     ============================================================ -->
+<div class="k-newsletter-band">
+  <div class="k-newsletter-card">
+    <p class="k-newsletter-eyebrow">Newsletter</p>
+    <h2 class="k-newsletter-title">Bleiben Sie auf dem Laufenden</h2>
+    <p class="k-newsletter-sub">Neue Produkte, exklusive Angebote und Insider-News — direkt in Ihr Postfach.</p>
+    <form class="k-newsletter-form" id="newsletter-form" onsubmit="return false;">
+      <input type="email" class="k-newsletter-input" id="newsletter-email" placeholder="Ihre E-Mail-Adresse" autocomplete="email" required>
+      <button type="submit" class="k-newsletter-btn">Abonnieren</button>
+    </form>
   </div>
 </div>
 
@@ -464,8 +500,9 @@
       <h4 class="k-footer-heading">Kontakt</h4>
       <ul class="k-footer-list">
         <li class="k-footer-info"><i class="fas fa-location-dot"></i>Berlin, Deutschland</li>
-        <li><a href="mailto:info@kocyigit.de" class="k-footer-link"><i class="fas fa-envelope"></i>Schreib uns</a></li>
+        <li><a href="tel:+4915125387018" class="k-footer-link"><i class="fas fa-phone"></i>+49 151 25387018</a></li>
         <li><a href="https://wa.me/4915207894831" target="_blank" rel="noopener" class="k-footer-link"><i class="fab fa-whatsapp"></i>WhatsApp</a></li>
+        <li><a href="mailto:support@kocyigit-trade.com" class="k-footer-link"><i class="fas fa-envelope"></i>support@kocyigit-trade.com</a></li>
         <li><a href="/admin.html" class="k-footer-link k-footer-admin"><i class="fas fa-lock"></i>Admin</a></li>
       </ul>
     </div>
@@ -476,6 +513,7 @@
 
   <div class="k-footer-bottom">
     <span class="k-footer-copy">© 2025 KOÇYİĞİT Betrieb &amp; Handel. Alle Rechte vorbehalten.</span>
+    <span class="k-footer-made">Made in Berlin</span>
     <div class="k-footer-payments">
       <i class="fab fa-cc-visa k-pay-icon"       title="Visa"></i>
       <i class="fab fa-cc-mastercard k-pay-icon"  title="Mastercard"></i>

@@ -781,71 +781,112 @@ body.light-mode .k-product-bar { background: rgba(250,250,249,0.92); }
   max-width: 100% !important;
   width: 100% !important;
   padding: 0 !important;
+  background: var(--bg-2);
 }
 
+/* ---- Card ---- */
 .testimonial-card {
-  background: var(--bg);
-  padding: 36px 32px;
+  background: var(--bg-2);
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   opacity: 0;
-  transition: opacity 0.5s var(--ease);
+  border-top: 2px solid transparent;
+  transition: opacity 0.5s var(--ease), border-color 0.3s var(--ease);
 }
-
 .testimonial-card.visible { opacity: 1; }
+.testimonial-card:hover { border-top-color: var(--bd-gold); }
 
-.testimonial-card::before {
-  content: '\201C';
-  font-family: var(--serif);
-  font-size: 4rem;
+/* Remove decorative quote — text from JS already contains quotes */
+.testimonial-card::before { display: none; }
+
+/* Stars: make emoji golden via text-shadow trick */
+.testimonial-card .stars,
+.stars.mb-2 {
+  color: transparent !important;
+  text-shadow: 0 0 0 var(--gold) !important;
+  font-size: 0.7rem !important;
+  letter-spacing: 3px !important;
+  margin-bottom: 16px !important;
+  display: block !important;
   line-height: 1;
-  color: var(--gold);
-  opacity: 0.2;
-  display: block;
-  margin-bottom: -8px;
 }
 
 .testimonial-text {
   font-size: 0.875rem;
   font-weight: 300;
   color: var(--tx-2);
-  line-height: 1.8;
+  line-height: 1.85;
   font-style: italic;
-  margin-bottom: 24px;
+  flex: 1;
+  margin-bottom: 0;
+}
+
+/* Admin reply box */
+.admin-reply-box {
+  border-radius: 0 !important;
+  border-left: 2px solid var(--bd-gold) !important;
+  background: var(--gold-bg) !important;
+  padding: 12px 16px !important;
+  margin: 16px 0 0 !important;
+}
+.admin-reply-box small,
+.admin-reply-box .small,
+.admin-reply-box p,
+.admin-reply-box .text-muted { color: var(--tx-2) !important; font-style: italic; font-size: 0.8rem !important; }
+
+/* Name + date footer */
+.testimonial-card > div:last-child {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--bd);
 }
 
 .testimonial-name {
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   font-weight: 500;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.14em;
   color: var(--tx);
   text-transform: uppercase;
+  display: block;
 }
 
 .testimonial-date {
-  font-size: 0.62rem;
-  color: var(--gold);
-  letter-spacing: 0.08em;
-  margin-top: 4px;
-  display: inline-block;
+  font-size: 0.6rem !important;
+  color: var(--gold) !important;
+  letter-spacing: 0.1em;
+  margin-top: 3px;
+  display: block;
 }
 
-/* Review form */
+/* ---- Review form ---- */
 #verified-review-box {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  max-width: unset;
+  margin: 0;
+}
+
+.k-review-form-wrap {
+  max-width: 680px;
+  margin: 48px auto 0;
+  padding: 0 var(--px);
+}
+.k-review-form-inner {
   background: var(--sf);
   border: 1px solid var(--bd);
-  padding: 40px !important;
-  max-width: 640px;
-  margin: 40px auto 0;
+  padding: 36px;
 }
-
-#verified-review-box h4 {
-  font-family: var(--serif);
-  font-size: 1.5rem;
-  font-weight: 300;
-  color: var(--tx);
-  margin-bottom: 8px;
+.k-review-form-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 28px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--bd);
 }
-
-#verified-review-box .text-muted { color: var(--tx-3) !important; }
 
 .k-form-label {
   font-size: 0.6rem;
@@ -865,9 +906,7 @@ body.light-mode .k-product-bar { background: rgba(250,250,249,0.92); }
   font-size: 0.875rem !important;
   font-weight: 300 !important;
 }
-
 .form-control::placeholder { color: var(--tx-3) !important; }
-
 .form-control:focus, .form-select:focus {
   border-color: var(--bd-gold) !important;
   box-shadow: none !important;
@@ -1852,24 +1891,6 @@ body.dark-mode { /* default is already dark */ }
 
 /* Products section */
 
-/* Review form */
-.k-review-form-wrap {
-  max-width: 680px;
-  margin: 48px auto 0;
-}
-.k-review-form-inner {
-  background: var(--sf);
-  border: 1px solid var(--bd);
-  padding: 36px;
-}
-.k-review-form-head {
-  display: flex;
-  align-items: flex-start;
-  gap: 16px;
-  margin-bottom: 28px;
-  padding-bottom: 20px;
-  border-bottom: 1px solid var(--bd);
-}
 .k-review-icon {
   font-size: 1rem;
   color: var(--gold);

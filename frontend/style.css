@@ -103,7 +103,14 @@ body.light-mode .k-nav { background: rgba(250,250,249,0.88); }
   max-width: var(--max-w);
   margin: 0 auto;
   width: 100%;
+  position: relative;
 }
+
+.k-nav.scrolled {
+  background: rgba(8,8,8,0.96);
+  border-bottom-color: var(--bd-2);
+}
+body.light-mode .k-nav.scrolled { background: rgba(250,250,249,0.96); }
 
 .k-logo {
   font-family: var(--serif);
@@ -129,6 +136,9 @@ body.light-mode .k-nav { background: rgba(250,250,249,0.88); }
   display: flex;
   align-items: center;
   gap: 32px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .k-nav-links a {
@@ -138,9 +148,21 @@ body.light-mode .k-nav { background: rgba(250,250,249,0.88); }
   text-transform: uppercase;
   color: var(--tx-2);
   transition: color 0.2s;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.k-nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px; left: 0;
+  width: 0; height: 1px;
+  background: var(--gold);
+  transition: width 0.3s var(--ease);
 }
 
 .k-nav-links a:hover { color: var(--tx); }
+.k-nav-links a:hover::after { width: 100%; }
 
 .k-nav-right {
   display: flex;
@@ -207,43 +229,22 @@ body.light-mode .k-nav { background: rgba(250,250,249,0.88); }
   transition: all 0.3s var(--ease);
 }
 
-/* Mobile nav overlay */
-.k-mobile-nav {
-  display: none;
-  background: var(--bg-2);
-  border-bottom: 1px solid var(--bd);
-}
-
-.k-mobile-nav.open { display: block; }
-
-.k-mobile-link {
-  display: block;
-  padding: 14px 0;
-  font-size: 0.85rem;
-  font-weight: 300;
-  color: var(--tx-2);
-  letter-spacing: 0.08em;
-  border-bottom: 1px solid var(--bd);
-  transition: color 0.2s;
-}
-
-.k-mobile-link:last-child { border-bottom: none; }
-.k-mobile-link:hover { color: var(--gold); }
-
 /* ── 5. HERO ─────────────────────────────────────────────── */
 .k-hero {
-  min-height: 100dvh;
+  height: 100dvh;
+  min-height: 600px;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  padding-top: var(--nav-h);
+  overflow: hidden;
 }
 
 .k-hero-left {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: clamp(48px,6vw,96px) var(--px) clamp(48px,6vw,96px) var(--px);
+  padding: calc(var(--nav-h) + clamp(40px,5vw,80px)) var(--px) clamp(40px,5vw,80px) var(--px);
   position: relative;
+  z-index: 1;
 }
 
 .k-hero-left::after {
@@ -1586,8 +1587,19 @@ body.dark-mode { /* default is already dark */ }
   text-transform: uppercase;
   color: var(--tx-2);
   transition: color 0.2s;
+  position: relative;
+  padding-bottom: 2px;
+}
+.k-nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px; left: 0;
+  width: 0; height: 1px;
+  background: var(--gold);
+  transition: width 0.3s var(--ease);
 }
 .k-nav-link:hover { color: var(--tx); }
+.k-nav-link:hover::after { width: 100%; }
 
 /* Cart badge alias */
 .k-cart-badge {
@@ -1716,8 +1728,8 @@ body.dark-mode { /* default is already dark */ }
 
 /* Hero image wrap */
 .k-hero-img-wrap {
-  position: relative;
-  width: 100%; height: 100%;
+  position: absolute;
+  inset: 0;
 }
 
 .k-hero-badge-num {
@@ -2296,11 +2308,25 @@ body.light-mode .k-map { filter: none; opacity: 1; }
 }
 
 @media (max-width: 860px) {
-  .k-hero { grid-template-columns: 1fr; min-height: auto; }
-  .k-hero-left { padding: 72px var(--px) 48px; }
+  .k-hero {
+    height: auto;
+    min-height: 100dvh;
+    grid-template-columns: 1fr;
+    overflow: visible;
+  }
+  .k-hero-left {
+    padding: calc(var(--nav-h) + 48px) var(--px) 48px;
+    min-height: 0;
+  }
   .k-hero-left::after { display: none; }
-  .k-hero-right { min-height: 55vw; max-height: 60vw; }
-  .k-nav-links { display: none; }
+  .k-hero-right {
+    height: 58vw;
+    min-height: 280px;
+    max-height: 480px;
+    position: relative;
+    overflow: hidden;
+  }
+  .k-nav-links { display: none !important; }
   .k-nav-toggle { display: flex; }
   .k-hamburger { display: flex; }
   #product-grid-container { grid-template-columns: repeat(2, 1fr); }

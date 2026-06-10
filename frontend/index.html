@@ -555,6 +555,34 @@
 </footer>
 
 <!-- ============================================================
+     MINI CART PROGRESS BAR
+     ============================================================ -->
+<div id="k-mini-cart" class="k-mini-cart" role="complementary" aria-label="Warenkorb Status">
+  <div class="k-mini-cart-inner">
+    <!-- Left: total -->
+    <div class="k-mini-cart-left">
+      <div class="k-mini-cart-icon"><i class="fas fa-bag-shopping"></i></div>
+      <div class="k-mini-cart-info">
+        <div class="k-mini-cart-label">Warenkorb</div>
+        <div class="k-mini-cart-total" id="mini-cart-total">0,00 €</div>
+      </div>
+    </div>
+    <!-- Center: shipping progress -->
+    <div class="k-mini-cart-center">
+      <div class="k-mini-cart-msg" id="mini-cart-msg"></div>
+      <div class="k-mini-cart-track">
+        <div class="k-mini-cart-fill" id="mini-cart-fill"></div>
+      </div>
+    </div>
+    <!-- Right: CTA -->
+    <a href="/payment.html" class="k-mini-cart-cta">
+      Zur Kasse
+      <i class="fas fa-arrow-right"></i>
+    </a>
+  </div>
+</div>
+
+<!-- ============================================================
      FLOATING ELEMENTS
      ============================================================ -->
 <button id="luxe-back-to-top" class="k-back-top" aria-label="Nach oben">
@@ -740,12 +768,14 @@
     if(drawer){ drawer.classList.add('open'); }
     if(overlay){ overlay.classList.add('open'); }
     document.body.style.overflow = 'hidden';
+    document.body.classList.add('k-cart-open');
     if(typeof renderCartDrawer === 'function') renderCartDrawer();
   }
   function closeCart(){
     if(drawer){ drawer.classList.remove('open'); }
     if(overlay){ overlay.classList.remove('open'); }
     document.body.style.overflow = '';
+    document.body.classList.remove('k-cart-open');
   }
 
   if(openBtn)  openBtn.addEventListener('click', openCart);
@@ -998,6 +1028,83 @@
   document.querySelectorAll('.k-reveal').forEach(function(el){
     revealObs.observe(el);
   });
+})();
+
+/* ---- Mini Cart Progress Bar ---- */
+(function(){
+  var FREE = 49;
+  var fmt  = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' });
+  var bar  = document.getElementById('k-mini-cart');
+  if(!bar) return;
+
+  function getProds(){
+    try{ return (typeof products !== 'undefined' && products.length) ? products : []; }
+    catch(e){ return []; }
+  }
+
+  function calcTotal(){
+    var cart  = JSON.parse(localStorage.getItem('luxeCartArray') || '[]');
+    var prods = getProds();
+    var total = 0;
+    cart.forEach(function(item){
+      var p = prods.find(function(x){ return x.id === item.id; });
+      if(p) total += p.price * (item.qty || 1);
+    });
+    return { total: total, count: cart.length };
+  }
+
+  function updateMiniCart(){
+    var cart = JSON.parse(localStorage.getItem('luxeCartArray') || '[]');
+    var data = calcTotal();
+
+    if(!cart.length){
+      bar.classList.remove('active');
+      document.body.classList.remove('k-mini-active');
+      return;
+    }
+
+    bar.classList.add('active');
+    document.body.classList.add('k-mini-active');
+
+    var totalEl = document.getElementById('mini-cart-total');
+    var msgEl   = document.getElementById('mini-cart-msg');
+    var fillEl  = document.getElementById('mini-cart-fill');
+
+    if(totalEl) totalEl.textContent = fmt.format(data.total);
+
+    var remaining = Math.max(0, FREE - data.total);
+    var pct       = Math.min(100, (data.total / FREE) * 100);
+
+    if(msgEl){
+      if(remaining <= 0){
+        msgEl.innerHTML = '<i class="fas fa-check"></i> Kostenloser Versand freigeschaltet!';
+        msgEl.className = 'k-mini-cart-msg is-free';
+      } else {
+        msgEl.innerHTML = 'Kostenloser Versand in nur <strong>' + fmt.format(remaining) + '</strong>';
+        msgEl.className = 'k-mini-cart-msg';
+      }
+    }
+
+    if(fillEl){
+      fillEl.style.width = pct + '%';
+      fillEl.className   = 'k-mini-cart-fill' + (remaining <= 0 ? ' is-free' : '');
+    }
+  }
+
+  /* Cross-tab sync */
+  window.addEventListener('storage', function(e){
+    if(e.key === 'luxeCartArray') setTimeout(updateMiniCart, 60);
+  });
+
+  /* Same-tab: patch localStorage.setItem */
+  var _origSet = localStorage.setItem.bind(localStorage);
+  localStorage.setItem = function(k, v){
+    _origSet(k, v);
+    if(k === 'luxeCartArray') setTimeout(updateMiniCart, 80);
+  };
+
+  /* Initial state (after main.js loads products) */
+  setTimeout(updateMiniCart, 400);
 })();
 
 /* ---- Cookie banner ---- */

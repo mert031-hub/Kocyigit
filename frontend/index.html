@@ -32,6 +32,13 @@
 </head>
 <body>
 
+<!-- Scroll progress bar -->
+<div id="k-scroll-bar"></div>
+
+<!-- Custom cursor (desktop only) -->
+<div id="k-cursor-ring"></div>
+<div id="k-cursor-dot"></div>
+
 <!-- ============================================================
      PRELOADER
      ============================================================ -->
@@ -116,6 +123,7 @@
      HERO
      ============================================================ -->
 <header class="k-hero" id="k-hero">
+  <canvas id="k-particles" aria-hidden="true"></canvas>
   <div class="k-hero-left">
     <p class="k-hero-eyebrow">Betrieb &amp; Handel · Seit 2020</p>
     <h1 class="k-hero-title">
@@ -245,7 +253,15 @@
      PRODUCTS
      ============================================================ -->
 <main id="produkte" class="k-products-section">
-  <div id="product-grid-container" class="row g-0"></div>
+  <!-- Skeleton cards shown while main.js fetches products -->
+  <div id="product-grid-container" class="row g-0">
+    <div class="col-12 col-md-6 col-lg-4 p-2 k-skel-col"><div class="k-skeleton-card"><div class="k-skel-img"></div><div class="k-skel-body"><div class="k-skel-line w80"></div><div class="k-skel-line w50"></div></div></div></div>
+    <div class="col-12 col-md-6 col-lg-4 p-2 k-skel-col"><div class="k-skeleton-card"><div class="k-skel-img"></div><div class="k-skel-body"><div class="k-skel-line w80"></div><div class="k-skel-line w50"></div></div></div></div>
+    <div class="col-12 col-md-6 col-lg-4 p-2 k-skel-col"><div class="k-skeleton-card"><div class="k-skel-img"></div><div class="k-skel-body"><div class="k-skel-line w80"></div><div class="k-skel-line w50"></div></div></div></div>
+    <div class="col-12 col-md-6 col-lg-4 p-2 k-skel-col"><div class="k-skeleton-card"><div class="k-skel-img"></div><div class="k-skel-body"><div class="k-skel-line w80"></div><div class="k-skel-line w50"></div></div></div></div>
+    <div class="col-12 col-md-6 col-lg-4 p-2 k-skel-col"><div class="k-skeleton-card"><div class="k-skel-img"></div><div class="k-skel-body"><div class="k-skel-line w80"></div><div class="k-skel-line w50"></div></div></div></div>
+    <div class="col-12 col-md-6 col-lg-4 p-2 k-skel-col"><div class="k-skeleton-card"><div class="k-skel-img"></div><div class="k-skel-body"><div class="k-skel-line w80"></div><div class="k-skel-line w50"></div></div></div></div>
+  </div>
   <div id="show-more-products-wrapper" style="display:none;text-align:center;padding:48px 0">
     <button id="showMoreProductsBtn" class="k-btn k-btn-more">
       <i class="fas fa-chevron-down"></i>
@@ -260,7 +276,7 @@
 <section id="testimonials" class="k-section">
   <div class="k-section-head k-reveal" style="max-width:var(--max-w);margin:0 auto">
     <p class="k-eyebrow">Kundenstimmen</p>
-    <h2 class="k-section-title">Was unsere Kunden sagen</h2>
+    <h2 class="k-section-title" data-word-reveal>Was unsere Kunden sagen</h2>
     <p class="k-section-sub">Echte Bewertungen von echten Menschen.</p>
   </div>
 
@@ -390,7 +406,7 @@
 <section id="besuch" class="k-section">
   <div class="k-section-head k-reveal" style="max-width:var(--max-w);margin:0 auto 40px">
     <p class="k-eyebrow">Standort</p>
-    <h2 class="k-section-title">Besuche uns</h2>
+    <h2 class="k-section-title" data-word-reveal>Besuche uns</h2>
   </div>
   <div class="k-visit-grid k-reveal">
     <div class="k-map-wrap">
@@ -1170,6 +1186,179 @@
 
 <script src="main.js"></script>
 <script src="cartSync.js"></script>
+
+<!-- ============================================================
+     ANIMATION ENGINE
+     ============================================================ -->
+<script>
+(function(){
+'use strict';
+
+/* ── A1: SCROLL PROGRESS BAR ─────────────────────────────── */
+var scrollBar = document.getElementById('k-scroll-bar');
+function updateScrollBar(){
+  var doc   = document.documentElement;
+  var total = doc.scrollHeight - doc.clientHeight;
+  var pct   = total > 0 ? (window.scrollY / total) * 100 : 0;
+  scrollBar.style.width = pct + '%';
+}
+window.addEventListener('scroll', updateScrollBar, { passive: true });
+
+/* ── A2: CUSTOM CURSOR ───────────────────────────────────── */
+var ring = document.getElementById('k-cursor-ring');
+var dot  = document.getElementById('k-cursor-dot');
+var hasTouch = window.matchMedia('(hover: none)').matches;
+
+if (!hasTouch) {
+  document.documentElement.classList.add('k-custom-cursor');
+  var mx = 0, my = 0, rx = 0, ry = 0;
+  var ringScale = 1;
+
+  document.addEventListener('mousemove', function(e){
+    mx = e.clientX; my = e.clientY;
+    dot.style.transform  = 'translate(' + (mx - 3) + 'px,' + (my - 3) + 'px)';
+  });
+
+  (function animRing(){
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    ring.style.transform = 'translate(' + (rx - 18) + 'px,' + (ry - 18) + 'px) scale(' + ringScale + ')';
+    requestAnimationFrame(animRing);
+  })();
+
+  /* Scale ring on interactive elements */
+  var hoverEls = 'a, button, .product-card, .k-btn, [role="button"], input, .k-nav-links a';
+  document.querySelectorAll(hoverEls).forEach(function(el){
+    el.addEventListener('mouseenter', function(){ ringScale = 1.6; ring.classList.add('k-cursor-hover'); });
+    el.addEventListener('mouseleave', function(){ ringScale = 1;   ring.classList.remove('k-cursor-hover'); });
+  });
+
+  /* Delegate for dynamic product cards */
+  document.getElementById('product-grid-container').addEventListener('mouseenter', function(){
+    ringScale = 1.6; ring.classList.add('k-cursor-hover');
+  }, true);
+  document.getElementById('product-grid-container').addEventListener('mouseleave', function(){
+    ringScale = 1; ring.classList.remove('k-cursor-hover');
+  }, true);
+}
+
+/* ── B1: 3D CARD TILT ────────────────────────────────────── */
+var gridEl = document.getElementById('product-grid-container');
+var activeTiltCard = null;
+
+gridEl.addEventListener('mousemove', function(e){
+  var card = e.target.closest('.product-card');
+  if (!card) return;
+  var rect   = card.getBoundingClientRect();
+  var cx     = rect.left + rect.width  / 2;
+  var cy     = rect.top  + rect.height / 2;
+  var dx     = (e.clientX - cx) / (rect.width  / 2);
+  var dy     = (e.clientY - cy) / (rect.height / 2);
+  var tiltX  = (-dy * 6).toFixed(2);
+  var tiltY  = ( dx * 6).toFixed(2);
+  card.style.transform = 'translateY(-6px) perspective(900px) rotateX(' + tiltX + 'deg) rotateY(' + tiltY + 'deg)';
+  card.style.transition = 'transform 0.08s linear, border-color 0.22s, box-shadow 0.22s';
+  activeTiltCard = card;
+});
+
+gridEl.addEventListener('mouseleave', function(){
+  if (activeTiltCard) {
+    activeTiltCard.style.transform  = '';
+    activeTiltCard.style.transition = '';
+    activeTiltCard = null;
+  }
+});
+
+gridEl.addEventListener('mouseover', function(e){
+  var card = e.target.closest('.product-card');
+  if (activeTiltCard && activeTiltCard !== card) {
+    activeTiltCard.style.transform  = '';
+    activeTiltCard.style.transition = '';
+  }
+});
+
+/* ── C1: HERO PARALLAX ───────────────────────────────────── */
+var heroImg = document.querySelector('.k-hero-img');
+if (heroImg) {
+  window.addEventListener('scroll', function(){
+    var sy = window.scrollY;
+    if (sy < 900) {
+      heroImg.style.transform = 'translateY(' + (sy * 0.22) + 'px) scale(1.05)';
+    }
+  }, { passive: true });
+}
+
+/* ── C2: SECTION HEADING WORD REVEAL ─────────────────────── */
+document.querySelectorAll('[data-word-reveal]').forEach(function(el){
+  var words = el.textContent.trim().split(/\s+/);
+  el.innerHTML = words.map(function(w){
+    return '<span class="k-wr-outer"><span class="k-wr-inner">' + w + '</span></span>';
+  }).join(' ');
+  el.classList.add('k-wr-ready');
+
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if (entry.isIntersecting) {
+        el.querySelectorAll('.k-wr-inner').forEach(function(span, i){
+          span.style.transitionDelay = (i * 80) + 'ms';
+          span.classList.add('k-wr-in');
+        });
+        obs.unobserve(el);
+      }
+    });
+  }, { threshold: 0.3 });
+  obs.observe(el);
+});
+
+/* ── C3: FLOATING PARTICLES ──────────────────────────────── */
+var canvas = document.getElementById('k-particles');
+if (canvas) {
+  var ctx  = canvas.getContext('2d');
+  var hero = document.getElementById('k-hero');
+  var particles = [];
+  var NUM = 38;
+
+  function resizeCanvas(){
+    canvas.width  = hero.offsetWidth;
+    canvas.height = hero.offsetHeight;
+  }
+  resizeCanvas();
+  window.addEventListener('resize', resizeCanvas, { passive: true });
+
+  for (var i = 0; i < NUM; i++) {
+    particles.push({
+      x:    Math.random() * canvas.width,
+      y:    Math.random() * canvas.height,
+      r:    Math.random() * 1.6 + 0.4,
+      vy:   -(Math.random() * 0.35 + 0.1),
+      vx:   (Math.random() - 0.5) * 0.18,
+      op:   Math.random() * 0.22 + 0.04,
+      gold: Math.random() > 0.55
+    });
+  }
+
+  function drawParticles(){
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(function(p){
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = p.gold
+        ? 'rgba(201,169,110,' + p.op + ')'
+        : 'rgba(255,255,255,' + p.op + ')';
+      ctx.fill();
+      p.x += p.vx;
+      p.y += p.vy;
+      if (p.y < -4)            p.y = canvas.height + 4;
+      if (p.x < -4)            p.x = canvas.width  + 4;
+      if (p.x > canvas.width + 4) p.x = -4;
+    });
+    requestAnimationFrame(drawParticles);
+  }
+  drawParticles();
+}
+
+})();
+</script>
 
 </body>
 </html>

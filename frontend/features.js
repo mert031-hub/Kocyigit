@@ -130,16 +130,8 @@
 
   updateWishlistUI();
 
-  /* MutationObserver: inject wish buttons whenever grid re-renders */
+  /* gridEl — used by the consolidated MutationObserver at end of file */
   var gridEl = qs('#product-grid-container');
-  if (gridEl) {
-    new MutationObserver(function () {
-      injectWishBtns();
-      updateWishlistUI();
-      injectStockBadges();
-      trackRecentlyViewed();
-    }).observe(gridEl, { childList: true, subtree: true });
-  }
 
   /* ================================================================
      2. RECENTLY VIEWED
@@ -929,7 +921,8 @@
       btn.setAttribute('aria-label', 'Schnell in den Warenkorb');
       btn.innerHTML = '<i class="fas fa-bag-shopping"></i>';
       btn.addEventListener('click', function (e) { e.stopPropagation(); quickAdd(pid); });
-      card.querySelector('.price-container').appendChild(btn);
+      var priceBox = card.querySelector('.price-container') || card.querySelector('.product-info');
+      if (priceBox) priceBox.appendChild(btn);
     });
   }
 
@@ -1283,7 +1276,7 @@
 
   function cartFlyFrom(srcEl) {
     if (!flyEl || !srcEl) return;
-    var cartIcon = qs('#cart-pill') || qs('[data-bs-target="#floatingCart"]') || qs('.k-nav-cart');
+    var cartIcon = qs('#cart-open-btn') || qs('[data-bs-target="#floatingCart"]') || qs('.k-cart-pill');
     if (!cartIcon) return;
     var from = srcEl.getBoundingClientRect();
     var to   = cartIcon.getBoundingClientRect();
@@ -1491,11 +1484,11 @@
     if (e.key === 'Escape') { closeShortcuts(); return; }
     /* shortcut: W → wishlist, C → cart */
     if (e.key === 'w' || e.key === 'W') {
-      var wBtn = qs('#k-wishlist-btn') || qs('.k-wishlist-toggle');
+      var wBtn = qs('#wishlist-btn') || qs('.k-wishlist-nav');
       if (wBtn) wBtn.click();
     }
     if (e.key === 'c' || e.key === 'C') {
-      var cartBtn = qs('#cart-pill') || qs('[data-bs-target="#floatingCart"]');
+      var cartBtn = qs('#cart-open-btn') || qs('[data-bs-target="#floatingCart"]');
       if (cartBtn) cartBtn.click();
     }
   });

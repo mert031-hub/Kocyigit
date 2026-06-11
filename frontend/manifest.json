@@ -5,8 +5,8 @@
   "start_url": "/",
   "display": "standalone",
   "orientation": "portrait-primary",
-  "background_color": "#080808",
-  "theme_color": "#c8a66a",
+  "background_color": "#0d0b09",
+  "theme_color": "#dab064",
   "icons": [
     {
       "src": "https://via.placeholder.com/192x192/080808/c8a66a?text=K",

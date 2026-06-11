@@ -199,16 +199,35 @@
   renderRV();
 
   /* ================================================================
-     3. LIVE STOCK BADGES
+     3. LIVE STOCK BADGES  +  window.products bootstrap
      ================================================================ */
   var stockData = {};
 
   fetch(API_URL + '/products')
     .then(function (r) { return r.json(); })
     .then(function (data) {
-      (Array.isArray(data) ? data : (data.products || [])).forEach(function (p) {
-        stockData[p._id] = p.stock || 0;
-      });
+      var raw = Array.isArray(data) ? data : (data.products || []);
+      /* ── Populate window.products so all features work ── */
+      if (!window.products || !window.products.length) {
+        window.products = raw
+          .filter(function (p) { return p.isDeleted !== true; })
+          .map(function (p) {
+            return {
+              id:          p._id,
+              name:        p.name        || '',
+              description: p.description || p.desc || '',
+              price:       p.price       || 0,
+              oldPrice:    p.oldPrice    || p.originalPrice || 0,
+              img:         p.img         || p.image         || '',
+              image:       p.img         || p.image         || '',
+              stock:       p.stock       || 0,
+              tag:         p.tag         || ''
+            };
+          });
+        document.dispatchEvent(new CustomEvent('productsLoaded'));
+      }
+      /* ── Stock data map ── */
+      raw.forEach(function (p) { stockData[p._id] = p.stock || 0; });
       injectStockBadges();
     })
     .catch(function () {});
@@ -2178,8 +2197,27 @@
   }
 
   /* ================================================================
-     X2. FONT SIZE SWITCHER
+     X2. FONT SIZE SWITCHER  +  X3. HIGH CONTRAST  (accessibility panel)
      ================================================================ */
+  var a11yBtn   = qs('#k-a11y-btn');
+  var a11yPanel = qs('#k-a11y-panel');
+
+  function toggleA11yPanel() {
+    if (!a11yPanel) return;
+    var open = a11yPanel.style.display !== 'none';
+    a11yPanel.style.display = open ? 'none' : 'flex';
+    if (a11yBtn) a11yBtn.classList.toggle('k-icon-btn-active', !open);
+  }
+
+  if (a11yBtn) a11yBtn.addEventListener('click', function (e) { e.stopPropagation(); toggleA11yPanel(); });
+
+  document.addEventListener('click', function (e) {
+    if (a11yPanel && a11yPanel.style.display !== 'none' && !a11yPanel.contains(e.target) && e.target !== a11yBtn) {
+      a11yPanel.style.display = 'none';
+      if (a11yBtn) a11yBtn.classList.remove('k-icon-btn-active');
+    }
+  });
+
   var FS_KEY     = 'k_font_size';
   var FS_CLASSES = { normal: '', large: 'k-fs-large', xlarge: 'k-fs-xlarge' };
   var fsBtns     = qsa('.k-fs-btn');
@@ -2197,16 +2235,16 @@
 
   applyFontSize(localStorage.getItem(FS_KEY) || 'normal');
 
-  /* ================================================================
-     X3. HIGH CONTRAST MODE
-     ================================================================ */
-  var HC_KEY    = 'k_high_contrast';
-  var hcBtn     = qs('#k-contrast-btn');
+  var HC_KEY = 'k_high_contrast';
+  var hcBtn  = qs('#k-contrast-btn');
 
   function applyHighContrast(on) {
     document.body.classList.toggle('k-high-contrast', on);
     localStorage.setItem(HC_KEY, on ? '1' : '0');
-    if (hcBtn) hcBtn.setAttribute('aria-pressed', String(on));
+    if (hcBtn) {
+      hcBtn.setAttribute('aria-pressed', String(on));
+      hcBtn.classList.toggle('k-contrast-active', on);
+    }
   }
 
   if (hcBtn) {

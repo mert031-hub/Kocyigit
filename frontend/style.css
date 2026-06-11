@@ -5420,38 +5420,90 @@ textarea:focus-visible {
 }
 
 /* ── X2. Font size switcher ──────────────────────────────── */
+/* ── X2+X3. Accessibility panel ─────────────────────────── */
+.k-icon-btn-active { color: var(--gold) !important; }
+
+#k-a11y-panel {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  z-index: 1600;
+  background: #111;
+  border: 1px solid rgba(200,166,106,0.22);
+  border-radius: 6px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.65);
+  padding: 14px 16px;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 180px;
+}
+/* parent needs position:relative */
+.k-nav-right { position: relative; }
+
+.k-a11y-label {
+  font-family: var(--sans);
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--tx-2);
+  margin: 0 0 4px;
+}
+
 .k-font-switcher {
   display: flex;
   align-items: center;
-  gap: 2px;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 4px;
-  padding: 2px 3px;
+  gap: 4px;
 }
 .k-fs-btn {
-  background: none;
-  border: none;
+  flex: 1;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
   color: var(--tx-2);
   cursor: pointer;
   font-family: var(--sans);
-  font-size: 0.58rem;
+  font-size: 0.65rem;
   font-weight: 600;
-  padding: 3px 5px;
-  border-radius: 3px;
-  transition: background 0.15s, color 0.15s;
+  padding: 6px 4px;
+  border-radius: 4px;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
   white-space: nowrap;
   letter-spacing: 0.02em;
+  text-align: center;
 }
-.k-fs-btn:hover { color: var(--tx-1); }
+.k-fs-btn:hover { color: var(--tx-1); background: rgba(255,255,255,0.08); }
 .k-fs-btn.k-fs-active {
   background: rgba(200,166,106,0.15);
+  border-color: rgba(200,166,106,0.3);
   color: var(--gold);
 }
 /* font size body classes */
 body.k-fs-large  { font-size: 105%; }
 body.k-fs-xlarge { font-size: 112%; }
-@media (max-width: 600px) { .k-font-switcher { display: none; } }
+
+.k-contrast-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 4px;
+  color: var(--tx-2);
+  font-family: var(--sans);
+  font-size: 0.65rem;
+  font-weight: 500;
+  padding: 7px 10px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  letter-spacing: 0.04em;
+}
+.k-contrast-toggle:hover { background: rgba(255,255,255,0.08); color: var(--tx-1); }
+.k-contrast-toggle.k-contrast-active {
+  background: rgba(200,166,106,0.12);
+  border-color: rgba(200,166,106,0.3);
+  color: var(--gold);
+}
 
 /* ── X3. High contrast mode ──────────────────────────────── */
 body.k-high-contrast {

@@ -104,17 +104,22 @@
         <i id="theme-icon" class="fas fa-moon"></i>
       </button>
 
-      <!-- X2: Font size switcher -->
-      <div class="k-font-switcher" id="k-font-switcher" aria-label="Schriftgröße">
-        <button class="k-fs-btn" data-size="normal" aria-label="Normal">A</button>
-        <button class="k-fs-btn" data-size="large"  aria-label="Groß">A+</button>
-        <button class="k-fs-btn" data-size="xlarge" aria-label="Sehr groß">A++</button>
-      </div>
-
-      <!-- X3: High contrast toggle -->
-      <button id="k-contrast-btn" class="k-icon-btn" aria-label="Hoher Kontrast" title="Hoher Kontrast">
-        <i class="fas fa-circle-half-stroke"></i>
+      <!-- X2+X3: Accessibility panel toggle -->
+      <button id="k-a11y-btn" class="k-icon-btn" aria-label="Barrierefreiheit" title="Barrierefreiheit">
+        <i class="fas fa-universal-access"></i>
       </button>
+      <!-- Accessibility popover -->
+      <div id="k-a11y-panel" class="k-a11y-panel" style="display:none" role="dialog" aria-label="Barrierefreiheit">
+        <p class="k-a11y-label">Schriftgröße</p>
+        <div class="k-font-switcher" id="k-font-switcher" aria-label="Schriftgröße">
+          <button class="k-fs-btn" data-size="normal" aria-label="Normal">A</button>
+          <button class="k-fs-btn" data-size="large"  aria-label="Groß">A+</button>
+          <button class="k-fs-btn" data-size="xlarge" aria-label="Sehr groß">A++</button>
+        </div>
+        <button id="k-contrast-btn" class="k-contrast-toggle" aria-label="Hoher Kontrast">
+          <i class="fas fa-circle-half-stroke"></i> Hoher Kontrast
+        </button>
+      </div>
 
       <button id="wishlist-btn" class="k-icon-btn k-wishlist-nav" aria-label="Wunschliste">
         <i class="far fa-heart"></i>

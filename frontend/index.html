@@ -36,6 +36,18 @@
 </head>
 <body>
 
+<!-- Announcement bar -->
+<div id="k-ann-bar" class="k-ann-bar">
+  <div class="k-ann-inner">
+    <span><i class="fas fa-truck-fast"></i> Kostenloser Versand ab <strong id="k-ann-threshold">49 €</strong></span>
+    <span class="k-ann-sep">·</span>
+    <span><i class="fas fa-shield-halved"></i> SSL-verschlüsselt &amp; DSGVO-konform</span>
+    <span class="k-ann-sep">·</span>
+    <span><i class="fas fa-rotate-left"></i> 14 Tage Widerruf</span>
+  </div>
+  <button id="k-ann-close" class="k-ann-close" aria-label="Schließen"><i class="fas fa-xmark"></i></button>
+</div>
+
 <!-- Scroll progress bar -->
 <div id="k-scroll-bar"></div>
 
@@ -242,7 +254,11 @@
         placeholder="Produkte suchen…"
         autocomplete="off"
         onkeyup="filterProducts()"
-        aria-label="Produkte suchen">
+        aria-label="Produkte suchen"
+        role="combobox"
+        aria-expanded="false"
+        aria-controls="k-ac-dropdown">
+      <div id="k-ac-dropdown" class="k-ac-dropdown" role="listbox" aria-label="Suchvorschläge"></div>
     </div>
 
     <!-- Right: decorative view toggle -->
@@ -760,6 +776,22 @@
 <!-- Dark mode ripple -->
 <div id="k-dm-ripple"></div>
 
+<!-- Confetti canvas -->
+<canvas id="k-confetti-canvas" aria-hidden="true"></canvas>
+
+<!-- Abandoned cart banner -->
+<div id="k-cart-recovery" class="k-cart-recovery" style="display:none" role="alert">
+  <div class="k-cr-inner">
+    <i class="fas fa-bag-shopping k-cr-icon"></i>
+    <div class="k-cr-text">
+      <strong id="k-cr-title">Du hast Artikel in deinem Warenkorb</strong>
+      <span id="k-cr-sub">Schließe deine Bestellung ab</span>
+    </div>
+    <button id="k-cr-open" class="k-cr-btn">Warenkorb öffnen</button>
+    <button id="k-cr-close" class="k-cr-dismiss" aria-label="Schließen"><i class="fas fa-xmark"></i></button>
+  </div>
+</div>
+
 <!-- Compare bar -->
 <div id="k-compare-bar" class="k-compare-bar" style="display:none">
   <div class="k-compare-inner">
@@ -812,6 +844,12 @@
     <div class="modal-content k-modal">
       <button type="button" class="k-modal-close" data-bs-dismiss="modal" aria-label="Schließen">
         <i class="fas fa-xmark"></i>
+      </button>
+      <button id="k-modal-prev" class="k-modal-nav k-modal-nav-prev" aria-label="Vorheriges Produkt">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <button id="k-modal-next" class="k-modal-nav k-modal-nav-next" aria-label="Nächstes Produkt">
+        <i class="fas fa-chevron-right"></i>
       </button>
       <div class="k-modal-body">
         <div class="k-modal-img-col">

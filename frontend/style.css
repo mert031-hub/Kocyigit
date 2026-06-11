@@ -4586,3 +4586,247 @@ body.k-has-compare { padding-bottom: 56px; }
   .k-range         { width: 55px; }
   .k-filter-count  { display: none; }
 }
+
+/* ════════════════════════════════════════════════════════════
+   N-SERIES  —  Batch N1-N6
+   ════════════════════════════════════════════════════════════ */
+
+/* ── N1. Announcement bar ────────────────────────────────── */
+#k-ann-bar {
+  position: relative;
+  z-index: 1100;
+  background: linear-gradient(90deg, #1a1208 0%, #2a1e08 50%, #1a1208 100%);
+  border-bottom: 1px solid rgba(200,166,106,0.22);
+  overflow: hidden;
+}
+.k-ann-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 9px 44px;
+  font-family: var(--sans);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold);
+  text-align: center;
+}
+.k-ann-sep {
+  color: rgba(200,166,106,0.4);
+  font-size: 0.55rem;
+}
+.k-ann-close {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: rgba(200,166,106,0.55);
+  cursor: pointer;
+  padding: 4px 6px;
+  font-size: 0.75rem;
+  line-height: 1;
+  transition: color 0.2s;
+}
+.k-ann-close:hover { color: var(--gold); }
+.k-ann-hiding {
+  animation: k-ann-slide-up 0.35s var(--ease) forwards;
+}
+@keyframes k-ann-slide-up {
+  to { height: 0; opacity: 0; padding: 0; overflow: hidden; }
+}
+
+/* ── N2. Search autocomplete ─────────────────────────────── */
+.k-ac-dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  background: #111;
+  border: 1px solid rgba(200,166,106,0.22);
+  border-radius: 4px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.6);
+  z-index: 2000;
+  overflow: hidden;
+  max-height: 320px;
+  overflow-y: auto;
+}
+.k-ac-dropdown:empty { display: none; }
+.k-ac-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  cursor: pointer;
+  transition: background 0.15s;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.k-ac-item:last-child { border-bottom: none; }
+.k-ac-item:hover,
+.k-ac-item.k-ac-focused {
+  background: rgba(200,166,106,0.08);
+}
+.k-ac-img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 3px;
+  flex-shrink: 0;
+  background: #1a1a1a;
+}
+.k-ac-info {
+  flex: 1;
+  min-width: 0;
+}
+.k-ac-name {
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  color: var(--tx-1);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.k-ac-price {
+  font-family: var(--serif);
+  font-size: 0.7rem;
+  color: var(--gold);
+  margin-top: 2px;
+}
+
+/* ── N3. Modal keyboard navigation ──────────────────────── */
+.k-modal-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  background: rgba(8,8,8,0.7);
+  border: 1px solid rgba(200,166,106,0.2);
+  color: var(--gold);
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, transform 0.2s;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  padding: 0;
+}
+.k-modal-nav:hover {
+  background: rgba(200,166,106,0.15);
+  border-color: rgba(200,166,106,0.5);
+  transform: translateY(-50%) scale(1.08);
+}
+.k-modal-nav-prev { left: 8px; }
+.k-modal-nav-next { right: 8px; }
+@media (max-width: 576px) {
+  .k-modal-nav { width: 30px; height: 30px; font-size: 0.7rem; }
+  .k-modal-nav-prev { left: 4px; }
+  .k-modal-nav-next { right: 4px; }
+}
+
+/* ── N4. Confetti canvas ─────────────────────────────────── */
+#k-confetti-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* ── N6. Abandoned cart recovery banner ──────────────────── */
+#k-cart-recovery {
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  z-index: 1800;
+  pointer-events: none;
+}
+.k-cart-recovery {
+  pointer-events: all;
+  position: relative;
+  background: #111;
+  border: 1px solid rgba(200,166,106,0.3);
+  border-radius: 8px;
+  box-shadow: 0 16px 48px rgba(0,0,0,0.6);
+  padding: 16px 20px;
+  max-width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  opacity: 0;
+  transform: translateY(16px) scale(0.96);
+  transition: opacity 0.4s var(--ease), transform 0.4s var(--ease);
+}
+.k-cart-recovery.k-cr-in {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+.k-cr-inner {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+.k-cr-icon {
+  font-size: 1.4rem;
+  color: var(--gold);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.k-cr-text {
+  flex: 1;
+}
+.k-cr-text strong {
+  display: block;
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--tx-1);
+  margin-bottom: 3px;
+}
+.k-cr-text p {
+  font-family: var(--sans);
+  font-size: 0.65rem;
+  color: var(--tx-2);
+  margin: 0;
+  line-height: 1.5;
+}
+.k-cr-btn {
+  display: block;
+  width: 100%;
+  background: var(--gold);
+  color: #080808;
+  border: none;
+  border-radius: 3px;
+  font-family: var(--sans);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 9px 0;
+  cursor: pointer;
+  transition: background 0.2s;
+  text-align: center;
+}
+.k-cr-btn:hover { background: var(--gold-h); }
+.k-cr-dismiss {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  background: none;
+  border: none;
+  color: var(--tx-2);
+  cursor: pointer;
+  font-size: 0.75rem;
+  padding: 2px 4px;
+  line-height: 1;
+  transition: color 0.2s;
+}
+.k-cr-dismiss:hover { color: var(--tx-1); }

@@ -36,6 +36,12 @@
 </head>
 <body>
 
+<!-- A1: Skip navigation -->
+<a href="#k-main-content" class="k-skip-nav">Zum Inhalt springen</a>
+
+<!-- A3: Cart count ARIA live region -->
+<div id="k-cart-aria-live" aria-live="polite" aria-atomic="true" class="k-sr-only"></div>
+
 <!-- Announcement bar -->
 <div id="k-ann-bar" class="k-ann-bar">
   <div class="k-ann-inner">
@@ -311,7 +317,8 @@
 <!-- ============================================================
      PRODUCTS
      ============================================================ -->
-<main id="produkte" class="k-products-section">
+<main id="produkte" class="k-products-section" tabindex="-1">
+<span id="k-main-content"></span>
   <!-- Skeleton cards shown while main.js fetches products -->
   <div id="product-grid-container" class="row g-0">
     <div class="col-12 col-md-6 col-lg-4 p-2 k-skel-col"><div class="k-skeleton-card"><div class="k-skel-img"></div><div class="k-skel-body"><div class="k-skel-line w80"></div><div class="k-skel-line w50"></div></div></div></div>
@@ -915,6 +922,20 @@
             <i class="fas fa-bag-shopping"></i>
             In den Warenkorb
           </button>
+          <!-- B1: Trust / return guarantee badge -->
+          <div class="k-trust-row" id="k-trust-row">
+            <span><i class="fas fa-rotate-left"></i> 30 Tage Rückgabe</span>
+            <span><i class="fas fa-lock"></i> Sichere Zahlung</span>
+            <span><i class="fas fa-truck-fast"></i> Schnelle Lieferung</span>
+          </div>
+          <!-- B2: Price drop notification -->
+          <div id="k-price-drop-form" class="k-price-drop-form" style="display:none">
+            <p class="k-notify-label"><i class="fas fa-tag"></i> Preisalarm aktivieren</p>
+            <form class="k-notify-inner" id="k-pricedrop-inner" onsubmit="return false;">
+              <input type="email" class="k-newsletter-input" id="k-pricedrop-email" placeholder="Ihre E-Mail-Adresse" autocomplete="email" required>
+              <button type="submit" class="k-newsletter-btn">Aktivieren</button>
+            </form>
+          </div>
           <!-- Stock notify form (shown when out of stock) -->
           <div id="k-notify-form" class="k-notify-form" style="display:none">
             <p class="k-notify-label"><i class="fas fa-bell"></i> Benachrichtige mich wenn wieder verfügbar</p>

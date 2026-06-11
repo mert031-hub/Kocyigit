@@ -1611,6 +1611,261 @@
   updateOnlineStatus();
 
   /* ================================================================
+     P1. HOVER PREFETCH — preload product image on card hover
+     ================================================================ */
+  document.addEventListener('mouseover', function (e) {
+    var card = e.target.closest && e.target.closest('.product-card');
+    if (!card || card._prefetched) return;
+    card._prefetched = true;
+    var img = card.querySelector('img[data-src]') || card.querySelector('img');
+    if (!img) return;
+    var src = img.dataset.src || img.src;
+    if (!src || src.startsWith('data:')) return;
+    var link = document.createElement('link');
+    link.rel  = 'prefetch';
+    link.as   = 'image';
+    link.href = src;
+    document.head.appendChild(link);
+  }, { passive: true });
+
+  /* ================================================================
+     P2. IMAGE ERROR FALLBACK
+     ================================================================ */
+  var PLACEHOLDER_SVG = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Crect fill='%230d0d0d' width='400' height='400'/%3E%3Ctext x='50%25' y='50%25' font-family='serif' font-size='48' fill='%23c8a66a' text-anchor='middle' dominant-baseline='middle'%3EK%3C/text%3E%3C/svg%3E";
+
+  function attachImgFallback(img) {
+    if (img._fbAttached) return;
+    img._fbAttached = true;
+    img.addEventListener('error', function () {
+      if (this.src !== PLACEHOLDER_SVG) this.src = PLACEHOLDER_SVG;
+    });
+  }
+
+  /* attach to all current images and watch for new ones */
+  qsa('img').forEach(attachImgFallback);
+  new MutationObserver(function (mutations) {
+    mutations.forEach(function (m) {
+      m.addedNodes.forEach(function (node) {
+        if (node.tagName === 'IMG') attachImgFallback(node);
+        if (node.querySelectorAll) node.querySelectorAll('img').forEach(attachImgFallback);
+      });
+    });
+  }).observe(document.body, { childList: true, subtree: true });
+
+  /* ================================================================
+     A3. CART COUNT ARIA LIVE
+     ================================================================ */
+  var cartAriaLive = qs('#k-cart-aria-live');
+
+  function announceCartChange(count) {
+    if (!cartAriaLive) return;
+    cartAriaLive.textContent = '';
+    setTimeout(function () {
+      cartAriaLive.textContent = count === 0
+        ? 'Warenkorb ist leer'
+        : count + (count === 1 ? ' Artikel' : ' Artikel') + ' im Warenkorb';
+    }, 50);
+  }
+
+  document.addEventListener('cartUpdated', function () {
+    var cart = [];
+    try { cart = JSON.parse(localStorage.getItem('luxeCartArray')) || []; } catch (e) {}
+    var total = cart.reduce(function (s, i) { return s + (i.qty || 1); }, 0);
+    announceCartChange(total);
+  });
+
+  /* ================================================================
+     B1. TRUST BADGE — show/hide with modal
+     ================================================================ */
+  /* always visible via CSS; modal shows it automatically */
+
+  /* ================================================================
+     B2. PRICE DROP NOTIFICATION
+     ================================================================ */
+  var PRICE_ALERTS_KEY = 'k_price_alerts';
+
+  function getPriceAlerts() {
+    try { return JSON.parse(localStorage.getItem(PRICE_ALERTS_KEY)) || {}; } catch (e) { return {}; }
+  }
+
+  function setPriceAlert(productId, email, price) {
+    var alerts = getPriceAlerts();
+    alerts[productId] = { email: email, price: price, date: Date.now() };
+    localStorage.setItem(PRICE_ALERTS_KEY, JSON.stringify(alerts));
+  }
+
+  var pricedropForm = qs('#k-pricedrop-inner');
+  var pricedropPanel = qs('#k-price-drop-form');
+
+  if (pricedropForm) {
+    pricedropForm.addEventListener('submit', function () {
+      var emailEl = qs('#k-pricedrop-email');
+      var email   = emailEl && emailEl.value.trim();
+      if (!email || !window._lastModalId) return;
+      var prod = window.products && window.products.find(function (p) { return p.id === window._lastModalId; });
+      if (!prod) return;
+      setPriceAlert(window._lastModalId, email, prod.price);
+      pricedropForm.innerHTML = '<p style="color:var(--gold);font-family:var(--sans);font-size:0.7rem;text-align:center;margin:0"><i class="fas fa-check-circle"></i> Preisalarm aktiv!</p>';
+    });
+  }
+
+  /* show price-drop panel in modal when product is in-stock */
+  var luxeModalEl = qs('#luxeModal');
+  if (luxeModalEl) {
+    luxeModalEl.addEventListener('shown.bs.modal', function () {
+      if (!pricedropPanel) return;
+      var isOut = (function () {
+        var st = qs('#mStockStatus');
+        return st && (st.classList.contains('text-danger') || st.textContent.toLowerCase().includes('ausverkauft'));
+      })();
+      /* show price-drop only when in-stock (out-of-stock already has notify form) */
+      pricedropPanel.style.display = isOut ? 'none' : 'block';
+      /* reset form if it was submitted */
+      var inner = qs('#k-pricedrop-inner');
+      if (!inner) return;
+      var btn = inner.querySelector('button');
+      if (!btn) return; /* already replaced by success message — leave as-is */
+    });
+  }
+
+  /* ================================================================
+     B3. RECENT SEARCH HISTORY
+     ================================================================ */
+  var SEARCH_HIST_KEY = 'k_search_history';
+  var MAX_HIST = 6;
+
+  function getSearchHistory() {
+    try { return JSON.parse(localStorage.getItem(SEARCH_HIST_KEY)) || []; } catch (e) { return []; }
+  }
+
+  function addToSearchHistory(term) {
+    if (!term || term.length < 2) return;
+    var hist = getSearchHistory().filter(function (t) { return t !== term; });
+    hist.unshift(term);
+    if (hist.length > MAX_HIST) hist = hist.slice(0, MAX_HIST);
+    localStorage.setItem(SEARCH_HIST_KEY, JSON.stringify(hist));
+  }
+
+  function showSearchHistory(inputEl, dropdownEl) {
+    var hist = getSearchHistory();
+    if (!hist.length) return;
+    dropdownEl.innerHTML = hist.map(function (t) {
+      return '<div class="k-ac-item k-ac-hist" data-term="' + t.replace(/"/g, '&quot;') + '">' +
+        '<i class="fas fa-clock-rotate-left k-ac-hist-icon"></i>' +
+        '<div class="k-ac-info"><div class="k-ac-name">' + t + '</div></div>' +
+        '</div>';
+    }).join('');
+    dropdownEl.style.display = 'block';
+
+    dropdownEl.querySelectorAll('.k-ac-hist').forEach(function (item) {
+      item.addEventListener('mousedown', function (e) {
+        e.preventDefault();
+        inputEl.value = this.dataset.term;
+        dropdownEl.style.display = 'none';
+        inputEl.dispatchEvent(new Event('input'));
+      });
+    });
+  }
+
+  /* hook into existing search input */
+  var searchInputEl = qs('#search-input') || qs('.k-search-input');
+  var acDropEl      = qs('#k-ac-dropdown');
+
+  if (searchInputEl && acDropEl) {
+    searchInputEl.addEventListener('focus', function () {
+      if (!this.value.trim()) showSearchHistory(this, acDropEl);
+    });
+    /* save term when user picks a result or presses Enter */
+    searchInputEl.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' && this.value.trim()) {
+        addToSearchHistory(this.value.trim());
+      }
+    });
+  }
+
+  /* save history when autocomplete item is clicked */
+  if (acDropEl) {
+    acDropEl.addEventListener('mousedown', function (e) {
+      var item = e.target.closest('.k-ac-item:not(.k-ac-hist)');
+      if (!item) return;
+      var nameEl = item.querySelector('.k-ac-name');
+      if (nameEl) addToSearchHistory(nameEl.textContent.trim());
+    });
+  }
+
+  /* ================================================================
+     E1. KONAMI CODE EASTER EGG
+     ================================================================ */
+  var KONAMI = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
+  var _konamiIdx = 0;
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === KONAMI[_konamiIdx]) {
+      _konamiIdx++;
+      if (_konamiIdx === KONAMI.length) {
+        _konamiIdx = 0;
+        triggerEasterEgg();
+      }
+    } else {
+      _konamiIdx = (e.key === KONAMI[0]) ? 1 : 0;
+    }
+  });
+
+  function triggerEasterEgg() {
+    /* rain confetti for 3 seconds + show a toast */
+    var canvas = qs('#k-confetti-canvas');
+    if (!canvas) return;
+    var ctx = canvas.getContext('2d');
+    canvas.width  = window.innerWidth;
+    canvas.height = window.innerHeight;
+    var COLORS = ['#c8a66a','#f5e096','#ffffff','#e8d5a0','#f0c060','#ffd700'];
+    var particles = [];
+    for (var i = 0; i < 120; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: -Math.random() * canvas.height * 0.5,
+        r: 5 + Math.random() * 6,
+        color: COLORS[Math.floor(Math.random() * COLORS.length)],
+        vx: (Math.random() - 0.5) * 3,
+        vy: 2 + Math.random() * 4,
+        alpha: 1,
+        rot: Math.random() * Math.PI * 2,
+        rotV: (Math.random() - 0.5) * 0.15
+      });
+    }
+    var end = Date.now() + 3000;
+    function tick() {
+      if (Date.now() > end) { ctx.clearRect(0, 0, canvas.width, canvas.height); return; }
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(function (p) {
+        p.x  += p.vx;
+        p.y  += p.vy;
+        p.rot += p.rotV;
+        p.alpha = Math.max(0, p.alpha - 0.004);
+        ctx.save();
+        ctx.globalAlpha = p.alpha;
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.rot);
+        ctx.fillStyle = p.color;
+        ctx.fillRect(-p.r / 2, -p.r / 2, p.r, p.r * 0.5);
+        ctx.restore();
+        if (p.y > canvas.height + 10) { p.y = -10; p.x = Math.random() * canvas.width; }
+      });
+      requestAnimationFrame(tick);
+    }
+    tick();
+    /* toast */
+    var tc = qs('#luxe-toast-container');
+    if (tc) {
+      var t = document.createElement('div');
+      t.className = 'luxe-toast show';
+      t.innerHTML = '<i class="fas fa-star"></i> Du hast den Geheimcode gefunden! ✨';
+      tc.appendChild(t);
+      setTimeout(function () { t.remove(); }, 4000);
+    }
+  }
+
+  /* ================================================================
      MutationObserver: run all card injections on grid re-render
      ================================================================ */
   if (gridEl) {

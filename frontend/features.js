@@ -829,8 +829,22 @@
     if (priceMin) { priceMin.max = maxP; }
     filterState.maxPrice = maxP;
     if (qs('#k-pmax-val')) qs('#k-pmax-val').textContent = maxP;
+    updateRangeFill();
     applyFilters();
   });
+
+  function updateRangeFill() {
+    var mn = qs('#k-price-min'), mx = qs('#k-price-max');
+    if (!mn || !mx) return;
+    var minV = parseInt(mn.min) || 0;
+    var maxV = parseInt(mn.max) || 200;
+    var range = maxV - minV || 1;
+    var lo = ((parseInt(mn.value) - minV) / range) * 100;
+    var hi = ((parseInt(mx.value) - minV) / range) * 100;
+    var track = 'rgba(255,255,255,0.12)';
+    var fill = 'var(--gold)';
+    mx.style.background = 'linear-gradient(to right,' + track + ' ' + lo + '%,' + fill + ' ' + lo + '%,' + fill + ' ' + hi + '%,' + track + ' ' + hi + '%)';
+  }
 
   function onRangeChange() {
     var mn = qs('#k-price-min'), mx = qs('#k-price-max');
@@ -841,6 +855,7 @@
     filterState.maxPrice = hi;
     if (qs('#k-pmin-val')) qs('#k-pmin-val').textContent = lo;
     if (qs('#k-pmax-val')) qs('#k-pmax-val').textContent = hi;
+    updateRangeFill();
     applyFilters();
   }
 
@@ -874,6 +889,7 @@
       if (mx) mx.value = maxP;
       if (qs('#k-pmin-val')) qs('#k-pmin-val').textContent = 0;
       if (qs('#k-pmax-val')) qs('#k-pmax-val').textContent = maxP;
+      updateRangeFill();
     });
     if (instockEl) instockEl.checked = false;
     if (sortEl) sortEl.value = '';

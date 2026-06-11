@@ -155,6 +155,23 @@
         <i class="fas fa-location-dot"></i> Bestellverfolgung
       </a>
     </nav>
+    <!-- Mobile a11y controls -->
+    <div class="k-mobile-controls">
+      <div class="k-mobile-ctrl-row">
+        <span class="k-mobile-ctrl-label">Erscheinungsbild</span>
+        <button id="k-theme-toggle-mob" class="k-mobile-ctrl-btn">
+          <i class="fas fa-moon"></i> Dark / Light
+        </button>
+      </div>
+      <div class="k-mobile-ctrl-row">
+        <span class="k-mobile-ctrl-label">Schriftgröße</span>
+        <div class="k-font-switcher-mob">
+          <button class="k-fs-btn" data-size="normal">A</button>
+          <button class="k-fs-btn" data-size="large">A+</button>
+          <button class="k-fs-btn" data-size="xlarge">A++</button>
+        </div>
+      </div>
+    </div>
     <div class="k-mobile-footer">
       <span class="k-mobile-brand">KOÇYİĞİT<span>.</span></span>
       <span class="k-mobile-tagline">Betrieb &amp; Handel</span>
@@ -600,6 +617,14 @@
   </div>
 </section>
 
+<!-- Recently viewed section -->
+<div id="k-recently-viewed" style="display:none">
+  <div class="k-rv-inner">
+    <p class="k-eyebrow">Zuletzt angesehen</p>
+    <div id="k-rv-grid" class="k-rv-grid"></div>
+  </div>
+</div>
+
 <!-- S1: JSON-LD structured data (updated dynamically) -->
 <script id="k-jsonld" type="application/ld+json"></script>
 
@@ -815,14 +840,6 @@
       <input type="email" class="k-newsletter-input" id="k-exit-email" placeholder="Ihre E-Mail-Adresse" autocomplete="email" required>
       <button type="submit" class="k-newsletter-btn k-exit-submit">Anmelden</button>
     </form>
-  </div>
-</div>
-
-<!-- Recently viewed section (injected here) -->
-<div id="k-recently-viewed" style="display:none">
-  <div class="k-rv-inner">
-    <p class="k-eyebrow">Zuletzt angesehen</p>
-    <div id="k-rv-grid" class="k-rv-grid"></div>
   </div>
 </div>
 

@@ -1119,21 +1119,37 @@
   /* ================================================================
      F7. DARK MODE WAVE ANIMATION
      ================================================================ */
-  var themeToggle = qs('#theme-toggle');
-  var dmRipple    = qs('#k-dm-ripple');
+  var themeToggle    = qs('#theme-toggle');
+  var themeToggleMob = qs('#k-theme-toggle-mob');
+  var dmRipple       = qs('#k-dm-ripple');
 
-  if (themeToggle && dmRipple) {
+  function triggerThemeRipple(cx, cy) {
+    if (!dmRipple) return;
+    var maxR = Math.hypot(Math.max(cx, window.innerWidth - cx), Math.max(cy, window.innerHeight - cy));
+    dmRipple.style.left = cx + 'px';
+    dmRipple.style.top  = cy + 'px';
+    dmRipple.style.setProperty('--dm-r', maxR + 'px');
+    dmRipple.classList.remove('k-dm-run');
+    void dmRipple.offsetWidth;
+    dmRipple.classList.add('k-dm-run');
+  }
+
+  if (themeToggle) {
     themeToggle.addEventListener('click', function () {
       var rect = themeToggle.getBoundingClientRect();
-      var cx = rect.left + rect.width / 2;
-      var cy = rect.top  + rect.height / 2;
-      var maxR = Math.hypot(Math.max(cx, window.innerWidth - cx), Math.max(cy, window.innerHeight - cy));
-      dmRipple.style.left = cx + 'px';
-      dmRipple.style.top  = cy + 'px';
-      dmRipple.style.setProperty('--dm-r', maxR + 'px');
-      dmRipple.classList.remove('k-dm-run');
-      void dmRipple.offsetWidth;
-      dmRipple.classList.add('k-dm-run');
+      triggerThemeRipple(rect.left + rect.width / 2, rect.top + rect.height / 2);
+    });
+  }
+
+  /* Mobile menu theme toggle */
+  if (themeToggleMob) {
+    themeToggleMob.addEventListener('click', function () {
+      triggerThemeRipple(window.innerWidth / 2, window.innerHeight / 2);
+      /* close mobile menu after toggle */
+      var mob = qs('#k-mobile-nav');
+      var ov  = qs('#k-mobile-overlay');
+      if (mob) mob.classList.remove('open');
+      if (ov)  ov.classList.remove('open');
     });
   }
 

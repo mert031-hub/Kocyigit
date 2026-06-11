@@ -224,7 +224,7 @@
 <!-- ============================================================
      PRODUCT BAR
      ============================================================ -->
-<div class="k-product-bar" id="k-product-bar">
+<div class="k-product-bar" id="k-product-bar"><!-- filter bar injected below by features.js -->
   <div class="k-product-bar-inner">
 
     <!-- Left: label -->
@@ -255,6 +255,40 @@
       </button>
     </div>
 
+  </div>
+</div>
+
+<!-- Filter / sort strip (populated by features.js) -->
+<div id="k-filter-bar" class="k-filter-bar">
+  <div class="k-filter-inner">
+    <div class="k-filter-group">
+      <span class="k-filter-label">Preis</span>
+      <div class="k-price-range">
+        <input type="range" id="k-price-min" class="k-range" min="0" max="200" value="0" step="1">
+        <input type="range" id="k-price-max" class="k-range" min="0" max="200" value="200" step="1">
+        <span class="k-range-val"><span id="k-pmin-val">0</span> – <span id="k-pmax-val">200</span> €</span>
+      </div>
+    </div>
+    <div class="k-filter-group">
+      <label class="k-filter-toggle">
+        <input type="checkbox" id="k-instock-only">
+        <span class="k-toggle-track"><span class="k-toggle-thumb"></span></span>
+        <span class="k-filter-label">Nur auf Lager</span>
+      </label>
+    </div>
+    <div class="k-filter-group">
+      <span class="k-filter-label">Sortieren</span>
+      <select id="k-sort-select" class="k-sort-select">
+        <option value="">Standard</option>
+        <option value="price-asc">Preis ↑</option>
+        <option value="price-desc">Preis ↓</option>
+        <option value="name-asc">Name A–Z</option>
+      </select>
+    </div>
+    <button id="k-filter-reset" class="k-filter-reset" style="display:none">
+      <i class="fas fa-rotate-left"></i> Zurücksetzen
+    </button>
+    <span id="k-filter-count" class="k-filter-count"></span>
   </div>
 </div>
 
@@ -666,6 +700,11 @@
       Zur Kasse
     </a>
   </div>
+  <!-- Upsell suggestions -->
+  <div id="k-cart-upsell" class="k-cart-upsell" style="display:none">
+    <p class="k-upsell-label">Das könnte dir auch gefallen</p>
+    <div id="k-upsell-grid" class="k-upsell-grid"></div>
+  </div>
 </div>
 <div class="k-cart-overlay" id="cart-overlay"></div>
 
@@ -718,6 +757,28 @@
 </div>
 <div id="k-wl-overlay" class="k-wl-overlay"></div>
 
+<!-- Dark mode ripple -->
+<div id="k-dm-ripple"></div>
+
+<!-- Compare bar -->
+<div id="k-compare-bar" class="k-compare-bar" style="display:none">
+  <div class="k-compare-inner">
+    <span class="k-compare-title"><i class="fas fa-code-compare"></i> Vergleichen</span>
+    <div id="k-compare-slots" class="k-compare-slots"></div>
+    <button id="k-compare-go" class="k-compare-go" disabled>Vergleichen (<span id="k-compare-count">0</span>)</button>
+    <button id="k-compare-clear" class="k-compare-clear"><i class="fas fa-xmark"></i></button>
+  </div>
+</div>
+
+<!-- Compare modal -->
+<div id="k-compare-modal" class="k-compare-modal" role="dialog" aria-modal="true">
+  <div class="k-compare-panel">
+    <button class="k-compare-modal-close" id="k-compare-modal-close"><i class="fas fa-xmark"></i></button>
+    <h3 class="k-compare-modal-title">Produktvergleich</h3>
+    <div id="k-compare-table" class="k-compare-table"></div>
+  </div>
+</div>
+
 <!-- Countdown strip (shown when active) -->
 <div id="k-countdown-strip" class="k-countdown-strip" style="display:none">
   <i class="fas fa-bolt"></i>
@@ -756,7 +817,11 @@
         <div class="k-modal-img-col">
           <div class="k-modal-img-wrap">
             <img id="mImg" src="" alt="" class="k-modal-img">
+            <button id="k-modal-zoom-btn" class="k-modal-zoom-btn" aria-label="Vergrößern">
+              <i class="fas fa-expand"></i>
+            </button>
           </div>
+          <div id="k-modal-thumbs" class="k-modal-thumbs"></div>
         </div>
         <div class="k-modal-info-col">
           <h2 id="mTitle" class="k-modal-title"></h2>
@@ -765,6 +830,8 @@
             <span id="mOldPriceDisplay" class="k-modal-old-price"></span>
           </div>
           <div id="mStockStatus" class="k-modal-stock"></div>
+          <!-- Delivery estimate (injected by features.js) -->
+          <div id="k-modal-delivery" class="k-modal-delivery" style="display:none"></div>
           <p id="mDesc" class="k-modal-desc"></p>
           <div class="k-modal-qty-row">
             <button class="k-qty-btn" id="qty-minus" aria-label="Menge verringern" onclick="changeQty(-1)"><i class="fas fa-minus"></i></button>
@@ -776,6 +843,23 @@
             <i class="fas fa-bag-shopping"></i>
             In den Warenkorb
           </button>
+          <!-- Stock notify form (shown when out of stock) -->
+          <div id="k-notify-form" class="k-notify-form" style="display:none">
+            <p class="k-notify-label"><i class="fas fa-bell"></i> Benachrichtige mich wenn wieder verfügbar</p>
+            <form class="k-notify-inner" id="k-notify-inner" onsubmit="return false;">
+              <input type="email" class="k-newsletter-input" id="k-notify-email" placeholder="Ihre E-Mail-Adresse" autocomplete="email" required>
+              <button type="submit" class="k-newsletter-btn">Benachrichtigen</button>
+            </form>
+          </div>
+          <!-- Action row: WhatsApp + Share -->
+          <div class="k-modal-actions">
+            <a id="k-modal-whatsapp" href="#" target="_blank" rel="noopener" class="k-modal-action-btn k-modal-wa">
+              <i class="fab fa-whatsapp"></i> Frage stellen
+            </a>
+            <button id="k-modal-share" class="k-modal-action-btn k-modal-share-btn">
+              <i class="fas fa-share-nodes"></i> Teilen
+            </button>
+          </div>
         </div>
       </div>
     </div>

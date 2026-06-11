@@ -1253,6 +1253,376 @@
       injectCompareBtns();
       injectTrendingBadges();
       trackRecentlyViewed();
+      injectSavingsBadges();
+    }).observe(gridEl, { childList: true, subtree: true });
+  }
+
+  /* ================================================================
+     C1. CART FLY ANIMATION
+     ================================================================ */
+  var flyEl = qs('#k-fly-img');
+
+  function cartFlyFrom(srcEl) {
+    if (!flyEl || !srcEl) return;
+    var cartIcon = qs('#cart-pill') || qs('[data-bs-target="#floatingCart"]') || qs('.k-nav-cart');
+    if (!cartIcon) return;
+    var from = srcEl.getBoundingClientRect();
+    var to   = cartIcon.getBoundingClientRect();
+    var imgSrc = '';
+    var img = srcEl.closest('.product-card') && srcEl.closest('.product-card').querySelector('img');
+    if (img) imgSrc = img.src;
+    flyEl.style.cssText = [
+      'display:block',
+      'left:' + (from.left + from.width / 2 - 24) + 'px',
+      'top:' + (from.top + from.height / 2 - 24) + 'px',
+      'background-image:url(' + imgSrc + ')',
+      'transform:translate(0,0) scale(1)',
+      'opacity:1',
+      'transition:none'
+    ].join(';');
+    flyEl.offsetWidth; /* reflow */
+    var dx = (to.left + to.width / 2 - 24) - (from.left + from.width / 2 - 24);
+    var dy = (to.top  + to.height / 2 - 24) - (from.top  + from.height / 2 - 24);
+    flyEl.style.transition = 'transform 0.65s var(--ease), opacity 0.65s var(--ease)';
+    flyEl.style.transform  = 'translate(' + dx + 'px,' + dy + 'px) scale(0.25)';
+    flyEl.style.opacity    = '0';
+    setTimeout(function () { flyEl.style.display = 'none'; }, 680);
+  }
+
+  /* hook quick-add and card click on add-to-cart */
+  document.addEventListener('click', function (e) {
+    var qa = e.target.closest('.k-quick-add');
+    if (qa) { cartFlyFrom(qa); return; }
+    var atcBtn = e.target.closest('#add-to-cart-btn');
+    if (atcBtn) {
+      var modalImg = qs('#mImg');
+      if (modalImg) cartFlyFrom(modalImg);
+    }
+  }, true);
+
+  /* ================================================================
+     C2. GIFT WRAPPING TOGGLE
+     ================================================================ */
+  var GIFT_KEY = 'k_gift_wrap';
+  var giftCheck = qs('#k-gift-wrap-check');
+  var giftRow   = qs('#k-gift-wrap-row');
+
+  function isGiftWrap() { return localStorage.getItem(GIFT_KEY) === '1'; }
+
+  function updateGiftWrapUI() {
+    if (!giftCheck) return;
+    giftCheck.checked = isGiftWrap();
+  }
+
+  if (giftCheck) {
+    updateGiftWrapUI();
+    giftCheck.addEventListener('change', function () {
+      localStorage.setItem(GIFT_KEY, this.checked ? '1' : '0');
+    });
+  }
+
+  /* show gift row only when cart has items */
+  document.addEventListener('cartUpdated', function () {
+    if (!giftRow) return;
+    var cart = [];
+    try { cart = JSON.parse(localStorage.getItem('luxeCartArray')) || []; } catch (e) {}
+    giftRow.style.display = cart.length ? 'flex' : 'none';
+  });
+  if (giftRow) giftRow.style.display = 'none'; /* hidden until cart has items */
+
+  /* ================================================================
+     C3. SAVINGS BADGE
+     ================================================================ */
+  function injectSavingsBadges() {
+    if (!window.products) return;
+    qsa('.product-card').forEach(function (card) {
+      if (card.querySelector('.k-savings-badge')) return;
+      var onc = card.getAttribute('onclick') || '';
+      var m   = onc.match(/setupModal\('([^']+)'\)/);
+      if (!m) return;
+      var prod = window.products.find(function (p) { return p.id === m[1]; });
+      if (!prod || !prod.originalPrice || prod.originalPrice <= prod.price) return;
+      var save = (prod.originalPrice - prod.price).toFixed(2).replace('.', ',');
+      var badge = document.createElement('span');
+      badge.className = 'k-savings-badge';
+      badge.textContent = '-' + save + ' €';
+      card.appendChild(badge);
+    });
+  }
+
+  /* ================================================================
+     C4. BUNDLE CROSS-SELL (in cart drawer)
+     ================================================================ */
+  var bundleEl = qs('#k-cart-upsell');
+
+  /* reuse existing refreshUpsell (defined earlier in features.js) and
+     add a "bundle" label when ≥2 items are in the cart */
+  document.addEventListener('cartUpdated', function () {
+    if (!bundleEl) return;
+    var cart = [];
+    try { cart = JSON.parse(localStorage.getItem('luxeCartArray')) || []; } catch (e) {}
+    if (cart.length >= 2) {
+      var lbl = bundleEl.querySelector('.k-upsell-label');
+      if (lbl) lbl.textContent = 'Wird oft zusammen gekauft';
+    }
+  });
+
+  /* ================================================================
+     U1. SWIPE GESTURE ON MODAL IMAGE
+     ================================================================ */
+  var modalImgWrap = qs('.k-modal-img-wrap');
+  if (modalImgWrap) {
+    var _swipeX = null;
+    modalImgWrap.addEventListener('touchstart', function (e) {
+      _swipeX = e.touches[0].clientX;
+    }, { passive: true });
+    modalImgWrap.addEventListener('touchend', function (e) {
+      if (_swipeX === null) return;
+      var dx = e.changedTouches[0].clientX - _swipeX;
+      _swipeX = null;
+      if (Math.abs(dx) < 40) return;
+      navigateModal(dx < 0 ? 1 : -1);
+    }, { passive: true });
+  }
+
+  /* ================================================================
+     U2. STICKY HEADER MORPH
+     ================================================================ */
+  var siteNav = qs('.k-nav') || qs('nav.navbar') || qs('header');
+  if (siteNav) {
+    var _morphed = false;
+    window.addEventListener('scroll', function () {
+      var should = window.scrollY > 60;
+      if (should === _morphed) return;
+      _morphed = should;
+      siteNav.classList.toggle('k-nav-scrolled', should);
+    }, { passive: true });
+  }
+
+  /* ================================================================
+     U3. URL STATE SYNC FOR FILTERS
+     ================================================================ */
+  function filtersToURL() {
+    var params = new URLSearchParams();
+    var minEl = qs('#k-price-min'), maxEl = qs('#k-price-max');
+    var stEl  = qs('#k-instock-only'), sortEl = qs('#k-sort-select');
+    var kw    = qs('#search-input') || qs('.k-search-input');
+    if (minEl  && minEl.value)   params.set('pmin',  minEl.value);
+    if (maxEl  && maxEl.value)   params.set('pmax',  maxEl.value);
+    if (stEl   && stEl.checked)  params.set('stock', '1');
+    if (sortEl && sortEl.value)  params.set('sort',  sortEl.value);
+    if (kw     && kw.value.trim()) params.set('q', kw.value.trim());
+    var str = params.toString();
+    history.replaceState(null, '', str ? '?' + str : location.pathname);
+  }
+
+  function urlToFilters() {
+    var params = new URLSearchParams(location.search);
+    var minEl  = qs('#k-price-min'), maxEl = qs('#k-price-max');
+    var stEl   = qs('#k-instock-only'), sortEl = qs('#k-sort-select');
+    var kw     = qs('#search-input') || qs('.k-search-input');
+    if (params.has('pmin') && minEl)  { minEl.value  = params.get('pmin');  }
+    if (params.has('pmax') && maxEl)  { maxEl.value  = params.get('pmax');  }
+    if (params.has('stock') && stEl)  { stEl.checked = true; }
+    if (params.has('sort') && sortEl) { sortEl.value = params.get('sort'); }
+    if (params.has('q') && kw)        { kw.value     = params.get('q'); }
+    if (params.toString()) {
+      setTimeout(function () {
+        if (window.filterProducts) window.filterProducts();
+      }, 500);
+    }
+  }
+
+  /* attach to filter events */
+  ['#k-price-min','#k-price-max','#k-instock-only','#k-sort-select'].forEach(function (sel) {
+    var el = qs(sel);
+    if (el) el.addEventListener('change', filtersToURL);
+  });
+  urlToFilters();
+
+  /* ================================================================
+     U4. KEYBOARD SHORTCUTS PANEL
+     ================================================================ */
+  var shortcutsPanel   = qs('#k-shortcuts-panel');
+  var shortcutsOverlay = qs('#k-shortcuts-overlay');
+  var shortcutsClose   = qs('#k-shortcuts-close');
+
+  function openShortcuts() {
+    if (!shortcutsPanel) return;
+    shortcutsPanel.style.display   = 'flex';
+    shortcutsOverlay.style.display = 'block';
+    shortcutsPanel.classList.add('k-shortcuts-in');
+  }
+  function closeShortcuts() {
+    if (!shortcutsPanel) return;
+    shortcutsPanel.classList.remove('k-shortcuts-in');
+    setTimeout(function () {
+      shortcutsPanel.style.display   = 'none';
+      shortcutsOverlay.style.display = 'none';
+    }, 250);
+  }
+
+  if (shortcutsClose)   shortcutsClose.addEventListener('click', closeShortcuts);
+  if (shortcutsOverlay) shortcutsOverlay.addEventListener('click', closeShortcuts);
+
+  /* extend existing keydown handler */
+  document.addEventListener('keydown', function (e) {
+    if (['INPUT','TEXTAREA','SELECT'].includes(e.target.tagName)) return;
+    if (e.key === '?') { openShortcuts(); return; }
+    if (e.key === 'Escape') { closeShortcuts(); return; }
+    /* shortcut: W → wishlist, C → cart */
+    if (e.key === 'w' || e.key === 'W') {
+      var wBtn = qs('#k-wishlist-btn') || qs('.k-wishlist-toggle');
+      if (wBtn) wBtn.click();
+    }
+    if (e.key === 'c' || e.key === 'C') {
+      var cartBtn = qs('#cart-pill') || qs('[data-bs-target="#floatingCart"]');
+      if (cartBtn) cartBtn.click();
+    }
+  });
+
+  /* ================================================================
+     V1. ANIMATED STAT COUNTERS
+     ================================================================ */
+  function animateCounter(el) {
+    var target = parseFloat(el.dataset.count || el.textContent.replace(/[^0-9.]/g, ''));
+    if (isNaN(target)) return;
+    var suffix = el.dataset.suffix || el.textContent.replace(/[\d.]/g, '').trim();
+    var duration = 1600;
+    var start = null;
+    var isFloat = target % 1 !== 0;
+    function step(ts) {
+      if (!start) start = ts;
+      var progress = Math.min((ts - start) / duration, 1);
+      var ease = 1 - Math.pow(1 - progress, 3);
+      var current = isFloat ? (target * ease).toFixed(1) : Math.round(target * ease);
+      el.textContent = current + (suffix ? ' ' + suffix : '');
+      if (progress < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  function initCounters() {
+    var statEls = qsa('[data-count], .k-stat-number, .testimonial-stat-value');
+    statEls.forEach(function (el) {
+      if (el.dataset.counted) return;
+      var num = parseFloat(el.textContent.replace(/[^0-9.]/g, ''));
+      if (isNaN(num) || num < 10) return;
+      el.dataset.count  = num;
+      el.dataset.suffix = el.textContent.replace(/[\d.,]/g, '').trim();
+      el.dataset.counted = '1';
+      var obs = new IntersectionObserver(function (entries, o) {
+        if (!entries[0].isIntersecting) return;
+        o.disconnect();
+        animateCounter(el);
+      }, { threshold: 0.6 });
+      obs.observe(el);
+    });
+  }
+  initCounters();
+
+  /* ================================================================
+     V2. PRODUCT MAGNIFIER
+     ================================================================ */
+  var MAGNIFIER_ZOOM = 2.5;
+
+  function initMagnifier(imgEl) {
+    if (!imgEl || imgEl._magInit) return;
+    imgEl._magInit = true;
+    var glass = document.createElement('div');
+    glass.className = 'k-magnifier';
+    glass.style.display = 'none';
+    imgEl.parentNode.style.position = 'relative';
+    imgEl.parentNode.appendChild(glass);
+
+    function onMove(e) {
+      if (!imgEl.complete || !imgEl.naturalWidth) return;
+      var rect  = imgEl.getBoundingClientRect();
+      var x     = (e.clientX || (e.touches && e.touches[0].clientX)) - rect.left;
+      var y     = (e.clientY || (e.touches && e.touches[0].clientY)) - rect.top;
+      if (x < 0 || y < 0 || x > rect.width || y > rect.height) { glass.style.display = 'none'; return; }
+      var gw = glass.offsetWidth  || 120;
+      var gh = glass.offsetHeight || 120;
+      glass.style.display    = 'block';
+      glass.style.left       = (x - gw / 2) + 'px';
+      glass.style.top        = (y - gh / 2) + 'px';
+      glass.style.backgroundImage = 'url(' + imgEl.src + ')';
+      glass.style.backgroundSize  = (rect.width * MAGNIFIER_ZOOM) + 'px ' + (rect.height * MAGNIFIER_ZOOM) + 'px';
+      glass.style.backgroundPositionX = (-x * MAGNIFIER_ZOOM + gw / 2) + 'px';
+      glass.style.backgroundPositionY = (-y * MAGNIFIER_ZOOM + gh / 2) + 'px';
+    }
+
+    imgEl.addEventListener('mousemove', onMove);
+    imgEl.addEventListener('mouseleave', function () { glass.style.display = 'none'; });
+  }
+
+  /* init on modal open */
+  var luxeModal = qs('#luxeModal');
+  if (luxeModal) {
+    luxeModal.addEventListener('shown.bs.modal', function () {
+      var modalImg = qs('#mImg');
+      if (modalImg) initMagnifier(modalImg);
+    });
+  }
+
+  /* ================================================================
+     V3. DYNAMIC PAGE TITLE
+     ================================================================ */
+  var _origTitle = document.title;
+
+  window.setupModal = (function (_prev) {
+    return function (id) {
+      if (_prev) _prev.call(this, id);
+      window._lastModalId = id;
+      /* update title after modal renders (~100ms) */
+      setTimeout(function () {
+        var titleEl = qs('#mTitle');
+        if (titleEl && titleEl.textContent.trim()) {
+          document.title = titleEl.textContent.trim() + ' · KOÇYİĞİT';
+        }
+      }, 120);
+    };
+  })(window.setupModal);
+
+  if (luxeModal) {
+    luxeModal.addEventListener('hidden.bs.modal', function () {
+      document.title = _origTitle;
+    });
+  }
+
+  /* ================================================================
+     V4. OFFLINE BANNER
+     ================================================================ */
+  var offlineBar = qs('#k-offline-bar');
+
+  function updateOnlineStatus() {
+    if (!offlineBar) return;
+    if (navigator.onLine) {
+      offlineBar.classList.remove('k-offline-visible');
+      setTimeout(function () { offlineBar.style.display = 'none'; }, 350);
+    } else {
+      offlineBar.style.display = 'flex';
+      requestAnimationFrame(function () { offlineBar.classList.add('k-offline-visible'); });
+    }
+  }
+
+  window.addEventListener('online',  updateOnlineStatus);
+  window.addEventListener('offline', updateOnlineStatus);
+  updateOnlineStatus();
+
+  /* ================================================================
+     MutationObserver: run all card injections on grid re-render
+     ================================================================ */
+  if (gridEl) {
+    new MutationObserver(function () {
+      injectWishBtns();
+      updateWishlistUI();
+      injectStockBadges();
+      injectQuickAddBtns();
+      injectCompareBtns();
+      injectTrendingBadges();
+      trackRecentlyViewed();
+      injectSavingsBadges();
     }).observe(gridEl, { childList: true, subtree: true });
   }
 

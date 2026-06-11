@@ -706,6 +706,14 @@
     </div>
   </div>
   <div class="k-floating-cart-body" id="floating-cart-items"></div>
+  <!-- Gift wrapping toggle -->
+  <div class="k-gift-wrap-row" id="k-gift-wrap-row">
+    <label class="k-gift-wrap-label">
+      <input type="checkbox" id="k-gift-wrap-check">
+      <span class="k-gift-wrap-box"><i class="fas fa-gift"></i></span>
+      <span class="k-gift-wrap-text">Geschenkverpackung (+2,99 €)</span>
+    </label>
+  </div>
   <div class="k-floating-cart-footer" id="cart-footer">
     <div class="k-floating-cart-total">
       <span>Gesamt</span>
@@ -778,6 +786,32 @@
 
 <!-- Confetti canvas -->
 <canvas id="k-confetti-canvas" aria-hidden="true"></canvas>
+
+<!-- Offline banner -->
+<div id="k-offline-bar" class="k-offline-bar" style="display:none" role="alert" aria-live="assertive">
+  <i class="fas fa-wifi-slash"></i>
+  <span>Keine Internetverbindung — einige Funktionen sind eingeschränkt</span>
+</div>
+
+<!-- Keyboard shortcuts panel -->
+<div id="k-shortcuts-panel" class="k-shortcuts-panel" role="dialog" aria-modal="true" aria-label="Tastaturkürzel" style="display:none">
+  <div class="k-shortcuts-inner">
+    <button id="k-shortcuts-close" class="k-shortcuts-close" aria-label="Schließen"><i class="fas fa-xmark"></i></button>
+    <h3 class="k-shortcuts-title"><i class="fas fa-keyboard"></i> Tastaturkürzel</h3>
+    <ul class="k-shortcuts-list">
+      <li><kbd>/</kbd> Suche öffnen</li>
+      <li><kbd>W</kbd> Wunschliste öffnen</li>
+      <li><kbd>C</kbd> Warenkorb öffnen</li>
+      <li><kbd>Esc</kbd> Schließen</li>
+      <li><kbd>←</kbd> <kbd>→</kbd> Modal navigieren</li>
+      <li><kbd>?</kbd> Dieses Fenster</li>
+    </ul>
+  </div>
+</div>
+<div id="k-shortcuts-overlay" class="k-shortcuts-overlay" style="display:none"></div>
+
+<!-- Cart fly element (dynamically created, placeholder) -->
+<div id="k-fly-img" class="k-fly-img" aria-hidden="true" style="display:none"></div>
 
 <!-- Abandoned cart banner -->
 <div id="k-cart-recovery" class="k-cart-recovery" style="display:none" role="alert">

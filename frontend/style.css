@@ -4830,3 +4830,243 @@ body.k-has-compare { padding-bottom: 56px; }
   transition: color 0.2s;
 }
 .k-cr-dismiss:hover { color: var(--tx-1); }
+
+/* ════════════════════════════════════════════════════════════
+   C/U/V-SERIES  —  16 new features
+   ════════════════════════════════════════════════════════════ */
+
+/* ── C1. Cart fly animation ──────────────────────────────── */
+#k-fly-img {
+  position: fixed;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--gold);
+  box-shadow: 0 4px 20px rgba(200,166,106,0.4);
+  pointer-events: none;
+  z-index: 9998;
+  will-change: transform, opacity;
+}
+
+/* ── C2. Gift wrapping toggle ────────────────────────────── */
+.k-gift-wrap-row {
+  display: none;
+  align-items: center;
+  padding: 10px 16px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.k-gift-wrap-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  width: 100%;
+}
+.k-gift-wrap-label input[type="checkbox"] { display: none; }
+.k-gift-wrap-box {
+  width: 22px;
+  height: 22px;
+  border: 1.5px solid rgba(200,166,106,0.4);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  color: transparent;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+  flex-shrink: 0;
+}
+.k-gift-wrap-label input:checked + .k-gift-wrap-box {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: #080808;
+}
+.k-gift-wrap-text {
+  font-family: var(--sans);
+  font-size: 0.68rem;
+  color: var(--tx-2);
+  letter-spacing: 0.02em;
+}
+.k-gift-wrap-label:hover .k-gift-wrap-text { color: var(--tx-1); }
+
+/* ── C3. Savings badge ───────────────────────────────────── */
+.k-savings-badge {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  font-family: var(--sans);
+  font-size: 0.52rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  background: rgba(52,168,83,0.15);
+  color: #5fba6e;
+  border: 1px solid rgba(52,168,83,0.3);
+  padding: 3px 8px;
+  border-radius: 3px;
+  z-index: 7;
+}
+
+/* ── U2. Sticky header morph ─────────────────────────────── */
+.k-nav.k-nav-scrolled,
+nav.navbar.k-nav-scrolled,
+header.k-nav-scrolled {
+  background: rgba(8,8,8,0.92) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  box-shadow: 0 1px 0 rgba(200,166,106,0.15), 0 4px 24px rgba(0,0,0,0.4) !important;
+  padding-top: 6px !important;
+  padding-bottom: 6px !important;
+  transition: background 0.3s, box-shadow 0.3s, padding 0.3s !important;
+}
+
+/* ── U4. Keyboard shortcuts panel ───────────────────────── */
+.k-shortcuts-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  z-index: 2100;
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+.k-shortcuts-panel {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.94);
+  z-index: 2200;
+  background: #111;
+  border: 1px solid rgba(200,166,106,0.25);
+  border-radius: 8px;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.7);
+  padding: 28px 32px;
+  min-width: 280px;
+  max-width: 360px;
+  width: 90vw;
+  flex-direction: column;
+  gap: 16px;
+  opacity: 0;
+  transition: opacity 0.25s var(--ease), transform 0.25s var(--ease);
+}
+.k-shortcuts-panel.k-shortcuts-in {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+.k-shortcuts-title {
+  font-family: var(--sans);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.k-shortcuts-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.k-shortcuts-list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--sans);
+  font-size: 0.7rem;
+  color: var(--tx-2);
+}
+.k-shortcuts-list kbd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 26px;
+  height: 22px;
+  padding: 0 6px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 4px;
+  font-family: var(--sans);
+  font-size: 0.62rem;
+  font-weight: 600;
+  color: var(--tx-1);
+  letter-spacing: 0.04em;
+}
+.k-shortcuts-close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  background: none;
+  border: none;
+  color: var(--tx-2);
+  cursor: pointer;
+  font-size: 0.8rem;
+  padding: 4px 6px;
+  transition: color 0.2s;
+}
+.k-shortcuts-close:hover { color: var(--tx-1); }
+
+/* ── V1. Animated stat counters ──────────────────────────── */
+.k-stat-number,
+.testimonial-stat-value,
+[data-count] {
+  transition: none; /* let JS control */
+}
+
+/* ── V2. Product magnifier ───────────────────────────────── */
+.k-magnifier {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 2px solid rgba(200,166,106,0.5);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.5);
+  pointer-events: none;
+  z-index: 20;
+  background-repeat: no-repeat;
+  cursor: none;
+  display: none;
+}
+@media (max-width: 768px) {
+  .k-magnifier { display: none !important; }
+}
+
+/* ── V4. Offline banner ──────────────────────────────────── */
+#k-offline-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2000;
+  background: #1a0a0a;
+  border-top: 1px solid rgba(220,70,70,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px 20px;
+  font-family: var(--sans);
+  font-size: 0.68rem;
+  color: #e06060;
+  letter-spacing: 0.04em;
+  transform: translateY(100%);
+  opacity: 0;
+  transition: transform 0.35s var(--ease), opacity 0.35s var(--ease);
+}
+#k-offline-bar.k-offline-visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+#k-offline-bar i { font-size: 0.8rem; }
+
+/* ── Responsive extras ───────────────────────────────────── */
+@media (max-width: 576px) {
+  .k-shortcuts-panel { padding: 22px 20px; }
+  .k-magnifier { display: none !important; }
+}

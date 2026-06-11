@@ -104,6 +104,18 @@
         <i id="theme-icon" class="fas fa-moon"></i>
       </button>
 
+      <!-- X2: Font size switcher -->
+      <div class="k-font-switcher" id="k-font-switcher" aria-label="Schriftgröße">
+        <button class="k-fs-btn" data-size="normal" aria-label="Normal">A</button>
+        <button class="k-fs-btn" data-size="large"  aria-label="Groß">A+</button>
+        <button class="k-fs-btn" data-size="xlarge" aria-label="Sehr groß">A++</button>
+      </div>
+
+      <!-- X3: High contrast toggle -->
+      <button id="k-contrast-btn" class="k-icon-btn" aria-label="Hoher Kontrast" title="Hoher Kontrast">
+        <i class="fas fa-circle-half-stroke"></i>
+      </button>
+
       <button id="wishlist-btn" class="k-icon-btn k-wishlist-nav" aria-label="Wunschliste">
         <i class="far fa-heart"></i>
         <span id="wishlist-badge" class="k-cart-badge" style="display:none">0</span>
@@ -575,6 +587,17 @@
 <!-- ============================================================
      FOOTER
      ============================================================ -->
+<!-- K3: Smart recommendations -->
+<section id="k-smart-recs" class="k-smart-recs" style="display:none">
+  <div class="container">
+    <h2 class="k-section-title" style="text-align:center">Empfohlen für dich</h2>
+    <div id="k-smart-recs-grid" class="k-smart-recs-grid"></div>
+  </div>
+</section>
+
+<!-- S1: JSON-LD structured data (updated dynamically) -->
+<script id="k-jsonld" type="application/ld+json"></script>
+
 <footer class="k-footer">
   <div class="k-footer-grid">
 
@@ -721,6 +744,14 @@
       <span class="k-gift-wrap-text">Geschenkverpackung (+2,99 €)</span>
     </label>
   </div>
+  <!-- K2: Coupon code -->
+  <div class="k-coupon-row" id="k-coupon-row" style="display:none">
+    <form class="k-coupon-form" id="k-coupon-form" onsubmit="return false;">
+      <input type="text" id="k-coupon-input" class="k-coupon-input" placeholder="Gutscheincode" autocomplete="off" spellcheck="false">
+      <button type="submit" class="k-coupon-btn"><i class="fas fa-tag"></i></button>
+    </form>
+    <div id="k-coupon-msg" class="k-coupon-msg"></div>
+  </div>
   <div class="k-floating-cart-footer" id="cart-footer">
     <div class="k-floating-cart-total">
       <span>Gesamt</span>
@@ -738,6 +769,18 @@
   </div>
 </div>
 <div class="k-cart-overlay" id="cart-overlay"></div>
+
+<!-- K1: Cart hover preview -->
+<div id="k-cart-hover-preview" class="k-cart-hover-preview" style="display:none" aria-hidden="true">
+  <div class="k-chp-inner">
+    <p class="k-chp-label">Warenkorb</p>
+    <div id="k-chp-items" class="k-chp-items"></div>
+    <div class="k-chp-footer">
+      <span class="k-chp-total-label">Gesamt</span>
+      <strong id="k-chp-total" class="k-chp-total">0,00 €</strong>
+    </div>
+  </div>
+</div>
 
 <!-- ============================================================
      TOAST
@@ -909,6 +952,11 @@
             <span id="mOldPriceDisplay" class="k-modal-old-price"></span>
           </div>
           <div id="mStockStatus" class="k-modal-stock"></div>
+          <!-- X1: Live visitor counter -->
+          <div id="k-visitor-count" class="k-visitor-count" style="display:none">
+            <span class="k-vc-dot"></span>
+            <span id="k-vc-text"></span>
+          </div>
           <!-- Delivery estimate (injected by features.js) -->
           <div id="k-modal-delivery" class="k-modal-delivery" style="display:none"></div>
           <p id="mDesc" class="k-modal-desc"></p>
